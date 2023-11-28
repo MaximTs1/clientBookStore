@@ -63,7 +63,7 @@ const Signup = () => {
 
     try {
       const response = await axios.post(
-        "http://185.229.226.27:3001/user/add-user",
+        "http://185.229.226.27:3001/user/signup",
         signupData
       );
       alert(response.data.message);

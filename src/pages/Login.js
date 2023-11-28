@@ -15,14 +15,15 @@ import "./Signup.css";
 import Visibility from "@mui/icons-material/Visibility";
 import VisibilityOff from "@mui/icons-material/VisibilityOff";
 import InputAdornment from "@mui/material/InputAdornment";
+import { GeneralContext } from "../App";
 
 const defaultTheme = createTheme();
 
 export default function Login() {
   const navigate = useNavigate();
   const [showPassword, setShowPassword] = useState(false);
-  const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
+  const { setLoading, snackbar, setUser, user } = useContext(GeneralContext);
 
   const handlePasswordChange = (event) => {
     setPassword(event.target.value);
@@ -44,25 +45,33 @@ export default function Login() {
       password: data.get("password"),
     };
     console.log("data", loginDetails);
+
     fetch("http://185.229.226.27:3001/user/login", {
-      // credentials: "include",
+      credentials: "include",
       method: "POST",
       headers: {
-        "Content-Type": "application/json",
+        "Content-type": "application/json",
       },
       body: JSON.stringify(loginDetails),
     })
-      .then((response) => {
-        if (response.ok) {
-          localStorage.setItem("isLoggedIn", "true");
-          navigate("/");
+      .then((res) => {
+        if (res.ok) {
+          return res.json();
         } else {
-          alert("Invalid login credentials");
+          return res.text().then((x) => {
+            throw new Error(x);
+          });
         }
       })
-      .catch((error) => {
-        console.error("Error during login:", error);
-      });
+      .then((data) => {
+        setUser(data);
+        localStorage.token = data.token;
+        navigate("/");
+      })
+      .catch((err) => {
+        alert("Invalid login credentials");
+      })
+      .finally(() => {});
   };
 
   return (

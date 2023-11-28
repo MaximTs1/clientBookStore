@@ -1,43 +1,47 @@
-import React from 'react';
-import { FaShoppingCart, FaUserMinus, FaUserPlus } from 'react-icons/fa';
-import { Link, useNavigate } from 'react-router-dom';
-import styled from 'styled-components';
-import { useProductsContext } from '../context/products_context';
-import { useCartContext } from '../context/cart_context';
-import { useUserContext } from '../context/user_context';
+import React from "react";
+import { useContext, useState } from "react";
+import { FaShoppingCart, FaUserMinus, FaUserPlus } from "react-icons/fa";
+import { Link, useNavigate } from "react-router-dom";
+import styled from "styled-components";
+import { useProductsContext } from "../context/products_context";
+import { useCartContext } from "../context/cart_context";
+import { useUserContext } from "../context/user_context";
+import { GeneralContext } from "../App";
 
 const CartButton = () => {
   const { closeSidebar } = useProductsContext();
   const { total_items, clearCart } = useCartContext();
   const { myUser, logout } = useUserContext();
   const navigate = useNavigate();
+  const { setLoading, snackbar, setUser, user } = useContext(GeneralContext);
 
   return (
-    <Wrapper className='cart-btn-wrapper'>
-      <Link to='/cart' className='cart-btn' onClick={closeSidebar}>
+    <Wrapper className="cart-btn-wrapper">
+      <Link to="/cart" className="cart-btn" onClick={closeSidebar}>
         Cart
-        <span className='cart-container'>
+        <span className="cart-container">
           <FaShoppingCart />
-          <span className='cart-value'>{total_items}</span>
+          <span className="cart-value">{total_items}</span>
         </span>
       </Link>
-      {myUser ? (
+      {user ? (
         <button
-          type='button'
-          className='auth-btn'
+          type="button"
+          className="auth-btn"
           onClick={() => {
             clearCart();
-            localStorage.removeItem('user');
-            logout({ returnTo: window.location.origin });
+            localStorage.clear("token");
+            // logout({ returnTo: window.location.origin });
+            window.location.reload();
           }}
         >
           Logout <FaUserMinus />
         </button>
       ) : (
         <button
-          type='button'
-          className='auth-btn'
-          onClick={() => navigate('/login')}
+          type="button"
+          className="auth-btn"
+          onClick={() => navigate("/login")}
         >
           Login <FaUserPlus />
         </button>
@@ -98,5 +102,5 @@ const Wrapper = styled.div`
       margin-left: 5px;
     }
   }
-`
-export default CartButton
+`;
+export default CartButton;
