@@ -1,5 +1,5 @@
 import React from "react";
-import { useContext, useState } from "react";
+import { useContext } from "react";
 import styled from "styled-components";
 import logo from "../assets/logo.jpeg";
 import { FaBars } from "react-icons/fa";
@@ -81,6 +81,10 @@ const NavContainer = styled.nav`
   }
   .cart-btn-wrapper {
     display: none;
+  }
+  .row{
+    display: flex;
+    margin-left: 15px;
   }
   @media (min-width: 992px) {
     .nav-toggle {

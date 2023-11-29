@@ -11,6 +11,7 @@ import {
 } from "./pages";
 import Login from "./pages/Login";
 import Signup from "./pages/Signup";
+import UserInfo from "./pages/UserInfo";
 
 export default function AppRoutes() {
   return (
@@ -18,6 +19,7 @@ export default function AppRoutes() {
       <Route path="/" exact element={<Home />} />
       <Route path="about" element={<About />} />
       <Route path="cart" element={<Cart />} />
+      <Route path="userInfo" element={<UserInfo />} />
       <Route path="login" element={<Login />} />
       <Route path="/signup" element={<Signup />} />
       <Route path="products" element={<Products />} />

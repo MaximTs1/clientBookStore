@@ -1,6 +1,6 @@
 import React from "react";
 import { useContext, useState } from "react";
-import { FaShoppingCart, FaUserMinus, FaUserPlus } from "react-icons/fa";
+import { FaShoppingCart, FaUserMinus, FaUserPlus, FaInfo } from "react-icons/fa";
 import { Link, useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import { useProductsContext } from "../context/products_context";
@@ -25,6 +25,14 @@ const CartButton = () => {
         </span>
       </Link>
       {user ? (
+      <div className="row">
+      <Link to="/userInfo" className="cart-btn" onClick={closeSidebar}>
+        Info
+        <span className="cart-container">
+          <FaInfo />
+        </span>
+      </Link>
+        
         <button
           type="button"
           className="auth-btn"
@@ -33,10 +41,11 @@ const CartButton = () => {
             localStorage.clear("token");
             // logout({ returnTo: window.location.origin });
             window.location.reload();
-          }}
+          } }
         >
-          Logout <FaUserMinus />
+            Logout <FaUserMinus />
         </button>
+        </div>
       ) : (
         <button
           type="button"
@@ -71,8 +80,9 @@ const Wrapper = styled.div`
     position: relative;
     svg {
       height: 1.6rem;
-      margin-left: 5px;
+      margin-left: 3px;
     }
+    margin-right:5px;
   }
   .cart-value {
     position: absolute;
