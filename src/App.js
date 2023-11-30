@@ -3,7 +3,6 @@ import { BrowserRouter as Router } from "react-router-dom";
 import { Navbar, Sidebar, Footer } from "./components";
 import AppRoutes from "./AppRoutes";
 import Loader from "./components/Loader";
-import { useNavigate } from "react-router-dom";
 
 export const GeneralContext = createContext();
 
