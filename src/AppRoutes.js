@@ -9,9 +9,10 @@ import {
   Products,
   PrivateRoute,
 } from "./pages";
-import Login from "./pages/Login";
-import Signup from "./pages/Signup";
-import UserInfo from "./pages/UserInfo";
+import FavoriteProducts from "./pages/Products/FavoriteProducts";
+import Login from "./pages/Auth/Login";
+import Signup from "./pages/Auth/Signup";
+import UserInfo from "./pages/Auth/UserInfo";
 
 export default function AppRoutes() {
   return (
@@ -21,9 +22,11 @@ export default function AppRoutes() {
       <Route path="cart" element={<Cart />} />
       <Route path="userInfo" element={<UserInfo />} />
       <Route path="login" element={<Login />} />
-      <Route path="/signup" element={<Signup />} />
+      <Route path="signup" element={<Signup />} />
       <Route path="products" element={<Products />} />
       <Route path="products/:id" element={<SingleProduct />} />
+      <Route path="favoriteproducts" element={<FavoriteProducts />} />
+
       <Route
         path="checkout"
         element={

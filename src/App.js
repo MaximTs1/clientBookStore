@@ -1,13 +1,12 @@
 import { createContext, useEffect, useState } from "react";
 import { BrowserRouter as Router } from "react-router-dom";
-import { Navbar, Sidebar, Footer } from "./components";
+import { Navbar, Sidebar, Footer } from "./components/General";
 import AppRoutes from "./AppRoutes";
-import Loader from "./components/Loader";
+import Loader from "./components/FromOtherProjects/Loader";
 
 export const GeneralContext = createContext();
 
 function App() {
-  // const navigate = useNavigate();
   const [user, setUser] = useState();
   const [loading, setLoading] = useState(false);
 
@@ -33,14 +32,11 @@ function App() {
         .then((data) => {
           setUser(data);
         })
-        .catch((err) => {
-          // navigate("/");
-        })
+        .catch((err) => {})
         .finally(() => {
           setLoading(false);
         });
     } else {
-      // navigate("/");
     }
   }, []);
 
