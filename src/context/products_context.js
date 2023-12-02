@@ -40,12 +40,12 @@ export const ProductsProvider = ({ children }) => {
     dispatch({ type: GET_PRODUCTS_BEGIN });
     try {
       const response = await axios.get(url);
-      console.log("fetchProducts products: ", response.data);
+      // console.log("fetchProducts products: ", response.data);
       const products = response.data.map((product) => ({
         ...product,
         id: product.customId,
       }));
-      console.log("products: ", products);
+      // console.log("products: ", products);
       dispatch({ type: GET_PRODUCTS_SUCCESS, payload: products });
     } catch (error) {
       dispatch({ type: GET_PRODUCTS_ERROR });
@@ -59,10 +59,10 @@ export const ProductsProvider = ({ children }) => {
         `http://185.229.226.27:3001/api/book-by-custom-id/${id}`
       );
       const singleProduct = response.data;
-      console.log("response", response);
+      // console.log("response", response);
       dispatch({ type: GET_SINGLE_PRODUCT_SUCCESS, payload: singleProduct });
     } catch (error) {
-      console.log("error", error);
+      // console.log("error", error);
       dispatch({ type: GET_SINGLE_PRODUCT_ERROR });
     }
   };

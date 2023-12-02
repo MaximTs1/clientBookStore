@@ -10,10 +10,13 @@ import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import { structure, signupSchema } from "./SignupStructure";
+import Visibility from "@mui/icons-material/Visibility";
+import VisibilityOff from "@mui/icons-material/VisibilityOff";
+import { IconButton, InputAdornment } from "@mui/material";
+import { useNavigate } from "react-router-dom";
 import "../Spinner.css";
 import "./Signup.css";
 import axios from "axios";
-import { useNavigate } from "react-router-dom";
 
 const defaultTheme = createTheme();
 
@@ -32,6 +35,7 @@ const Signup = () => {
 
   const [errors, setErrors] = useState({});
   const [isValid, setIsValid] = useState(false);
+  const [showPassword, setShowPassword] = useState(false);
   const navigate = useNavigate();
 
   const handleInputChange = (ev) => {
@@ -57,6 +61,10 @@ const Signup = () => {
     });
     setErrors(newErrors);
     setIsValid(!Object.keys(newErrors).length);
+  };
+
+  const handleClickShowPassword = () => {
+    setShowPassword(!showPassword);
   };
 
   const handleSubmit = async (e) => {
@@ -114,10 +122,34 @@ const Signup = () => {
                       fullWidth
                       id={s.name}
                       label={s.label}
-                      type={s.type}
+                      type={
+                        s.type === "password" && !showPassword
+                          ? "password"
+                          : "text"
+                      }
                       error={!!errors[s.name]}
                       helperText={errors[s.name] || ""}
                       onChange={handleInputChange}
+                      InputProps={
+                        s.type === "password"
+                          ? {
+                              endAdornment: (
+                                <InputAdornment position="end">
+                                  <IconButton
+                                    aria-label="toggle password visibility"
+                                    onClick={handleClickShowPassword}
+                                  >
+                                    {showPassword ? (
+                                      <VisibilityOff />
+                                    ) : (
+                                      <Visibility />
+                                    )}
+                                  </IconButton>
+                                </InputAdornment>
+                              ),
+                            }
+                          : null
+                      }
                     />
                   </Grid>
                 ))}
