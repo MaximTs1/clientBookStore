@@ -70,17 +70,21 @@ const CheckoutForm = () => {
     setError(event.error ? event.error.message : "");
   };
   const handleSubmit = async (ev) => {
+    console.log("total_amount",total_amount);
+    console.log("cart", cart);
+
     ev.preventDefault();
     setProcessing(true);
-    const payload = await stripe.confirmCardPayment(clientSecret, {
-      payment_method: {
-        card: elements.getElement(CardElement),
-      },
-    });
-    if (payload.error) {
-      setError(`Payment failed ${payload.error.message}`);
-      setProcessing(false);
-    } else {
+    // const payload = await stripe.confirmCardPayment(clientSecret, {
+    //   payment_method: {
+    //     card: elements.getElement(CardElement),
+    //   },
+    // });
+    // if (payload.error) {
+    //   setError(`Payment failed ${payload.error.message}`);
+    //   setProcessing(false);
+    // } else {
+      await updateProductStock();
       setError(null);
       setProcessing(false);
       setSucceeded(true);
@@ -88,8 +92,18 @@ const CheckoutForm = () => {
         clearCart();
         navigate("/");
       }, 10000);
-    }
+    // }
   };
+
+  const updateProductStock = async () => {
+    const itemsToUpdate = cart.map(item => ({
+      customId: item.id,
+      amount: item.amount
+    })); 
+
+    await axios.post('http://185.229.226.27:3001/api/update-stock', itemsToUpdate);
+  };
+
   return (
     <div>
       {succeeded ? (
@@ -111,9 +125,11 @@ const CheckoutForm = () => {
           options={cardStyle}
           onChange={handleChange}
         />
-        <button disabled={processing || disabled || succeeded} id="submit">
+        {/* <button disabled={processing || disabled || succeeded} id="submit"> */}
+        <button id="submit">
           <span id="button-text">
-            {processing ? <div className="spinner" id="spinner"></div> : "Pay"}
+            {/* {processing ? <div className="spinner" id="spinner"></div> : "Pay"} */}
+            "Pay"
           </span>
         </button>
         {/* Show any error that happens when processing the payment */}

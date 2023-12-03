@@ -21,21 +21,29 @@ const UserData = () => {
   const { user, setUser } = useContext(GeneralContext);
   const navigate = useNavigate();
 
-  const [userData, setUserData] = useState({
-    customId: user.customId,
-    firstName: user.firstName,
-    lastName: user.lastName,
-    phone: user.phone,
-    email: user.email,
-    password: user.password,
-    city: user.city,
-    street: user.street,
-    houseNumber: user.houseNumber,
-    zip: user.zip,
+  // Function to initialize userData
+  const initializeUserData = () => ({
+    customId: user?.customId || '',
+    firstName: user?.firstName || '',
+    lastName: user?.lastName || '',
+    phone: user?.phone || '',
+    email: user?.email || '',
+    password: user?.password || '',
+    city: user?.city || '',
+    street: user?.street || '',
+    houseNumber: user?.houseNumber || '',
+    zip: user?.zip || '',
   });
 
+  const [userData, setUserData] = useState(initializeUserData);
   const [errors, setErrors] = useState({});
   const [isValid, setIsValid] = useState(false);
+
+  useEffect(() => {
+    if (user) {
+      setUserData(initializeUserData());
+    }
+  }, [user]);
 
   const handleInputChange = (ev) => {
     const { name, value } = ev.target;
@@ -81,14 +89,12 @@ const UserData = () => {
       }
 
       const updatedUser = await response.json();
-      navigate("/");
       setUser(updatedUser);
+      navigate("/");
     } catch (error) {
       console.error("Error:", error);
     }
   };
-
-  console.log("userData: ", userData);
 
   return (
     <div className="formContainer">
@@ -110,53 +116,54 @@ const UserData = () => {
             <Typography component="h1" variant="h5">
               User Info
             </Typography>
-            <Box
-              component="form"
-              noValidate
-              onSubmit={handleSubmit}
-              sx={{ mt: 3 }}
-            >
-              <Grid container spacing={2}>
-                {structure.map((s) => (
-                  <Grid key={s.name} item xs={12} sm={s.block ? 12 : 6}>
-                    <TextField
-                      name={s.name}
-                      value={userData[s.name]}
-                      required={s.required}
-                      fullWidth
-                      id={s.name}
-                      label={s.label}
-                      type={s.type}
-                      error={!!errors[s.name]}
-                      helperText={errors[s.name] || user.id}
-                      onChange={handleInputChange}
-                    />
-                  </Grid>
-                ))}
-              </Grid>
-
-              <Button
-                className={`spinner-button ${isValid ? "valid" : user.id}`}
-                disabled={!isValid}
-                display={!isValid}
-                style={{ display: isValid ? "none" : user.id }}
-                sx={{ mt: 2, mb: 0 }}
+            {user && (
+              <Box
+                component="form"
+                noValidate
+                onSubmit={handleSubmit}
+                sx={{ mt: 3 }}
               >
-                <span className="spinner"></span>
-                {isValid ? "Valid" : "Finish the required field..."}
-              </Button>
+                <Grid container spacing={2}>
+                  {structure.map((s) => (
+                    <Grid key={s.name} item xs={12} sm={s.block ? 12 : 6}>
+                      <TextField
+                        name={s.name}
+                        value={userData[s.name]}
+                        required={s.required}
+                        fullWidth
+                        id={s.name}
+                        label={s.label}
+                        type={s.type}
+                        error={!!errors[s.name]}
+                        helperText={errors[s.name] || ""}
+                        onChange={handleInputChange}
+                      />
+                    </Grid>
+                  ))}
+                </Grid>
 
-              <Button
-                type="submit"
-                fullWidth
-                variant="contained"
-                sx={{ mt: 2, mb: 5 }}
-                disabled={!isValid}
-              >
-                Update User Details
-              </Button>
-              <Grid container justifyContent="center"></Grid>
-            </Box>
+                <Button
+                  className={`spinner-button ${isValid ? "valid" : ""}`}
+                  disabled={!isValid}
+                  style={{ display: isValid ? "none" : "block" }}
+                  sx={{ mt: 2, mb: 0 }}
+                >
+                  <span className="spinner"></span>
+                  {isValid ? "Valid" : "Finish the required field..."}
+                </Button>
+
+                <Button
+                  type="submit"
+                  fullWidth
+                  variant="contained"
+                  sx={{ mt: 2, mb: 5 }}
+                  disabled={!isValid}
+                >
+                  Update User Details
+                </Button>
+                <Grid container justifyContent="center"></Grid>
+              </Box>
+            )}
           </Box>
         </Container>
       </ThemeProvider>

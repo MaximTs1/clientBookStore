@@ -1,7 +1,8 @@
 import React from "react";
 import styled from "styled-components";
-import { Filters, ProductList, Sort, PageHero } from "../../components/General";
+import { Filters, FavoriteProductList, Sort, PageHero } from "../../components/General";
 const FavoriteProducts = () => {
+
   return (
     <main>
       <PageHero title="products" />
@@ -10,7 +11,7 @@ const FavoriteProducts = () => {
           <Filters />
           <div>
             <Sort />
-            <ProductList />
+            <FavoriteProductList />
           </div>
         </div>
       </Wrapper>

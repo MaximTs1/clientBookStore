@@ -11,6 +11,7 @@ import Error from "./Error";
 import AddToCart from "../Cart/AddToCart";
 import Filters from "../Product/Filters";
 import ProductList from "../Product/ProductList";
+import FavoriteProductList from "../Product/FavoriteProductList";
 import Sort from "../Product/Sort";
 import Stars from "../Stars";
 import CartContent from "../Cart/CartContent";
@@ -30,6 +31,7 @@ export {
   AddToCart,
   Filters,
   ProductList,
+  FavoriteProductList,
   Sort,
   Stars,
   CartContent,
