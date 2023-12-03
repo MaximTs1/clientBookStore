@@ -6,10 +6,11 @@ import Error from "../General/Error";
 import Loading from "../General/Loading";
 import Product from "./Product";
 const FeaturedProducts = () => {
+
   const {
     products_loading: loading,
     products_error: error,
-    featured_products: featured,
+    products: featured,
   } = useProductsContext();
   if (loading) {
     return <Loading />;
@@ -17,6 +18,7 @@ const FeaturedProducts = () => {
   if (error) {
     return <Error />;
   }
+
   return (
     <Wrapper className="section">
       <div className="title">
