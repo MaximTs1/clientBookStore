@@ -70,7 +70,7 @@ const CheckoutForm = () => {
     setError(event.error ? event.error.message : "");
   };
   const handleSubmit = async (ev) => {
-    console.log("total_amount",total_amount);
+    console.log("total_amount", total_amount);
     console.log("cart", cart);
 
     ev.preventDefault();
@@ -84,42 +84,44 @@ const CheckoutForm = () => {
     //   setError(`Payment failed ${payload.error.message}`);
     //   setProcessing(false);
     // } else {
-      await updateProductStock();
-      await updateUserOrdersHistory();
-      setError(null);
-      setProcessing(false);
-      setSucceeded(true);
-      setTimeout(() => {
-        clearCart();
-        navigate("/");
-      }, 10000);
+    await updateProductStock();
+    await updateUserOrdersHistory();
+    setError(null);
+    setProcessing(false);
+    setSucceeded(true);
+    setTimeout(() => {
+      clearCart();
+      navigate("/");
+    }, 10000);
     // }
   };
 
   const updateProductStock = async () => {
-    const itemsToUpdate = cart.map(item => ({
+    const itemsToUpdate = cart.map((item) => ({
       customId: item.id,
-      amount: item.amount
-    })); 
+      amount: item.amount,
+    }));
 
-    await axios.post('http://185.229.226.27:3001/api/update-stock', itemsToUpdate);
+    await axios.post(
+      "http://185.229.226.27:3001/api/update-stock",
+      itemsToUpdate
+    );
   };
 
   const updateUserOrdersHistory = async () => {
-
-    const simplifiedCart = cart.map(item => ({
+    const simplifiedCart = cart.map((item) => ({
       id: item.id,
       name: item.name,
       amount: item.amount,
       price: item.price,
     }));
-  
+
     const newOrder = {
       cart: simplifiedCart,
-      date: new Date().toDateString() // Corrected to call the function
+      date: new Date().toDateString(), // Corrected to call the function
     };
 
-    console.log("newOrder: " , newOrder);
+    console.log("newOrder: ", newOrder);
     try {
       const response = await fetch(
         `http://185.229.226.27:3001/user/update-order-history/${user.customId}`,
@@ -127,6 +129,7 @@ const CheckoutForm = () => {
           method: "PUT",
           headers: {
             "Content-Type": "application/json",
+            Authorization: localStorage.token,
           },
           body: JSON.stringify(newOrder),
         }
@@ -142,7 +145,8 @@ const CheckoutForm = () => {
       setUser((user) => ({ ...user, likedBooks: updatedUser.likedBooks }));
     } catch (error) {
       console.error("Error:", error);
-    }  };
+    }
+  };
   return (
     <div>
       {succeeded ? (

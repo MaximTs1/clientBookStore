@@ -87,6 +87,7 @@ const UserData = () => {
           method: "PUT",
           headers: {
             "Content-Type": "application/json",
+            Authorization: localStorage.token,
           },
           body: JSON.stringify(userData),
         }

@@ -12,7 +12,7 @@ import {
 import { GeneralContext } from "../../App";
 import styled from "styled-components";
 import { Link } from "react-router-dom";
-import { BsFillHeartFill } from 'react-icons/bs';
+import { BsFillHeartFill } from "react-icons/bs";
 import "./SingleProductPage.css";
 
 const SingleProductPage = () => {
@@ -76,6 +76,7 @@ const SingleProductPage = () => {
           method: "PUT",
           headers: {
             "Content-Type": "application/json",
+            Authorization: localStorage.token,
           },
           body: JSON.stringify(dataToUpdate),
         }
@@ -122,12 +123,20 @@ const SingleProductPage = () => {
             </p>
             <hr />
             {stock > 0 && <AddToCart product={product} />}
-            <span> 
-              {user && <BsFillHeartFill className='Heart'size={26} style={{ color: user.likedBooks.includes(id) ? 'red' : 'rgb(51, 49, 49)' }} onClick={() => isFavorite(id)} />}
-            </span> 
-
-
-
+            <span>
+              {user && (
+                <BsFillHeartFill
+                  className="Heart"
+                  size={26}
+                  style={{
+                    color: user.likedBooks.includes(id)
+                      ? "red"
+                      : "rgb(51, 49, 49)",
+                  }}
+                  onClick={() => isFavorite(id)}
+                />
+              )}
+            </span>
           </section>
         </div>
       </div>

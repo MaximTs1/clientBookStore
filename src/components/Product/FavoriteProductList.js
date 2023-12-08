@@ -13,15 +13,22 @@ const FavoriteProductList = () => {
   // State to store the products
   const [idOfFavoriteProducts, setIdOfFavoriteProducts] = useState([]);
 
-  const {
-    products: allProducts,
-  } = useProductsContext();
+  const { products: allProducts } = useProductsContext();
 
   useEffect(() => {
     // Function to fetch products
     const fetchProducts = async () => {
       try {
-        const response = await axios.get(`http://185.229.226.27:3001/user/get-favorite-books/${user && user.customId}`);
+        const response = await axios.get(
+          `http://185.229.226.27:3001/user/get-favorite-books/${
+            user && user.customId
+          }`,
+          {
+            headers: {
+              Authorization: localStorage.token,
+            },
+          }
+        );
         setIdOfFavoriteProducts(response.data);
       } catch (error) {
         console.error("Error fetching products:", error);
@@ -30,11 +37,11 @@ const FavoriteProductList = () => {
 
     // Call the function
     fetchProducts();
-  }, [user && user.customId]); 
+  }, [user && user.customId]);
 
-const favoriteProducts = allProducts.filter(product =>
-  idOfFavoriteProducts.includes(String(product.customId))
-);
+  const favoriteProducts = allProducts.filter((product) =>
+    idOfFavoriteProducts.includes(String(product.customId))
+  );
 
   if (favoriteProducts.length < 1) {
     return (
