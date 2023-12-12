@@ -63,7 +63,6 @@ export default function Login() {
         }
       })
       .then((data) => {
-        // setUser(data);
         localStorage.token = data.token;
         setUser(data);
         navigate("/");

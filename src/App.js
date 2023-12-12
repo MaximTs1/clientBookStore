@@ -31,6 +31,7 @@ function App() {
         })
         .then((data) => {
           setUser(data);
+          console.log("data", data);
         })
         .catch((err) => {})
         .finally(() => {

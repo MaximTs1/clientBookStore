@@ -35,12 +35,11 @@ const Nav = () => {
               </li>
             );
           })}
-          {user && (
+          {/* {user && (
             <li>
-              <Link to="/favoriteproducts">Favorite Products</Link>
-              <Link to="/checkout">CheckOut</Link>
+              <Link to="/favoriteproducts">💚</Link>
             </li>
-          )}
+          )} */}
         </ul>
         <CartButtons />
       </div>

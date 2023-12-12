@@ -39,6 +39,8 @@ const UserData = () => {
     zip: user?.zip || "",
   });
 
+  console.log("user", user);
+
   const [userData, setUserData] = useState(initializeUserData);
   const [errors, setErrors] = useState({});
   const [isValid, setIsValid] = useState(false);
@@ -57,6 +59,14 @@ const UserData = () => {
   const handleClickShowPassword = () => {
     setShowPassword(!showPassword);
   };
+
+  useEffect(() => {
+    setUserData(initializeUserData()); // Resets user data
+    setShowPassword(false); // Resets password visibility state
+    setErrors({}); // Resets any errors
+    setIsValid(false); // Resets validation state
+    // Add any other state resets here
+  }, []);
 
   useEffect(() => {
     const validationResults = signupSchema.validate(userData, {
@@ -99,6 +109,7 @@ const UserData = () => {
 
       const updatedUser = await response.json();
       setUser(updatedUser);
+      setUserData(initializeUserData(""));
       navigate("/");
     } catch (error) {
       console.error("Error:", error);
@@ -142,10 +153,34 @@ const UserData = () => {
                         fullWidth
                         id={s.name}
                         label={s.label}
-                        type={s.type}
+                        type={
+                          s.type === "password" && !showPassword
+                            ? "password"
+                            : "text"
+                        }
                         error={!!errors[s.name]}
                         helperText={errors[s.name] || ""}
                         onChange={handleInputChange}
+                        InputProps={
+                          s.type === "password"
+                            ? {
+                                endAdornment: (
+                                  <InputAdornment position="end">
+                                    <IconButton
+                                      aria-label="toggle password visibility"
+                                      onClick={handleClickShowPassword}
+                                    >
+                                      {showPassword ? (
+                                        <VisibilityOff />
+                                      ) : (
+                                        <Visibility />
+                                      )}
+                                    </IconButton>
+                                  </InputAdornment>
+                                ),
+                              }
+                            : null
+                        }
                       />
                     </Grid>
                   ))}
