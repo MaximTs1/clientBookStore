@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useContext } from "react";
 import { GeneralContext } from "../../App";
+import "../Spinner.css";
 import "./OrderHistoryPage.css";
 
 const OrderHistoryPage = () => {
@@ -22,7 +23,11 @@ const OrderHistoryPage = () => {
         console.error("Fetch error:", error);
       }
     };
-  });
+
+    if (user) {
+      fetchOrderHistory();
+    }
+  }, [user]);
 
   const toggleOrderDetails = (orderId) => {
     setSelectedOrderId(selectedOrderId === orderId ? null : orderId);
@@ -46,9 +51,9 @@ const OrderHistoryPage = () => {
                 <td>View Details</td>
               </tr>
               {selectedOrderId === index && (
-                <tr className="details-row">
+                <tr>
                   <td colSpan="2">
-                    <div className="details-content">
+                    <div>
                       <ul>
                         {order.cart.map((item, idx) => (
                           <li key={idx}>
