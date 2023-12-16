@@ -59,7 +59,7 @@ const SingleProductPage = () => {
 
   const isFavorite = async (id) => {
     console.log("id", id);
-    const isAlreadyFavorite = user.likedBooks.includes(id);
+    const isAlreadyFavorite = user.likedBooks?.includes(id);
     const updatedLikedBooks = isAlreadyFavorite
       ? user.likedBooks.filter((favoriteId) => favoriteId !== id)
       : [...user.likedBooks, id];
@@ -129,7 +129,7 @@ const SingleProductPage = () => {
                   className="Heart"
                   size={26}
                   style={{
-                    color: user.likedBooks.includes(id)
+                    color: user.likedBooks?.includes(id)
                       ? "red"
                       : "rgb(51, 49, 49)",
                   }}

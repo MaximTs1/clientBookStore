@@ -1,24 +1,26 @@
-import React, { useState, useEffect, useContext } from 'react';
+import React, { useState, useEffect, useContext } from "react";
 import { GeneralContext } from "../../App";
 import "../Spinner.css";
 import "./OrderHistoryPage.css";
 
 const OrderHistoryPage = () => {
-    const { user } = useContext(GeneralContext);
-    const [orderHistory, setOrderHistory] = useState([]);
-    const [selectedOrderId, setSelectedOrderId] = useState(null);
-    
+  const { user } = useContext(GeneralContext);
+  const [orderHistory, setOrderHistory] = useState([]);
+  const [selectedOrderId, setSelectedOrderId] = useState(null);
+
   useEffect(() => {
     const fetchOrderHistory = async () => {
       try {
-        const response = await fetch(`http://185.229.226.27:3001/user/order-history/${user.customId}`);
+        const response = await fetch(
+          `http://185.229.226.27:3001/user/order-history/${user.customId}`
+        );
         if (!response.ok) {
-          throw new Error('Network response was not ok');
+          throw new Error("Network response was not ok");
         }
         const data = await response.json();
         setOrderHistory(data);
       } catch (error) {
-        console.error('Fetch error:', error);
+        console.error("Fetch error:", error);
       }
     };
 

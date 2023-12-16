@@ -1,33 +1,25 @@
 import React, { useState, useContext, useEffect } from "react";
 import styled from "styled-components";
 import { loadStripe } from "@stripe/stripe-js";
-import {
-  CardElement,
-  useStripe,
-  Elements,
-  useElements,
-} from "@stripe/react-stripe-js";
+import { CardElement, Elements } from "@stripe/react-stripe-js";
 import axios from "axios";
 import { useCartContext } from "../context/cart_context";
-import { useUserContext } from "../context/user_context";
 import { formatPrice } from "../utils/helpers";
 import { useNavigate } from "react-router-dom";
 import { GeneralContext } from "../App";
+import "./StripCheckout.css";
 
 const promise = loadStripe(process.env.REACT_APP_STRIPE_PUBLIC_KEY);
 
 const CheckoutForm = () => {
+  const [showCreditCardInput, setShowCreditCardInput] = useState(false);
   const { cart, total_amount, shipping_fee, clearCart } = useCartContext();
-  const { myUser } = useUserContext();
   const navigate = useNavigate();
   const [succeeded, setSucceeded] = useState(false);
   const [error, setError] = useState(null);
-  const [processing, setProcessing] = useState("");
-  const [disabled, setDisabled] = useState(true);
-  const [clientSecret, setClientSecret] = useState("");
-  const stripe = useStripe();
-  const elements = useElements();
-  const { setLoading, snackbar, setUser, user } = useContext(GeneralContext);
+  const [setDisabled] = useState(true);
+  const [setClientSecret] = useState("");
+  const { setUser, user } = useContext(GeneralContext);
 
   const createPaymentIntent = async () => {
     try {
@@ -41,53 +33,29 @@ const CheckoutForm = () => {
       // console.log(error.response)
     }
   };
+
   useEffect(() => {
     createPaymentIntent();
-    // eslint-disable-next-line
+    const bootstrapStyle = document.createElement("link");
+    bootstrapStyle.href =
+      "https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css";
+    bootstrapStyle.rel = "stylesheet";
+    bootstrapStyle.type = "text/css";
+    document.head.appendChild(bootstrapStyle);
+
+    return () => {
+      document.head.removeChild(bootstrapStyle);
+    };
   }, []);
 
-  const cardStyle = {
-    style: {
-      base: {
-        color: "#32325d",
-        fontFamily: "Arial, sans-serif",
-        fontSmoothing: "antialiased",
-        fontSize: "16px",
-        "::placeholder": {
-          color: "#32325d",
-        },
-      },
-      invalid: {
-        color: "#fa755a",
-        iconColor: "#fa755a",
-      },
-    },
-  };
-  const handleChange = async (event) => {
-    // Listen for changes in the CardElement
-    // and display any errors as the customer types their card details
-    setDisabled(event.empty);
-    setError(event.error ? event.error.message : "");
-  };
   const handleSubmit = async (ev) => {
     console.log("total_amount", total_amount);
     console.log("cart", cart);
 
     ev.preventDefault();
-    setProcessing(true);
-    // const payload = await stripe.confirmCardPayment(clientSecret, {
-    //   payment_method: {
-    //     card: elements.getElement(CardElement),
-    //   },
-    // });
-    // if (payload.error) {
-    //   setError(`Payment failed ${payload.error.message}`);
-    //   setProcessing(false);
-    // } else {
     await updateProductStock();
     await updateUserOrdersHistory();
     setError(null);
-    setProcessing(false);
     setSucceeded(true);
     setTimeout(() => {
       clearCart();
@@ -147,202 +115,376 @@ const CheckoutForm = () => {
       console.error("Error:", error);
     }
   };
+
+  const subtotal = cart.reduce(
+    (total, item) => total + item.price * item.amount,
+    0
+  );
+
   return (
     <div>
-      {succeeded ? (
-        <article>
-          <h4>Thank you</h4>
-          <h4>Your payment was successful!</h4>
-          <h4>Redirecting to home page shortly</h4>
-        </article>
-      ) : (
-        <article>
-          <h4>Hello, {user && user.firstName}</h4>
-          <p>Your total is {formatPrice(total_amount)}</p>
-          <p>Test Card Number: 4242 4242 4242 4242</p>
-        </article>
-      )}
-      <form id="payment-form" onSubmit={handleSubmit}>
-        <CardElement
-          id="card-element"
-          options={cardStyle}
-          onChange={handleChange}
-        />
-        {/* <button disabled={processing || disabled || succeeded} id="submit"> */}
-        <button id="submit">
-          <span id="button-text">
-            {/* {processing ? <div className="spinner" id="spinner"></div> : "Pay"} */}
-            "Pay"
-          </span>
-        </button>
-        {/* Show any error that happens when processing the payment */}
-        {error && (
-          <div className="card-error" role="alert">
-            {error}
+      <link
+        rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/MaterialDesign-Webfont/5.3.45/css/materialdesignicons.css"
+        integrity="sha256-NAxhqDvtY0l4xn+YVa6WjAcmd94NNfttjNsDmNatFVc="
+        crossorigin="anonymous"
+      />
+      <link
+        href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css"
+        rel="stylesheet"
+      />
+
+      <div class="container">
+        <div class="row">
+          <div class="col-xl-8">
+            <div class="card">
+              <div class="card-body">
+                <ol class="activity-checkout mb-0 px-4 mt-3">
+                  <li class="checkout-item">
+                    <div class="avatar checkout-icon p-1">
+                      <div class="avatar-title rounded-circle bg-primary">
+                        <i class="bx bxs-receipt text-white font-size-20"></i>
+                      </div>
+                    </div>
+                    <div class="feed-item-list">
+                      <div>
+                        <h5 class="font-size-16 mb-1">Delivery Info</h5>
+                        <p class="text-muted text-truncate mb-4">
+                          Fill in the following details for shipment
+                        </p>
+                        <div class="mb-3">
+                          <form>
+                            <div>
+                              <div class="row">
+                                <div class="col-lg-4">
+                                  <div class="mb-3">
+                                    <label
+                                      class="form-label"
+                                      for="billing-name"
+                                    >
+                                      Name
+                                    </label>
+                                    <input
+                                      type="text"
+                                      class="form-control"
+                                      id="billing-name"
+                                      placeholder="Enter name"
+                                    />
+                                  </div>
+                                </div>
+                                <div class="col-lg-4">
+                                  <div class="mb-3">
+                                    <label
+                                      class="form-label"
+                                      for="billing-email-address"
+                                    >
+                                      Email Address
+                                    </label>
+                                    <input
+                                      type="email"
+                                      class="form-control"
+                                      id="billing-email-address"
+                                      placeholder="Enter email"
+                                    />
+                                  </div>
+                                </div>
+                                <div class="col-lg-4">
+                                  <div class="mb-3">
+                                    <label
+                                      class="form-label"
+                                      for="billing-phone"
+                                    >
+                                      Phone
+                                    </label>
+                                    <input
+                                      type="text"
+                                      class="form-control"
+                                      id="billing-phone"
+                                      placeholder="Enter Phone no."
+                                    />
+                                  </div>
+                                </div>
+                              </div>
+
+                              <div class="mb-3">
+                                <label class="form-label" for="billing-address">
+                                  Address
+                                </label>
+                                <textarea
+                                  class="form-control"
+                                  id="billing-address"
+                                  rows="3"
+                                  placeholder="Enter full address"
+                                ></textarea>
+                              </div>
+
+                              <div class="row">
+                                <div class="col-lg-4">
+                                  <div class="mb-4 mb-lg-0">
+                                    <label
+                                      class="form-label"
+                                      for="billing-city"
+                                    >
+                                      City
+                                    </label>
+                                    <input
+                                      type="text"
+                                      class="form-control"
+                                      id="billing-city"
+                                      placeholder="Enter City"
+                                    />
+                                  </div>
+                                </div>
+
+                                <div class="col-lg-4">
+                                  <div class="mb-0">
+                                    <label class="form-label" for="zip-code">
+                                      Zip / Postal code
+                                    </label>
+                                    <input
+                                      type="text"
+                                      class="form-control"
+                                      id="zip-code"
+                                      placeholder="Enter Postal code"
+                                    />
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                          </form>
+                        </div>
+                      </div>
+                    </div>
+                  </li>
+                  <li class="checkout-item">
+                    <div class="avatar checkout-icon p-1">
+                      <div class="avatar-title rounded-circle bg-primary">
+                        <i class="bx bxs-wallet-alt text-white font-size-20"></i>
+                      </div>
+                    </div>
+                    <div class="feed-item-list">
+                      <div>
+                        <h5 class="font-size-16 mb-1">Payment Info</h5>
+                        <p class="text-muted text-truncate mb-4">
+                          Choose a payment method
+                        </p>
+                      </div>
+                      <div>
+                        <h5 class="font-size-14 mb-3">Payment method :</h5>
+                        <div class="row">
+                          <div class="col-lg-3 col-sm-6">
+                            <div data-bs-toggle="collapse">
+                              <label class="card-radio-label">
+                                <input
+                                  type="radio"
+                                  name="pay-method"
+                                  id="pay-methodoption1"
+                                  className="card-radio-input"
+                                  onChange={() => setShowCreditCardInput(true)}
+                                />
+                                <span class="card-radio py-3 text-center text-truncate">
+                                  <i class="bx bx-credit-card d-block h2 mb-3"></i>
+                                  Credit Card
+                                </span>
+                              </label>
+                            </div>
+                          </div>
+
+                          <div class="col-lg-3 col-sm-6">
+                            <div>
+                              <label class="card-radio-label">
+                                <input
+                                  type="radio"
+                                  name="pay-method"
+                                  id="pay-methodoption2"
+                                  class="card-radio-input"
+                                  onChange={() => setShowCreditCardInput(false)}
+                                />
+                                <span class="card-radio py-3 text-center text-truncate">
+                                  <i class="bx bx-money d-block h2 mb-3"></i>
+                                  Cash
+                                </span>
+                              </label>
+                            </div>
+                          </div>
+
+                          <div class="col-lg-3 col-sm-6">
+                            <div>
+                              <label class="card-radio-label">
+                                <input
+                                  type="radio"
+                                  name="pay-method"
+                                  id="pay-methodoption3"
+                                  class="card-radio-input"
+                                  checked=""
+                                />
+                              </label>
+                            </div>
+                          </div>
+                        </div>
+                        {showCreditCardInput && (
+                          <div
+                            id="collapseCC"
+                            className="accordion-collapse collapse show"
+                            data-bs-parent="#accordionPayment"
+                          >
+                            <div className="accordion-body">
+                              <div class="row">
+                                <div class="col-lg-4">
+                                  <div class="mb-4 mb-lg-0">
+                                    <label class="form-label">
+                                      Card number
+                                    </label>
+                                    <input
+                                      type="text"
+                                      class="form-control"
+                                      placeholder="Enter card number"
+                                    />
+                                  </div>
+                                </div>
+
+                                <div class="col-lg-4">
+                                  <div class="mb-4 mb-lg-0">
+                                    <label class="form-label">
+                                      Name on card
+                                    </label>
+                                    <input
+                                      type="text"
+                                      class="form-control"
+                                      placeholder="Enter name"
+                                    />
+                                  </div>
+                                </div>
+                              </div>
+
+                              <div class="row">
+                                <div class="col-lg-4">
+                                  <div class="mb-0">
+                                    <label class="form-label">
+                                      Expiry date
+                                    </label>
+                                    <input
+                                      type="text"
+                                      class="form-control"
+                                      placeholder="Enter expiry date"
+                                    />
+                                  </div>
+                                </div>
+                                <div class="col-lg-4">
+                                  <div class="mb-0">
+                                    <label class="form-label">CVV Code</label>
+                                    <input
+                                      type="text"
+                                      class="form-control"
+                                      placeholder="Enter CVV code"
+                                    />
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        )}
+                      </div>
+                    </div>
+                  </li>
+                </ol>
+              </div>
+            </div>
+            <div class="row my-4">
+              <div class="col">
+                <a href="products.html" class="btn btn-link text-muted">
+                  <i class="mdi mdi-arrow-left me-1"></i> Continue Shopping{" "}
+                </a>
+              </div>
+              <div class="col">
+                <div className="text-end mt-2 mt-sm-0">
+                  <form id="payment-form" onSubmit={handleSubmit}>
+                    <button
+                      id="submit"
+                      style={{
+                        backgroundColor: "green",
+                        color: "white",
+                        border: "none",
+                        padding: "10px 20px",
+                        borderRadius: "5px",
+                        cursor: "pointer",
+                      }}
+                    >
+                      Pay
+                    </button>
+                  </form>
+                </div>
+              </div>
+            </div>
           </div>
-        )}
-        {/* Show a success message upon completion */}
-        <p className={succeeded ? "result-message" : "result-message hidden"}>
-          Payment succeeded, see the result in your
-          <a href={`https://dashboard.stripe.com/test/payments`}>
-            {" "}
-            Stripe dashboard.
-          </a>{" "}
-          Refresh the page to pay again.
-        </p>
-      </form>
+
+          <div className="col-xl-4">
+            <div className="card checkout-order-summary">
+              <div className="card-body">
+                <div className="p-3 bg-light mb-3">
+                  <h5 className="font-size-16 mb-0">Order Summary</h5>
+                </div>
+                <div className="table-responsive">
+                  <table className="table table-centered mb-0 table-nowrap">
+                    <thead>
+                      <tr>
+                        <th className="border-top-0" scope="col">
+                          Product
+                        </th>
+                        <th className="border-top-0" scope="col">
+                          Amount
+                        </th>
+                        <th className="border-top-0" scope="col">
+                          Price
+                        </th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {cart.map((item) => (
+                        <tr key={item.id}>
+                          <td>
+                            <img
+                              className="img"
+                              src={`data:image/jpeg;base64,${item.image}`}
+                              alt={item.name}
+                            />
+                            <p className="font-size-16 text-truncate">
+                              {item.name}
+                            </p>
+                          </td>
+                          <td>{item.amount}</td>
+                          <td>${item.price * item.amount}</td>
+                        </tr>
+                      ))}
+                      <tr>
+                        <td colSpan="2">
+                          <h5 className="font-size-14 m-0">Sub Total :</h5>
+                        </td>
+                        <td>${subtotal}</td>
+                      </tr>
+                      <tr>
+                        <td colSpan="2">
+                          <h5 className="font-size-14 m-0">
+                            Shipping Charge :
+                          </h5>
+                        </td>
+                        <td>${shipping_fee}</td>
+                      </tr>
+                      <tr className="bg-light">
+                        <td colSpan="2">
+                          <h5 className="font-size-14 m-0">Total:</h5>
+                        </td>
+                        <td>${total_amount + shipping_fee}</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
   );
 };
-
-const StripeCheckout = () => {
-  return (
-    <Wrapper>
-      <Elements stripe={promise}>
-        <CheckoutForm />
-      </Elements>
-    </Wrapper>
-  );
-};
-
-const Wrapper = styled.section`
-  form {
-    width: 30vw;
-    align-self: center;
-    box-shadow: 0px 0px 0px 0.5px rgba(50, 50, 93, 0.1),
-      0px 2px 5px 0px rgba(50, 50, 93, 0.1),
-      0px 1px 1.5px 0px rgba(0, 0, 0, 0.07);
-    border-radius: 7px;
-    padding: 40px;
-  }
-  input {
-    border-radius: 6px;
-    margin-bottom: 6px;
-    padding: 12px;
-    border: 1px solid rgba(50, 50, 93, 0.1);
-    max-height: 44px;
-    font-size: 16px;
-    width: 100%;
-    background: white;
-    box-sizing: border-box;
-  }
-  .result-message {
-    line-height: 22px;
-    font-size: 16px;
-  }
-  .result-message a {
-    color: rgb(89, 111, 214);
-    font-weight: 600;
-    text-decoration: none;
-  }
-  .hidden {
-    display: none;
-  }
-  #card-error {
-    color: rgb(105, 115, 134);
-    font-size: 16px;
-    line-height: 20px;
-    margin-top: 12px;
-    text-align: center;
-  }
-  #card-element {
-    border-radius: 4px 4px 0 0;
-    padding: 12px;
-    border: 1px solid rgba(50, 50, 93, 0.1);
-    max-height: 44px;
-    width: 100%;
-    background: white;
-    box-sizing: border-box;
-  }
-  #payment-request-button {
-    margin-bottom: 32px;
-  }
-  /* Buttons and links */
-  button {
-    background: #5469d4;
-    font-family: Arial, sans-serif;
-    color: #ffffff;
-    border-radius: 0 0 4px 4px;
-    border: 0;
-    padding: 12px 16px;
-    font-size: 16px;
-    font-weight: 600;
-    cursor: pointer;
-    display: block;
-    transition: all 0.2s ease;
-    box-shadow: 0px 4px 5.5px 0px rgba(0, 0, 0, 0.07);
-    width: 100%;
-  }
-  button:hover {
-    filter: contrast(115%);
-  }
-  button:disabled {
-    opacity: 0.5;
-    cursor: default;
-  }
-  /* spinner/processing state, errors */
-  .spinner,
-  .spinner:before,
-  .spinner:after {
-    border-radius: 50%;
-  }
-  .spinner {
-    color: #ffffff;
-    font-size: 22px;
-    text-indent: -99999px;
-    margin: 0px auto;
-    position: relative;
-    width: 20px;
-    height: 20px;
-    box-shadow: inset 0 0 0 2px;
-    -webkit-transform: translateZ(0);
-    -ms-transform: translateZ(0);
-    transform: translateZ(0);
-  }
-  .spinner:before,
-  .spinner:after {
-    position: absolute;
-    content: "";
-  }
-  .spinner:before {
-    width: 10.4px;
-    height: 20.4px;
-    background: #5469d4;
-    border-radius: 20.4px 0 0 20.4px;
-    top: -0.2px;
-    left: -0.2px;
-    -webkit-transform-origin: 10.4px 10.2px;
-    transform-origin: 10.4px 10.2px;
-    -webkit-animation: loading 2s infinite ease 1.5s;
-    animation: loading 2s infinite ease 1.5s;
-  }
-  .spinner:after {
-    width: 10.4px;
-    height: 10.2px;
-    background: #5469d4;
-    border-radius: 0 10.2px 10.2px 0;
-    top: -0.1px;
-    left: 10.2px;
-    -webkit-transform-origin: 0px 10.2px;
-    transform-origin: 0px 10.2px;
-    -webkit-animation: loading 2s infinite ease;
-    animation: loading 2s infinite ease;
-  }
-  @keyframes loading {
-    0% {
-      -webkit-transform: rotate(0deg);
-      transform: rotate(0deg);
-    }
-    100% {
-      -webkit-transform: rotate(360deg);
-      transform: rotate(360deg);
-    }
-  }
-  @media only screen and (max-width: 600px) {
-    form {
-      width: 80vw;
-    }
-  }
-`;
-
-export default StripeCheckout;
+export default CheckoutForm;
