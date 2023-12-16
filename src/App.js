@@ -1,6 +1,7 @@
 import { createContext, useEffect, useState } from "react";
 import { BrowserRouter as Router } from "react-router-dom";
-import { Navbar, Sidebar, Footer } from "./components/General";
+import { Navbar, Sidebar } from "./components/General";
+import Footer from "./components/General/Footer/Footer"
 import AppRoutes from "./AppRoutes";
 import Loader from "./components/FromOtherProjects/Loader";
 
