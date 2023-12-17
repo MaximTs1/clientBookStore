@@ -17,7 +17,6 @@ const CheckoutForm = () => {
   const navigate = useNavigate();
   const [succeeded, setSucceeded] = useState(false);
   const [error, setError] = useState(null);
-  const [setDisabled] = useState(true);
   const [setClientSecret] = useState("");
   const { setUser, user } = useContext(GeneralContext);
 
@@ -49,9 +48,6 @@ const CheckoutForm = () => {
   }, []);
 
   const handleSubmit = async (ev) => {
-    console.log("total_amount", total_amount);
-    console.log("cart", cart);
-
     ev.preventDefault();
     await updateProductStock();
     await updateUserOrdersHistory();
@@ -80,6 +76,7 @@ const CheckoutForm = () => {
     const simplifiedCart = cart.map((item) => ({
       id: item.id,
       name: item.name,
+      image: item.image,
       amount: item.amount,
       price: item.price,
     }));
@@ -87,6 +84,7 @@ const CheckoutForm = () => {
     const newOrder = {
       cart: simplifiedCart,
       date: new Date().toDateString(), // Corrected to call the function
+      orderStatus: "Placed",
     };
 
     console.log("newOrder: ", newOrder);

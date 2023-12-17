@@ -1,11 +1,15 @@
 import React from "react";
 import styled from "styled-components";
-import { Filters, FavoriteProductList, Sort, PageHero } from "../../components/General";
+import {
+  Filters,
+  FavoriteProductList,
+  Sort,
+  PageHero,
+} from "../../components/General";
 const FavoriteProducts = () => {
-
   return (
     <main>
-      <PageHero title="products" />
+      <PageHero title="Favorite products" />
       <Wrapper className="page">
         <div className="section-center products">
           <Filters />
