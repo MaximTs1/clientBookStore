@@ -1,34 +1,43 @@
+import {
+  faFacebook,
+  faGithub,
+  faInstagram,
+  faLinkedin,
+  faTwitter,
+  faDiscord,
+} from "@fortawesome/free-brands-svg-icons";
+
 const social_media_data = [
   {
     index: 1,
-    icon_class: "fas fa fa-facebook-square",
-    where_to_go_link:
-      "https://www.facebook.com/profile.php?id=100084277096494&mibextid=ZbWKwL",
+    icon_class: faFacebook,
+    where_to_go_link: "https://www.facebook.com/",
+    // icon: faFacebook,
   },
   {
     index: 2,
-    icon_class: "fas fa fa-github",
-    where_to_go_link: "https://github.com/ganraj21",
+    icon_class: faGithub,
+    where_to_go_link: "https://github.com/",
   },
   {
     index: 3,
-    icon_class: "fas fa fa-instagram",
-    where_to_go_link: "https://www.instagram.com/ganraj_21/",
+    icon_class: faInstagram,
+    where_to_go_link: "https://www.instagram.com/",
   },
   {
     index: 4,
-    icon_class: "fas fa fa-linkedin",
-    where_to_go_link: "https://www.linkedin.com/in/ganraj21/",
+    icon_class: faLinkedin,
+    where_to_go_link: "https://www.linkedin.com/",
   },
   {
     index: 5,
-    icon_class: "fas fa fa-twitter",
-    where_to_go_link: "https://twitter.com/ganraj_21",
+    icon_class: faTwitter,
+    where_to_go_link: "https://twitter.com/",
   },
   {
     index: 6,
-    icon_class: "fa-brands fa-discord",
-    where_to_go_link: "https://discord.com/channels/Ganraj21",
+    icon_class: faDiscord,
+    where_to_go_link: "https://discord.com/",
   },
 ];
 

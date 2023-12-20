@@ -21,10 +21,9 @@ import { PageHero } from "../../components/General";
 
 const defaultTheme = createTheme();
 
-const UserData = () => {
+const UserInfo = () => {
   const { user, setUser } = useContext(GeneralContext);
   const navigate = useNavigate();
-  const [showPassword, setShowPassword] = useState(false);
 
   // Function to initialize userData
   const initializeUserData = () => ({
@@ -33,14 +32,11 @@ const UserData = () => {
     lastName: user?.lastName || "",
     phone: user?.phone || "",
     email: user?.email || "",
-    password: user?.password || "",
     city: user?.city || "",
     street: user?.street || "",
     houseNumber: user?.houseNumber || "",
     zip: user?.zip || "",
   });
-
-  console.log("user", user);
 
   const [userData, setUserData] = useState(initializeUserData);
   const [errors, setErrors] = useState({});
@@ -57,13 +53,8 @@ const UserData = () => {
     setUserData({ ...userData, [name]: value });
   };
 
-  const handleClickShowPassword = () => {
-    setShowPassword(!showPassword);
-  };
-
   useEffect(() => {
     setUserData(initializeUserData()); // Resets user data
-    setShowPassword(false); // Resets password visibility state
     setErrors({}); // Resets any errors
     setIsValid(false); // Resets validation state
     // Add any other state resets here
@@ -79,7 +70,10 @@ const UserData = () => {
     if (validationResults.error) {
       validationResults.error.details.forEach((error) => {
         if (error.path && error.path.length > 0) {
-          newErrors[error.path[0]] = error.message;
+          if (error.path[0] !== "password") {
+            // Exclude errors related to the "password" field
+            newErrors[error.path[0]] = error.message;
+          }
         }
       });
     }
@@ -87,6 +81,25 @@ const UserData = () => {
     setErrors(newErrors);
     setIsValid(Object.keys(newErrors).length === 0);
   }, [userData]);
+
+  // useEffect(() => {
+  //   const validationResults = signupSchema.validate(userData, {
+  //     abortEarly: false,
+  //     allowUnknown: true,
+  //   });
+
+  //   const newErrors = {};
+  //   if (validationResults.error) {
+  //     validationResults.error.details.forEach((error) => {
+  //       if (error.path && error.path.length > 0) {
+  //         newErrors[error.path[0]] = error.message;
+  //       }
+  //     });
+  //   }
+
+  //   setErrors(newErrors);
+  //   setIsValid(Object.keys(newErrors).length === 0);
+  // }, [userData]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -144,53 +157,41 @@ const UserData = () => {
                   sx={{ mt: 3 }}
                 >
                   <Grid container spacing={2}>
-                    {structure.map((s) => (
-                      <Grid key={s.name} item xs={12} sm={s.block ? 12 : 6}>
-                        <TextField
-                          name={s.name}
-                          value={userData[s.name]}
-                          required={s.required}
-                          fullWidth
-                          id={s.name}
-                          label={s.label}
-                          type={
-                            s.type === "password" && !showPassword
-                              ? "password"
-                              : "text"
-                          }
-                          error={!!errors[s.name]}
-                          helperText={errors[s.name] || ""}
-                          onChange={handleInputChange}
-                          InputProps={
-                            s.type === "password"
-                              ? {
-                                  endAdornment: (
-                                    <InputAdornment position="end">
-                                      <IconButton
-                                        aria-label="toggle password visibility"
-                                        onClick={handleClickShowPassword}
-                                      >
-                                        {showPassword ? (
-                                          <VisibilityOff />
-                                        ) : (
-                                          <Visibility />
-                                        )}
-                                      </IconButton>
-                                    </InputAdornment>
-                                  ),
-                                }
-                              : null
-                          }
-                        />
-                      </Grid>
-                    ))}
+                    {structure.map((s) => {
+                      // Exclude the 'password' field from the input fields
+                      if (s.name !== "password") {
+                        return (
+                          <Grid key={s.name} item xs={15} sm={s.block ? 12 : 6}>
+                            <TextField
+                              name={s.name}
+                              value={userData[s.name]}
+                              required={s.required}
+                              fullWidth
+                              id={s.name}
+                              label={s.label}
+                              type={s.type}
+                              error={!!errors[s.name]}
+                              helperText={errors[s.name] || ""}
+                              onChange={handleInputChange}
+                            />
+                          </Grid>
+                        );
+                      }
+                      return null; // Exclude 'password' field
+                    })}
                   </Grid>
 
                   <Button
                     className={`spinner-button ${isValid ? "valid" : ""}`}
                     disabled={!isValid}
-                    style={{ display: isValid ? "none" : "block" }}
-                    sx={{ mt: 2, mb: 0 }}
+                    style={{ display: isValid ? "none" : "" }}
+                    sx={{
+                      mt: 4,
+                      mb: 2,
+                      justifyContent: "center",
+                      alignItems: "center",
+                      textAlign: "center",
+                    }}
                   >
                     <span className="spinner"></span>
                     {isValid ? "Valid" : "Finish the required field..."}
@@ -200,7 +201,7 @@ const UserData = () => {
                     type="submit"
                     fullWidth
                     variant="contained"
-                    sx={{ mt: 2, mb: 5 }}
+                    sx={{ mt: 2, mb: 5, textAlign: "center" }}
                     disabled={!isValid}
                   >
                     Update User Details
@@ -216,4 +217,4 @@ const UserData = () => {
   );
 };
 
-export default UserData;
+export default UserInfo;

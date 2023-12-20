@@ -7,12 +7,13 @@ import {
   Error,
   About,
   Products,
-  PrivateRoute,
+  // PrivateRoute,
 } from "./pages";
 import FavoriteProducts from "./pages/Products/FavoriteProducts";
 import Login from "./pages/Auth/Login";
 import Signup from "./pages/Auth/Signup";
 import UserInfo from "./pages/Auth/UserInfo";
+import ChangePassword from "./pages/Auth/ChangePassword/ChangePassword";
 import OrderHistoryPage from "./pages/OrderHistory/OrderHistoryPage ";
 
 export default function AppRoutes() {
@@ -28,6 +29,7 @@ export default function AppRoutes() {
       <Route path="products/:id" element={<SingleProduct />} />
       <Route path="favoriteproducts" element={<FavoriteProducts />} />
       <Route path="orderhistorypage" element={<OrderHistoryPage />} />
+      <Route path="changepassword" element={<ChangePassword />} />
 
       <Route
         path="checkout"

@@ -49,6 +49,13 @@ const CartButton = () => {
                 User Info
               </Link>
               <Link
+                to="/changepassword"
+                className="dropdown-item"
+                onClick={closeSidebar}
+              >
+                My Password
+              </Link>
+              <Link
                 to="/orderhistorypage"
                 className="dropdown-item"
                 onClick={closeSidebar}

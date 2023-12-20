@@ -17,8 +17,8 @@ export const structure = [
   },
   {
     name: "phone",
-    type: "tel",
-    label: "phone",
+    type: "number",
+    label: "Phone Number",
     required: true,
     block: false,
   },
@@ -40,21 +40,21 @@ export const structure = [
   {
     name: "street",
     type: "text",
-    label: "street",
+    label: "Street Address",
     required: true,
     block: false,
   },
   {
     name: "houseNumber",
     type: "number",
-    label: "House number",
+    label: "House Number",
     required: true,
     block: false,
   },
   {
     name: "zip",
     type: "number",
-    label: "zip",
+    label: "Zip",
     required: true,
     block: false,
   },
@@ -67,9 +67,18 @@ export const pattern = new RegExp(
 export const signupSchema = Joi.object({
   firstName: Joi.string().min(3).max(50).required(),
   lastName: Joi.string().min(3).max(200).required(),
-  phone: Joi.string()
-    .length(10)
-    .pattern(/^[0-9]+$/)
+  phone: Joi.number()
+    .integer()
+    .custom((value, helpers) => {
+      if (value.toString().length === 10) {
+        return value;
+      } else {
+        return helpers.error("any.invalid");
+      }
+    })
+    .required(),
+  email: Joi.string()
+    .email({ tlds: { allow: false } })
     .required(),
   password: Joi.string().regex(pattern).required().min(8).max(20),
   email: Joi.string().email({ tlds: { allow: false } }),

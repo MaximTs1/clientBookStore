@@ -7,12 +7,14 @@ const Services = () => {
       <div className="section-center">
         <article className="header">
           <h3>
-            custom furniture <br /> built only for you
+            Unique Items <br /> For Your Collection
           </h3>
           <p>
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Saepe
-            dolorum debitis consectetur reprehenderit non aliquam voluptates
-            dolore aut vero consequuntur.
+            Explore my curated collection of unique antique items available for
+            sale. <br /> Discover timeless treasures, rare finds, and
+            one-of-a-kind pieces that tell stories of the past. <br /> Whether
+            you're a collector or a history enthusiast, my selection offers a
+            glimpse into the beauty of bygone eras.
           </p>
         </article>
         <div className="services-center">

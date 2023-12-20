@@ -28,7 +28,6 @@ const SingleProductPage = () => {
 
   useEffect(() => {
     fetchSingleProduct(id);
-    // eslint-disable-next-line
   }, [id]);
   useEffect(() => {
     if (error) {
@@ -36,7 +35,6 @@ const SingleProductPage = () => {
         navigate("/");
       }, 3000);
     }
-    // eslint-disable-next-line
   }, [error]);
   if (loading) {
     return <Loading />;
@@ -47,18 +45,21 @@ const SingleProductPage = () => {
 
   const {
     name,
+    author,
+    category,
     price,
-    description,
-    stock,
-    //,
-    //reviews,
-    id: sku,
-    company,
     image,
+    condition,
+    book_parts,
+    stock,
+    hand,
+    publishing_year,
+    translation,
+    publisher,
+    description,
   } = product;
 
   const isFavorite = async (id) => {
-    console.log("id", id);
     const isAlreadyFavorite = user.likedBooks?.includes(id);
     const updatedLikedBooks = isAlreadyFavorite
       ? user.likedBooks.filter((favoriteId) => favoriteId !== id)
@@ -106,20 +107,24 @@ const SingleProductPage = () => {
           <img src={`data:image/jpeg;base64,${image}`} alt={name} />
           <section className="content">
             <h2>{name}</h2>
+            <h3>{author}</h3>
             {/* <Stars stars={stars} reviews={reviews} /> */}
             <h5 className="price">{formatPrice(price)}</h5>
-            <p className="desc">{description}</p>
+            <p className="info">
+              <span>ID :</span>
+              {id}
+            </p>
+            <p className="info">
+              <span>Category: </span>
+              {category}
+            </p>{" "}
             <p className="info">
               <span>Available : </span>
               {stock > 0 ? "In stock" : "out of stock"}
             </p>
             <p className="info">
-              <span>SKU :</span>
-              {sku}
-            </p>
-            <p className="info">
               <span>Brand :</span>
-              {company}
+              {"ccccc"}
             </p>
             <hr />
             {stock > 0 && <AddToCart product={product} />}
@@ -149,6 +154,10 @@ const Wrapper = styled.main`
     display: grid;
     gap: 4rem;
     margin-top: 2rem;
+  }
+  .product-center img {
+    max-width: 50vw;
+    max-height: 50vh;
   }
   .price {
     color: var(--clr-primary-5);

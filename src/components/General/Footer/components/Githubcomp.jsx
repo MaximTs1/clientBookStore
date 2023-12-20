@@ -1,5 +1,5 @@
-import React from 'react';
-import './Githubcomp.css';
+import React from "react";
+import "./Githubcomp.css";
 /* eslint-disable react/jsx-no-target-blank */
 
 /**

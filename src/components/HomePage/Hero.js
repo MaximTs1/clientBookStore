@@ -13,24 +13,25 @@ const Hero = () => {
         </h1>
         <p>
           Hey ! My name is Ariela and this is my bookstore 😊 <br /> Over the
-          years I have read thousands of books and my shelves are already full
-          to the brim, and now they are looking for new owners who will enjoy
-          them as much as I did. <br /> Come visit and shop at my new store 🤩
+          years I have read thousands of books, and now they are looking for new
+          owners who will enjoy them as much as I did. <br /> Come visit and
+          shop at my new store 🤩
         </p>
         <Link to="/products" className="btn hero-btn">
           shop now
         </Link>
       </article>
       <article className="img-container">
-        <img src={heroBcg} alt="nice table" className="main-img" />
-        <img src={heroBcg2} alt="person working" className="accent-img" />
+        <img src={heroBcg} alt="book and plant" className="main-img" />
+        <img src={heroBcg2} alt="person reading" className="accent-img" />
       </article>
     </Wrapper>
   );
 };
 
 const Wrapper = styled.section`
-  min-height: 60vh;
+  min-height: 40vh;
+  max-height: 55vh;
   display: grid;
   place-items: center;
   .img-container {
@@ -64,7 +65,7 @@ const Wrapper = styled.section`
     }
     .main-img {
       width: 100%;
-      height: 550px;
+      height: 350px;
       position: relative;
       border-radius: var(--radius);
       display: block;

@@ -59,10 +59,8 @@ export const ProductsProvider = ({ children }) => {
         `http://185.229.226.27:3001/api/book-by-custom-id/${id}`
       );
       const singleProduct = response.data;
-      // console.log("response", response);
       dispatch({ type: GET_SINGLE_PRODUCT_SUCCESS, payload: singleProduct });
     } catch (error) {
-      // console.log("error", error);
       dispatch({ type: GET_SINGLE_PRODUCT_ERROR });
     }
   };

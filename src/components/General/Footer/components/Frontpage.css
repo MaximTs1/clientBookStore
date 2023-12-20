@@ -1,0 +1,9 @@
+.icon-link {
+  margin-right: 14px; /* Adjust the margin for spacing */
+  font-size: 24px; /* Adjust the font size for making them larger */
+  color: #ffffff;
+}
+
+.icon-link:hover {
+  transform: scale(1.3);
+}

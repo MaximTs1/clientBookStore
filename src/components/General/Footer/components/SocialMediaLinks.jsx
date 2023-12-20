@@ -1,10 +1,8 @@
-import React from 'react';
-import social_media_data from '../assets/SocialMData';
-/* eslint-disable react/jsx-no-target-blank */
+import React from "react";
+import social_media_data from "../assets/SocialMData";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import "./Frontpage.css";
 
-/**
- * Safe link to own external websites only.
- */
 function SocialMediaLinks(props) {
   return (
     <>
@@ -12,12 +10,12 @@ function SocialMediaLinks(props) {
         {social_media_data.map((data, index) => {
           return (
             <a
+              key={data.index}
               href={data.where_to_go_link}
-              key={index}
               target="_blank"
-              style={{ margin: '6px', color: '#fff' }}
+              rel="noopener noreferrer"
             >
-              <i className={data.icon_class}></i>
+              <FontAwesomeIcon icon={data.icon_class} className="icon-link" />
             </a>
           );
         })}
