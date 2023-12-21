@@ -111,37 +111,51 @@ const SingleProductPage = () => {
             {/* <Stars stars={stars} reviews={reviews} /> */}
             <h5 className="price">{formatPrice(price)}</h5>
             <p className="info">
-              <span>ID :</span>
-              {id}
-            </p>
-            <p className="info">
               <span>Category: </span>
               {category}
             </p>{" "}
             <p className="info">
               <span>Available : </span>
-              {stock > 0 ? "In stock" : "out of stock"}
+              {stock > 0 ? "In stock " : "out of stock"}
             </p>
             <p className="info">
-              <span>Brand :</span>
-              {"ccccc"}
+              <span>Hand :</span>
+              {hand}
+            </p>
+            <p className="info">
+              <span>Publishing Year :</span>
+              {publishing_year}
+            </p>
+            <p className="info">
+              <span>Translation :</span>
+              {translation}
+            </p>
+            <p className="info">
+              <span>Publisher :</span>
+              {publisher}
+            </p>
+            <p className="info">
+              <span>Description :</span>
+              {description}
             </p>
             <hr />
-            {stock > 0 && <AddToCart product={product} />}
-            <span>
-              {user && (
-                <BsFillHeartFill
-                  className="Heart"
-                  size={26}
-                  style={{
-                    color: user.likedBooks?.includes(id)
-                      ? "red"
-                      : "rgb(51, 49, 49)",
-                  }}
-                  onClick={() => isFavorite(id)}
-                />
-              )}
-            </span>
+            <div className="button-container">
+              {stock > 0 && <AddToCart product={product} />}
+              <span>
+                {user && (
+                  <BsFillHeartFill
+                    className="Heart"
+                    size={26}
+                    style={{
+                      color: user.likedBooks?.includes(id)
+                        ? "red"
+                        : "rgb(51, 49, 49)",
+                    }}
+                    onClick={() => isFavorite(id)}
+                  />
+                )}
+              </span>
+            </div>
           </section>
         </div>
       </div>
@@ -154,6 +168,11 @@ const Wrapper = styled.main`
     display: grid;
     gap: 4rem;
     margin-top: 2rem;
+  }
+  .button-container {
+    display: flex; /* Display children in a row */
+    align-items: end; /* Vertically center children */
+    gap: 55px; /* Adjust the gap between the buttons */
   }
   .product-center img {
     max-width: 50vw;
@@ -184,6 +203,11 @@ const Wrapper = styled.main`
     .price {
       font-size: 1.25rem;
     }
+  }
+
+  span:hover {
+    transform: scale(1.3);
+    cursor: pointer;
   }
 `;
 

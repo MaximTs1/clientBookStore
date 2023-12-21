@@ -69,10 +69,10 @@ const Wrapper = styled.section`
     letter-spacing: var(--spacing);
     cursor: pointer;
     transition: var(--transition);
-    color: var(--clr-black);
+    color: white;
   }
   .submit-btn:hover {
-    color: var(--clr-white);
+    color: var(--clr-black);
   }
   @media (min-width: 992px) {
     .content {

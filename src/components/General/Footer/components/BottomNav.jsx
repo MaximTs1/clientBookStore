@@ -44,11 +44,39 @@ const BottomNav = () => {
             <div className="bot_middle_header">
               <h3>Quick Links</h3>
             </div>
+            {/* <div className="bot_nav">
+              {my_navbar_data.map((data, index) => {
+                return (
+                  <a
+                    key={index}
+                    href={data.nav_link}
+                    style={{ textDecoration: "none" }}
+                  >
+                    <FontAwesomeIcon
+                      icon={data.icon}
+                      style={{
+                        color: "grey",
+                        transition: "all 0.3s",
+                        fontSize: "1.3rem",
+                      }}
+                    />
+                    <p style={{ transition: "color 0.3s", fontSize: "1rem" }}>
+                      {data.navbar_name}
+                    </p>
+                  </a>
+                );
+              })}
+            </div>  */}
+
             <div className="bot_nav">
               {my_navbar_data.map((data, index) => {
                 return (
                   <>
-                    <HashLink key={index} to={data.nav_link}>
+                    <HashLink
+                      key={index}
+                      to={data.nav_link}
+                      scroll={(el) => el.scrollIntoView({ behavior: "smooth" })}
+                    >
                       <FontAwesomeIcon
                         icon={data.icon}
                         style={{

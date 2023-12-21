@@ -5,8 +5,8 @@
   align-content: center;
   width: 100%;
   flex-direction: column;
-  background:var(--clr-primary-5);
-  padding: 15px 10px;
+  background: hsl(145, 63%, 68%);
+  padding: 0px 10px;
 }
 .footer_section h2 {
   font-size: 21px !important;

@@ -35,12 +35,12 @@ const my_navbar_data = [
     navbar_name: "Legal Information",
     icon: faAnglesRight,
   },
-  {
-    index: 5,
-    nav_link: `/#contact_page`,
-    navbar_name: "Contact Me",
-    icon: faAnglesRight,
-  },
+  // {
+  //   index: 5,
+  //   nav_link: `/#contact_page`,
+  //   navbar_name: "Contact Me",
+  //   icon: faAnglesRight,
+  // },
 ];
 
 export default my_navbar_data;

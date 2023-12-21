@@ -25,10 +25,8 @@ export const services = [
     title: "mission",
     text: (
       <>
-        The mission is simple: to provide exceptional sales experiences and
-        top-notch customer service. <br />
-        Im committed to helping you find the perfect products and ensuring your
-        satisfaction every step of the way. <br />
+        The mission is simple: <br /> Provide exceptional sales experiences and
+        first-class customer service. <br />
         Join me on this journey, and let me exceed your expectations.
       </>
     ),

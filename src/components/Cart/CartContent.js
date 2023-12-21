@@ -52,5 +52,8 @@ const Wrapper = styled.section`
   .clear-btn {
     background: var(--clr-black);
   }
+  hr {
+    width: 100%;
+  }
 `;
 export default CartItems;
