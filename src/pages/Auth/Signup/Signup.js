@@ -14,9 +14,11 @@ import Visibility from "@mui/icons-material/Visibility";
 import VisibilityOff from "@mui/icons-material/VisibilityOff";
 import { IconButton, InputAdornment } from "@mui/material";
 import { useNavigate } from "react-router-dom";
-import "../Spinner.css";
+import "../../Spinner.css";
 import "./Signup.css";
 import axios from "axios";
+import { PageHero } from "../../../components/General";
+
 
 const defaultTheme = createTheme();
 
@@ -88,6 +90,8 @@ const Signup = () => {
   };
 
   return (
+    <main>
+    <PageHero title="Sign Up" />
     <div className="formContainer">
       <ThemeProvider theme={defaultTheme}>
         <Container component="main" maxWidth="xs">
@@ -105,7 +109,7 @@ const Signup = () => {
               <LockOutlinedIcon />
             </Avatar>
             <Typography component="h1" variant="h5">
-              Sign In
+              Sign Up
             </Typography>
             <Box
               component="form"
@@ -173,7 +177,7 @@ const Signup = () => {
                 sx={{ mt: 2, mb: 3 }}
                 disabled={!isValid}
               >
-                Sign In
+                Sign Up
               </Button>
               <Grid container justifyContent="center"></Grid>
             </Box>
@@ -181,6 +185,8 @@ const Signup = () => {
         </Container>
       </ThemeProvider>
     </div>
+
+    </main>
   );
 };
 

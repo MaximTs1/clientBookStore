@@ -7,20 +7,23 @@ import {
   Error,
   About,
   Products,
-  // PrivateRoute,
 } from "./pages";
 import FavoriteProducts from "./pages/Products/FavoriteProducts";
-import Login from "./pages/Auth/Login";
-import Signup from "./pages/Auth/Signup";
+import Login from "./pages/Auth/Login/Login";
+import Signup from "./pages/Auth/Signup/Signup.js";
 import UserInfo from "./pages/Auth/UserInfo";
 import ChangePassword from "./pages/Auth/ChangePassword/ChangePassword";
 import OrderHistoryPage from "./pages/OrderHistory/OrderHistoryPage ";
+import LegalInfo from "./pages/About&Home/LegalInfo.js";
+import   PurchaseInfo from "./pages/About&Home/PurchaseInfo.js";
 
 export default function AppRoutes() {
   return (
     <Routes>
       <Route path="/" exact element={<Home />} />
       <Route path="about" element={<About />} />
+      <Route path="legalinfo" element={<LegalInfo />} />
+      <Route path="purchaseinfo" element={<PurchaseInfo />} />
       <Route path="cart" element={<Cart />} />
       <Route path="userInfo" element={<UserInfo />} />
       <Route path="login" element={<Login />} />
@@ -34,9 +37,7 @@ export default function AppRoutes() {
       <Route
         path="checkout"
         element={
-          // <PrivateRoute>
           <Checkout />
-          // </PrivateRoute>
         }
       />
       <Route path="*" element={<Error />} />

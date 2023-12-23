@@ -23,16 +23,16 @@ const my_navbar_data = [
   },
   {
     index: 3,
-    nav_link: `/tech/#my_skill`,
-    navbar_name: "Purchase Information",
+    nav_link: "/purchaseinfo",
+    navbar_name: "Purchase Info",
     icon: faAnglesRight,
     another_page: true,
   },
 
   {
     index: 4,
-    nav_link: "/#my-work",
-    navbar_name: "Legal Information",
+    nav_link: "/legalinfo",
+    navbar_name: "Legal Info",
     icon: faAnglesRight,
   },
   // {

@@ -9,13 +9,13 @@ import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
-import { structure, signupSchema } from "./SignupStructure";
+import { structure, signupSchema } from "./Signup/SignupStructure";
 import Visibility from "@mui/icons-material/Visibility";
 import VisibilityOff from "@mui/icons-material/VisibilityOff";
 import { IconButton, InputAdornment } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 import "../Spinner.css";
-import "./Signup.css";
+import "./Signup/Signup.css";
 import { GeneralContext } from "../../App";
 import { PageHero } from "../../components/General";
 

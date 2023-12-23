@@ -15,7 +15,7 @@ import VisibilityOff from "@mui/icons-material/VisibilityOff";
 import { IconButton, InputAdornment } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 import "../../Spinner.css";
-import "../Signup.css";
+import "../Signup/Signup.css";
 import { GeneralContext } from "../../../App";
 import { PageHero } from "../../../components/General";
 
