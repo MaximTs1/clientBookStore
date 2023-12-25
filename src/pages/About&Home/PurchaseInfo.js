@@ -1,16 +1,14 @@
 import React from "react";
 import styled from "styled-components";
 import { PageHero } from "../../components/General";
-import aboutImg from "../../assets/books-picture-4.jpg";
 const PurchaseInfo = () => {
   return (
     <main>
       <PageHero title="Purchase Info" />
       <Wrapper className="page section section-center">
-        <img src={aboutImg} alt="nice desk" />
         <article>
           <div className="title">
-            <h2>my story</h2>
+            <h2>Purchase Information</h2>
             <div className="underline"></div>
           </div>
           <p>
@@ -26,7 +24,7 @@ const PurchaseInfo = () => {
             That's why I decided to create an attractive and modern website for
             my entire collection, so that anyone who is interested in one or
             several of the books, can easily add the books they like to the
-            shopping cart and make a purchase, make a convenient and simple
+            shopping cart and make a purchase, and make a convenient and simple
             transfer via Paybox/Bit.
             <br /> After quick confirmation of the order by SMS that everything
             has been completed successfully - the order will be sent by a
@@ -42,16 +40,10 @@ const PurchaseInfo = () => {
 const Wrapper = styled.section`
   display: grid;
   gap: 4rem;
-  img {
-    width: 100%;
-    display: block;
-    border-radius: var(--radius);
-    height: 750px;
-    object-fit: cover;
-  }
+
   p {
     line-height: 2;
-    max-width: 45em;
+    max-width: 65em;
     margin: 0 auto;
     margin-top: 2rem;
     color: var(--clr-grey-5);
