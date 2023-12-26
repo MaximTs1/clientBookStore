@@ -2,13 +2,8 @@ import React, { useEffect, useContext } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import { useProductsContext } from "../../context/products_context";
 import { formatPrice } from "../../utils/helpers";
-import {
-  Loading,
-  Error,
-  AddToCart,
-  //Stars,
-  PageHero,
-} from "../../components/General";
+import { isFavorite } from "../../context/favorite_context";
+import { Loading, Error, AddToCart, PageHero } from "../../components/General";
 import { GeneralContext } from "../../App";
 import styled from "styled-components";
 import { Link } from "react-router-dom";
@@ -59,43 +54,6 @@ const SingleProductPage = () => {
     description,
   } = product;
 
-  const isFavorite = async (id) => {
-    const isAlreadyFavorite = user.likedBooks?.includes(id);
-    const updatedLikedBooks = isAlreadyFavorite
-      ? user.likedBooks.filter((favoriteId) => favoriteId !== id)
-      : [...user.likedBooks, id];
-    // Construct the data to be sent - assuming you only want to update likedBooks
-    const dataToUpdate = {
-      likedBooks: updatedLikedBooks,
-    };
-    console.log("dataToUpdate", dataToUpdate);
-
-    try {
-      const response = await fetch(
-        `http://185.229.226.27:3001/user/update-likedBooks/${user.customId}`,
-        {
-          method: "PUT",
-          headers: {
-            "Content-Type": "application/json",
-            Authorization: localStorage.token,
-          },
-          body: JSON.stringify(dataToUpdate),
-        }
-      );
-
-      if (!response.ok) {
-        throw new Error("Error updating user");
-      }
-
-      const updatedUser = await response.json();
-      console.log("Updated User:", updatedUser);
-
-      setUser((user) => ({ ...user, likedBooks: updatedUser.likedBooks }));
-    } catch (error) {
-      console.error("Error:", error);
-    }
-  };
-
   return (
     <Wrapper>
       <PageHero title={name} product />
@@ -108,7 +66,6 @@ const SingleProductPage = () => {
           <section className="content">
             <h2>{name}</h2>
             <h3>{author}</h3>
-            {/* <Stars stars={stars} reviews={reviews} /> */}
             <h5 className="price">{formatPrice(price)}</h5>
             <p className="info">
               <span>Category: </span>
@@ -151,7 +108,7 @@ const SingleProductPage = () => {
                         ? "red"
                         : "rgb(51, 49, 49)",
                     }}
-                    onClick={() => isFavorite(id)}
+                    onClick={() => isFavorite(id, user, setUser)}
                   />
                 )}
               </span>

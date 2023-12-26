@@ -1,40 +1,66 @@
-import React from "react";
+import React, { useContext } from "react";
+import { GeneralContext } from "../../App";
 import styled from "styled-components";
 import { formatPrice } from "../../utils/helpers";
 import { FaSearch, FaShoppingCart, FaRegHeart } from "react-icons/fa";
 import { Link } from "react-router-dom";
+import { useCartContext } from "../../context/cart_context";
+import { isFavorite } from "../../context/favorite_context";
+import { BsFillHeartFill } from "react-icons/bs";
+
 const Product = ({ image, name, category, price, id }) => {
+  const { addToCart } = useCartContext();
+  const { setLoading, snackbar, setUser, user } = useContext(GeneralContext);
+
   return (
     <Wrapper>
       <div className="container">
         <img src={`data:image/jpeg;base64,${image}`} alt={name} />
         <div className="links">
-          <Link to={`/products/${id}`} className="link">
+          <Link
+            to={`/cart`}
+            className="link"
+            onClick={() =>
+              addToCart(id, 1, { customId: id, image, name, category, price })
+            }
+          >
             <FaShoppingCart />
           </Link>
           <Link to={`/products/${id}`} className="link">
             <FaSearch />
           </Link>
-          <Link to={`/products/${id}`} className="link">
-            <FaRegHeart />
-          </Link>
+          {user && (
+            <Link className="link">
+              <FaRegHeart
+                style={{
+                  color: user.likedBooks?.includes(id) ? "grey" : "red",
+                }}
+                onClick={() => isFavorite(id, user, setUser)}
+              />
+            </Link>
+          )}
         </div>
-      </div>
-      <footer>
         <div className="column">
           <h5>{name}</h5>
           <h5>{category}</h5>
         </div>
         <p>{formatPrice(price)}</p>
-      </footer>
+      </div>
+      {/* <footer>
+        <div className="column">
+          <h5>{name}</h5>
+          <h5>{category}</h5>
+        </div>
+        <p>{formatPrice(price)}</p>
+      </footer> */}
     </Wrapper>
   );
 };
 const Wrapper = styled.article`
   .container {
     position: relative;
-    background: var(--clr-black);
     border-radius: var(--radius);
+    border: 0.5px solid #ddd;
   }
   img {
     width: 100%;
@@ -111,11 +137,17 @@ const Wrapper = styled.article`
   .column {
     display: flex;
     flex-direction: column;
-    align-items: flex-start;
+    align-items: center;
+    background: white;
   }
   .column h5 {
     margin-bottom: 0.5rem;
     font-weight: 400;
+  }
+  p {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
   }
 
   footer {
