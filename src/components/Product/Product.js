@@ -5,12 +5,12 @@ import { formatPrice } from "../../utils/helpers";
 import { FaSearch, FaShoppingCart, FaRegHeart } from "react-icons/fa";
 import { Link } from "react-router-dom";
 import { useCartContext } from "../../context/cart_context";
-import { isFavorite } from "../../context/favorite_context";
-import { BsFillHeartFill } from "react-icons/bs";
+import { useFavoriteContext } from "../../context/favorite_context";
 
 const Product = ({ image, name, category, price, id }) => {
   const { addToCart } = useCartContext();
-  const { setLoading, snackbar, setUser, user } = useContext(GeneralContext);
+  const { isFavorite } = useFavoriteContext();
+  const { setUser, user } = useContext(GeneralContext);
 
   return (
     <Wrapper>

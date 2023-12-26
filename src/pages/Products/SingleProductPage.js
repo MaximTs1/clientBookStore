@@ -2,15 +2,16 @@ import React, { useEffect, useContext } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import { useProductsContext } from "../../context/products_context";
 import { formatPrice } from "../../utils/helpers";
-import { isFavorite } from "../../context/favorite_context";
 import { Loading, Error, AddToCart, PageHero } from "../../components/General";
 import { GeneralContext } from "../../App";
 import styled from "styled-components";
 import { Link } from "react-router-dom";
 import { BsFillHeartFill } from "react-icons/bs";
+import { useFavoriteContext } from "../../context/favorite_context";
 import "./SingleProductPage.css";
 
 const SingleProductPage = () => {
+  const { isFavorite } = useFavoriteContext();
   const { id } = useParams();
   const navigate = useNavigate();
   const {
@@ -19,7 +20,7 @@ const SingleProductPage = () => {
     single_product: product,
     fetchSingleProduct,
   } = useProductsContext();
-  const { setLoading, snackbar, setUser, user } = useContext(GeneralContext);
+  const { setUser, user } = useContext(GeneralContext);
 
   useEffect(() => {
     fetchSingleProduct(id);

@@ -1,4 +1,10 @@
-export const isFavorite = async (id, user, setUser) => {
+import React ,{ useContext } from "react";
+
+const FavoriteContext = React.createContext();
+
+export const FavoriteProvider = ({children }) => {
+  const isFavorite = async (id, user, setUser) => {
+  id = id.toString();
   const isAlreadyFavorite = user.likedBooks?.includes(id);
   const updatedLikedBooks = isAlreadyFavorite
     ? user.likedBooks.filter((favoriteId) => favoriteId !== id)
@@ -28,4 +34,15 @@ export const isFavorite = async (id, user, setUser) => {
   } catch (error) {
     console.error("Error:", error);
   }
+};
+
+return (
+  <FavoriteContext.Provider value={{ isFavorite }}>
+    {children}
+  </FavoriteContext.Provider>
+);
+
+}
+export const useFavoriteContext = () => {
+  return useContext(FavoriteContext);
 };
