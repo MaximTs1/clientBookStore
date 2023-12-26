@@ -4,6 +4,7 @@ import { Navbar, Sidebar } from "./components/General";
 import Footer from "./components/General/Footer/Footer";
 import AppRoutes from "./AppRoutes";
 import Loader from "./components/FromOtherProjects/Loader";
+import "./App.css";
 
 export const GeneralContext = createContext();
 
