@@ -1,12 +1,12 @@
 import React from "react";
-import { useContext, useState } from "react";
+import { useContext, useState, useEffect, useRef } from "react";
 import {
   FaShoppingCart,
   FaUserMinus,
   FaUserPlus,
   FaInfo,
 } from "react-icons/fa";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useNavigate, useLocation } from "react-router-dom";
 import styled from "styled-components";
 import { useProductsContext } from "../../context/products_context";
 import { useCartContext } from "../../context/cart_context";
@@ -20,10 +20,39 @@ const CartButton = () => {
   const navigate = useNavigate();
   const { setLoading, snackbar, setUser, user } = useContext(GeneralContext);
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+  const dropdownRef = useRef(null);
 
-  const toggleDropdown = () => {
+  const toggleDropdown = (event) => {
+    event.preventDefault();
+    event.stopPropagation();
     setIsDropdownOpen(!isDropdownOpen);
   };
+
+  const handleDropdownItemClick = () => {
+    setIsDropdownOpen(false);
+  };
+
+  const handleClickOutside = (event) => {
+    if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
+      setIsDropdownOpen(false);
+    }
+  };
+
+  useEffect(() => {
+    if (isDropdownOpen) {
+      document.addEventListener("mousedown", handleClickOutside);
+    }
+
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, [isDropdownOpen]);
+
+  const location = useLocation();
+
+  useEffect(() => {
+    setIsDropdownOpen(false);
+  }, [location]);
 
   return (
     <Wrapper className="cart-btn-wrapper">
@@ -35,30 +64,30 @@ const CartButton = () => {
         </span>
       </Link>{" "}
       {user ? (
-        <div className="row">
+        <div className="user_buttons">
           <Link className="cart-btn2" onClick={toggleDropdown}>
             My Account
           </Link>
           {isDropdownOpen && (
-            <div className="dropdown-menu">
+            <div className="dropdown-menu" ref={dropdownRef}>
               <Link
                 to="/userInfo"
                 className="dropdown-item"
-                onClick={closeSidebar}
+                onClick={handleDropdownItemClick}
               >
                 User Info
               </Link>
               <Link
                 to="/changepassword"
                 className="dropdown-item"
-                onClick={closeSidebar}
+                onClick={handleDropdownItemClick}
               >
                 My Password
               </Link>
               <Link
                 to="/orderhistorypage"
                 className="dropdown-item"
-                onClick={closeSidebar}
+                onClick={handleDropdownItemClick}
               >
                 My Orders
               </Link>
@@ -67,6 +96,7 @@ const CartButton = () => {
                 className="dropdown-item"
                 onClick={() => {
                   clearCart();
+                  handleDropdownItemClick();
                   localStorage.clear("token");
                   window.location.reload();
                 }}
@@ -95,6 +125,7 @@ const CartButton = () => {
 const Wrapper = styled.div`
   display: grid;
   grid-template-columns: 1fr 1fr;
+  // space-column: 2fr 2fr;
   align-items: center;
   width: 225px;
 
@@ -119,6 +150,7 @@ const Wrapper = styled.div`
     display: flex;
     align-items: center;
     width: 5.5vw;
+    margin-right: 35px;
   }
   .cart-btn2 {
     color: var(--clr-grey-1);
@@ -135,7 +167,7 @@ const Wrapper = styled.div`
     letter-spacing: var(--spacing);
     display: flex;
     align-items: center;
-    justify-content: center; // Center the content
+    justify-content: center;
     width: 2.5vw;
     height: 2.5vw; // Make height equal to the width for a perfect circle
     margin-left: 2vw;
@@ -190,10 +222,10 @@ const Wrapper = styled.div`
       background-color: #f1f1f1;
     }
   }
-  .row {
+  .user_buttons {
     position: relative;
     display: flex;
-    align-items: center;
+    align-items: start;
   }
 `;
 export default CartButton;

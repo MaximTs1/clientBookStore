@@ -120,7 +120,7 @@ const CheckoutForm = () => {
   );
 
   return (
-    <div>
+    <div className="checkout_frame">
       <link
         rel="stylesheet"
         href="https://cdnjs.cloudflare.com/ajax/libs/MaterialDesign-Webfont/5.3.45/css/materialdesignicons.css"
@@ -131,7 +131,6 @@ const CheckoutForm = () => {
         href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css"
         rel="stylesheet"
       />
-
       <div class="container">
         <div class="row">
           <div class="col-xl-8">
@@ -160,7 +159,7 @@ const CheckoutForm = () => {
                                       class="form-label"
                                       for="billing-name"
                                     >
-                                      Name
+                                      Full Name
                                     </label>
                                     <input
                                       type="text"

@@ -1,6 +1,6 @@
 import React from "react";
 import { useContext, useState } from "react";
-import logo from "../../assets/logo.svg";
+import logo from "../../assets/logo.jpeg";
 import { Link } from "react-router-dom";
 import { useProductsContext } from "../../context/products_context";
 import { FaTimes } from "react-icons/fa";
@@ -21,7 +21,7 @@ const Sidebar = () => {
         className={`${isSidebarOpen ? "sidebar show-sidebar" : "sidebar"}`}
       >
         <div className="sidebar-header">
-          <img src={logo} className="logo" alt="coding addict" />
+          <img src={logo} className="logo" alt="ariella books" />
           <button className="close-btn" onClick={closeSidebar}>
             <FaTimes />
           </button>
@@ -44,7 +44,9 @@ const Sidebar = () => {
             </li>
           )}
         </ul>
-        <CartButtons />
+        <div className="cart_buttons">
+          <CartButtons />
+        </div>
       </aside>
     </SidebarContainer>
   );
@@ -118,6 +120,12 @@ const SidebarContainer = styled.div`
     .sidebar {
       display: none;
     }
+  }
+  .cart_buttons {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    margin-left: 1rem;
+    width: 90%;
   }
 `;
 

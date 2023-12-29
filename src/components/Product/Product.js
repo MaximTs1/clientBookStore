@@ -33,7 +33,9 @@ const Product = ({ image, name, category, price, id }) => {
             <Link className="link">
               <FaRegHeart
                 style={{
-                  color: user.likedBooks?.includes(id) ? "grey" : "red",
+                  color: user.likedBooks?.includes(id.toString())
+                    ? "red"
+                    : "grey",
                 }}
                 onClick={() => isFavorite(id, user, setUser)}
               />
