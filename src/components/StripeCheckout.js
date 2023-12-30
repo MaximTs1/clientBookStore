@@ -19,6 +19,21 @@ const CheckoutForm = () => {
   const [error, setError] = useState(null);
   const [setClientSecret] = useState("");
   const { setUser, user } = useContext(GeneralContext);
+  const [deliveryInfo, setDeliveryInfo] = useState({
+    fullName: '',
+    email: '',
+    phone: '',
+    address: '',
+    city: '',
+    postalCode: '',
+    paymentMethod: '', // 'CreditCard' or 'Cash'
+  });
+
+  // Function to handle changes in delivery info form
+  const handleDeliveryInfoChange = (e) => {
+    const { name, value } = e.target;
+    setDeliveryInfo({ ...deliveryInfo, [name]: value });
+  };
 
   const createPaymentIntent = async () => {
     try {
@@ -29,7 +44,6 @@ const CheckoutForm = () => {
       );
       setClientSecret(data.clientSecret);
     } catch (error) {
-      // console.log(error.response)
     }
   };
 
@@ -81,13 +95,19 @@ const CheckoutForm = () => {
       price: item.price,
     }));
 
+    const updatedPaymentMethod = showCreditCardInput ? 'CreditCard' : 'Cash';
+    console.log("showCreditCardInput: " , showCreditCardInput);
+    console.log("updatedPaymentMethod: " , updatedPaymentMethod);
+    const updatedDeliveryInfo = { ...deliveryInfo, paymentMethod: updatedPaymentMethod };
+
+    console.log("deliveryInfo: " , deliveryInfo);
     const newOrder = {
       cart: simplifiedCart,
       date: new Date().toDateString(), // Corrected to call the function
       orderStatus: "Placed",
+      info: updatedDeliveryInfo
     };
-
-    console.log("newOrder: ", newOrder);
+console.log("newOrder: " , newOrder);
     try {
       const response = await fetch(
         `http://185.229.226.27:3001/user/update-order-history/${user.customId}`,
@@ -163,7 +183,10 @@ const CheckoutForm = () => {
                                     </label>
                                     <input
                                       type="text"
-                                      class="form-control"
+                                      name="fullName"
+                                      value={deliveryInfo.fullName}
+                                      onChange={handleDeliveryInfoChange}
+                                      className="form-control"
                                       id="billing-name"
                                       placeholder="Enter name"
                                     />
@@ -179,6 +202,9 @@ const CheckoutForm = () => {
                                     </label>
                                     <input
                                       type="email"
+                                      name="email"
+                                      value={deliveryInfo.email}
+                                      onChange={handleDeliveryInfoChange}
                                       class="form-control"
                                       id="billing-email-address"
                                       placeholder="Enter email"
@@ -195,6 +221,9 @@ const CheckoutForm = () => {
                                     </label>
                                     <input
                                       type="text"
+                                      name="phone"
+                                      value={deliveryInfo.phone}
+                                      onChange={handleDeliveryInfoChange}
                                       class="form-control"
                                       id="billing-phone"
                                       placeholder="Enter Phone no."
@@ -209,6 +238,9 @@ const CheckoutForm = () => {
                                 </label>
                                 <textarea
                                   class="form-control"
+                                  name="address"
+                                  value={deliveryInfo.address}
+                                  onChange={handleDeliveryInfoChange}
                                   id="billing-address"
                                   rows="3"
                                   placeholder="Enter full address"
@@ -226,6 +258,9 @@ const CheckoutForm = () => {
                                     </label>
                                     <input
                                       type="text"
+                                      name="city"
+                                      value={deliveryInfo.city}
+                                      onChange={handleDeliveryInfoChange}
                                       class="form-control"
                                       id="billing-city"
                                       placeholder="Enter City"
@@ -240,6 +275,9 @@ const CheckoutForm = () => {
                                     </label>
                                     <input
                                       type="text"
+                                      name="postalCode"
+                                      value={deliveryInfo.postalCode}
+                                      onChange={handleDeliveryInfoChange}
                                       class="form-control"
                                       id="zip-code"
                                       placeholder="Enter Postal code"
