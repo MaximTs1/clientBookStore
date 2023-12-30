@@ -11,6 +11,8 @@ import "./StripCheckout.css";
 
 const promise = loadStripe(process.env.REACT_APP_STRIPE_PUBLIC_KEY);
 
+//push new 
+
 const CheckoutForm = () => {
   const [showCreditCardInput, setShowCreditCardInput] = useState(false);
   const { cart, total_amount, shipping_fee, clearCart } = useCartContext();
