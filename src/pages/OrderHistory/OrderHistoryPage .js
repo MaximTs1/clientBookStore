@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useContext } from "react";
 import { GeneralContext } from "../../App";
 import "./OrderHistoryPage.css";
-import "../../components/StripCheckout.css";
+import "../../components/CheckOut/StripeCheckout.js";
 import { PageHero } from "../../components/General";
 import OrderStatusBar from "./OrderStatus.js";
 

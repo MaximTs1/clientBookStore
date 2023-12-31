@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useState, useContext } from "react";
 import { GeneralContext } from "../../App";
 import styled from "styled-components";
 import { formatPrice } from "../../utils/helpers";
@@ -6,11 +6,32 @@ import { FaSearch, FaShoppingCart, FaRegHeart } from "react-icons/fa";
 import { Link } from "react-router-dom";
 import { useCartContext } from "../../context/cart_context";
 import { useFavoriteContext } from "../../context/favorite_context";
+import ConfirmationModal from "./ConfirmationModal";
+import { useNavigate } from "react-router-dom";
 
 const Product = ({ image, name, category, price, id }) => {
   const { addToCart } = useCartContext();
   const { isFavorite } = useFavoriteContext();
   const { setUser, user } = useContext(GeneralContext);
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [selectedItem, setSelectedItem] = useState({});
+  const navigate = useNavigate();
+
+  const handleCartClick = () => {
+    setSelectedItem({ id, image, name, category, price });
+    setIsModalOpen(true);
+  };
+
+  const continueShopping = (id, quantity, product) => {
+    setIsModalOpen(false);
+    addToCart(id, quantity, product);
+  };
+
+  const addToCartAndGoToCart = (id, quantity, product) => {
+    setIsModalOpen(false);
+    addToCart(id, quantity, product);
+    navigate("/cart");
+  };
 
   return (
     <Wrapper>
@@ -18,11 +39,12 @@ const Product = ({ image, name, category, price, id }) => {
         <img src={`data:image/jpeg;base64,${image}`} alt={name} />
         <div className="links">
           <Link
-            to={`/cart`}
+            to="#"
             className="link"
-            onClick={() =>
-              addToCart(id, 1, { customId: id, image, name, category, price })
-            }
+            onClick={(e) => {
+              e.preventDefault();
+              handleCartClick();
+            }}
           >
             <FaShoppingCart />
           </Link>
@@ -48,13 +70,12 @@ const Product = ({ image, name, category, price, id }) => {
         </div>
         <p>{formatPrice(price)}</p>
       </div>
-      {/* <footer>
-        <div className="column">
-          <h5>{name}</h5>
-          <h5>{category}</h5>
-        </div>
-        <p>{formatPrice(price)}</p>
-      </footer> */}
+      <ConfirmationModal
+        isOpen={isModalOpen}
+        itemDetails={selectedItem}
+        onContinueShopping={continueShopping}
+        onAddToCartAndGoToCart={addToCartAndGoToCart}
+      />
     </Wrapper>
   );
 };

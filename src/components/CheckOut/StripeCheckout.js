@@ -3,15 +3,25 @@ import styled from "styled-components";
 import { loadStripe } from "@stripe/stripe-js";
 import { CardElement, Elements } from "@stripe/react-stripe-js";
 import axios from "axios";
-import { useCartContext } from "../context/cart_context";
-import { formatPrice } from "../utils/helpers";
+import { useCartContext } from "../../context/cart_context";
+import { formatPrice } from "../../utils/helpers";
 import { useNavigate } from "react-router-dom";
-import { GeneralContext } from "../App";
+import { GeneralContext } from "../../App";
 import "./StripCheckout.css";
+import {
+  isValidName,
+  isValidEmail,
+  isValidPhoneNumber,
+  isValidAddress,
+  isValidCity,
+  isValidPostalCode,
+  isValidCardNumber,
+  isValidExpiryDate,
+  isValidCVV,
+  validations,
+} from "./formValidation";
 
 const promise = loadStripe(process.env.REACT_APP_STRIPE_PUBLIC_KEY);
-
-//push new 
 
 const CheckoutForm = () => {
   const [showCreditCardInput, setShowCreditCardInput] = useState(false);
@@ -22,20 +32,25 @@ const CheckoutForm = () => {
   const [setClientSecret] = useState("");
   const { setUser, user } = useContext(GeneralContext);
   const [deliveryInfo, setDeliveryInfo] = useState({
-    fullName: '',
-    email: '',
-    phone: '',
-    address: '',
-    city: '',
-    postalCode: '',
-    paymentMethod: '', // 'CreditCard' or 'Cash'
+    fullName: "",
+    email: "",
+    phone: "",
+    address: "",
+    city: "",
+    postalCode: "",
+    paymentMethod: "",
+    cardNumber: "",
+    cardFullName: "",
+    expDate: "",
+    cvv: "",
   });
 
-  // Function to handle changes in delivery info form
   const handleDeliveryInfoChange = (e) => {
     const { name, value } = e.target;
     setDeliveryInfo({ ...deliveryInfo, [name]: value });
   };
+
+  const [errors, setErrors] = useState({});
 
   const createPaymentIntent = async () => {
     try {
@@ -46,6 +61,7 @@ const CheckoutForm = () => {
       );
       setClientSecret(data.clientSecret);
     } catch (error) {
+      // console.log(error.response)
     }
   };
 
@@ -65,15 +81,27 @@ const CheckoutForm = () => {
 
   const handleSubmit = async (ev) => {
     ev.preventDefault();
-    await updateProductStock();
-    await updateUserOrdersHistory();
-    setError(null);
-    setSucceeded(true);
-    setTimeout(() => {
-      clearCart();
-      navigate("/");
-    }, 10000);
-    // }
+
+    const newErrors = {};
+
+    validations.forEach(({ field, validate, errorMessage }) => {
+      if (!validate(deliveryInfo[field])) {
+        newErrors[field] = errorMessage;
+      }
+    });
+
+    setErrors(newErrors);
+
+    if (Object.keys(newErrors).length === 0) {
+      await updateProductStock();
+      await updateUserOrdersHistory();
+      setError(null);
+      setSucceeded(true);
+      setTimeout(() => {
+        clearCart();
+        navigate("/");
+      }, 1500);
+    }
   };
 
   const updateProductStock = async () => {
@@ -97,19 +125,19 @@ const CheckoutForm = () => {
       price: item.price,
     }));
 
-    const updatedPaymentMethod = showCreditCardInput ? 'CreditCard' : 'Cash';
-    console.log("showCreditCardInput: " , showCreditCardInput);
-    console.log("updatedPaymentMethod: " , updatedPaymentMethod);
-    const updatedDeliveryInfo = { ...deliveryInfo, paymentMethod: updatedPaymentMethod };
+    const updatedPaymentMethod = showCreditCardInput ? "CreditCard" : "Cash";
+    const updatedDeliveryInfo = {
+      ...deliveryInfo,
+      paymentMethod: updatedPaymentMethod,
+    };
 
-    console.log("deliveryInfo: " , deliveryInfo);
     const newOrder = {
       cart: simplifiedCart,
       date: new Date().toDateString(), // Corrected to call the function
       orderStatus: "Placed",
-      info: updatedDeliveryInfo
+      info: updatedDeliveryInfo,
     };
-console.log("newOrder: " , newOrder);
+
     try {
       const response = await fetch(
         `http://185.229.226.27:3001/user/update-order-history/${user.customId}`,
@@ -147,38 +175,38 @@ console.log("newOrder: " , newOrder);
         rel="stylesheet"
         href="https://cdnjs.cloudflare.com/ajax/libs/MaterialDesign-Webfont/5.3.45/css/materialdesignicons.css"
         integrity="sha256-NAxhqDvtY0l4xn+YVa6WjAcmd94NNfttjNsDmNatFVc="
-        crossorigin="anonymous"
+        crossOrigin="anonymous"
       />
       <link
         href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css"
         rel="stylesheet"
       />
-      <div class="container">
-        <div class="row">
-          <div class="col-xl-8">
-            <div class="card">
-              <div class="card-body">
-                <ol class="activity-checkout mb-0 px-4 mt-3">
-                  <li class="checkout-item">
-                    <div class="avatar checkout-icon p-1">
-                      <div class="avatar-title rounded-circle bg-primary">
-                        <i class="bx bxs-receipt text-white font-size-20"></i>
+      <div className="container">
+        <div className="row">
+          <div className="col-xl-8">
+            <div className="card">
+              <div className="card-body">
+                <ol className="activity-checkout mb-0 px-4 mt-3">
+                  <li className="checkout-item">
+                    <div className="avatar checkout-icon p-1">
+                      <div className="avatar-title rounded-circle bg-primary">
+                        <i className="bx bxs-receipt text-white font-size-20"></i>
                       </div>
                     </div>
-                    <div class="feed-item-list">
+                    <div className="feed-item-list">
                       <div>
-                        <h5 class="font-size-16 mb-1">Delivery Info</h5>
-                        <p class="text-muted text-truncate mb-4">
+                        <h5 className="font-size-16 mb-1">Delivery Info</h5>
+                        <p className="text-muted text-truncate mb-4">
                           Fill in the following details for shipment
                         </p>
-                        <div class="mb-3">
+                        <div className="mb-3">
                           <form>
                             <div>
-                              <div class="row">
-                                <div class="col-lg-4">
-                                  <div class="mb-3">
+                              <div className="row">
+                                <div className="col-lg-4">
+                                  <div className="mb-3">
                                     <label
-                                      class="form-label"
+                                      className="form-label"
                                       for="billing-name"
                                     >
                                       Full Name
@@ -192,12 +220,22 @@ console.log("newOrder: " , newOrder);
                                       id="billing-name"
                                       placeholder="Enter name"
                                     />
+                                    {errors.fullName && (
+                                      <div
+                                        style={{
+                                          color: "red",
+                                          marginTop: "3px",
+                                        }}
+                                      >
+                                        {errors.fullName}
+                                      </div>
+                                    )}
                                   </div>
                                 </div>
-                                <div class="col-lg-4">
-                                  <div class="mb-3">
+                                <div className="col-lg-4">
+                                  <div className="mb-3">
                                     <label
-                                      class="form-label"
+                                      className="form-label"
                                       for="billing-email-address"
                                     >
                                       Email Address
@@ -211,12 +249,22 @@ console.log("newOrder: " , newOrder);
                                       id="billing-email-address"
                                       placeholder="Enter email"
                                     />
+                                    {errors.email && (
+                                      <div
+                                        style={{
+                                          color: "red",
+                                          marginTop: "3px",
+                                        }}
+                                      >
+                                        {errors.email}
+                                      </div>
+                                    )}
                                   </div>
                                 </div>
-                                <div class="col-lg-4">
-                                  <div class="mb-3">
+                                <div className="col-lg-4">
+                                  <div className="mb-3">
                                     <label
-                                      class="form-label"
+                                      className="form-label"
                                       for="billing-phone"
                                     >
                                       Phone
@@ -230,30 +278,50 @@ console.log("newOrder: " , newOrder);
                                       id="billing-phone"
                                       placeholder="Enter Phone no."
                                     />
+                                    {errors.phone && (
+                                      <div
+                                        style={{
+                                          color: "red",
+                                          marginTop: "3px",
+                                        }}
+                                      >
+                                        {errors.phone}
+                                      </div>
+                                    )}
                                   </div>
                                 </div>
                               </div>
 
-                              <div class="mb-3">
-                                <label class="form-label" for="billing-address">
+                              <div className="mb-3">
+                                <label
+                                  className="form-label"
+                                  for="billing-address"
+                                >
                                   Address
                                 </label>
                                 <textarea
-                                  class="form-control"
-                                  name="address"
-                                  value={deliveryInfo.address}
-                                  onChange={handleDeliveryInfoChange}
+                                  className="form-control"
                                   id="billing-address"
                                   rows="3"
                                   placeholder="Enter full address"
+                                  name="address"
+                                  value={deliveryInfo.address}
+                                  onChange={handleDeliveryInfoChange}
                                 ></textarea>
+                                {errors.address && (
+                                  <div
+                                    style={{ color: "red", marginTop: "10px" }}
+                                  >
+                                    {errors.address}
+                                  </div>
+                                )}
                               </div>
 
-                              <div class="row">
-                                <div class="col-lg-4">
-                                  <div class="mb-4 mb-lg-0">
+                              <div className="row">
+                                <div className="col-lg-4">
+                                  <div className="mb-4 mb-lg-0">
                                     <label
-                                      class="form-label"
+                                      className="form-label"
                                       for="billing-city"
                                     >
                                       City
@@ -267,12 +335,25 @@ console.log("newOrder: " , newOrder);
                                       id="billing-city"
                                       placeholder="Enter City"
                                     />
+                                    {errors.city && (
+                                      <div
+                                        style={{
+                                          color: "red",
+                                          marginTop: "3px",
+                                        }}
+                                      >
+                                        {errors.city}
+                                      </div>
+                                    )}
                                   </div>
                                 </div>
 
-                                <div class="col-lg-4">
-                                  <div class="mb-0">
-                                    <label class="form-label" for="zip-code">
+                                <div className="col-lg-4">
+                                  <div className="mb-0">
+                                    <label
+                                      className="form-label"
+                                      for="zip-code"
+                                    >
                                       Zip / Postal code
                                     </label>
                                     <input
@@ -281,9 +362,19 @@ console.log("newOrder: " , newOrder);
                                       value={deliveryInfo.postalCode}
                                       onChange={handleDeliveryInfoChange}
                                       class="form-control"
-                                      id="zip-code"
+                                      id="postalCode"
                                       placeholder="Enter Postal code"
                                     />
+                                    {errors.postalCode && (
+                                      <div
+                                        style={{
+                                          color: "red",
+                                          marginTop: "3px",
+                                        }}
+                                      >
+                                        {errors.postalCode}
+                                      </div>
+                                    )}
                                   </div>
                                 </div>
                               </div>
@@ -293,25 +384,25 @@ console.log("newOrder: " , newOrder);
                       </div>
                     </div>
                   </li>
-                  <li class="checkout-item">
-                    <div class="avatar checkout-icon p-1">
-                      <div class="avatar-title rounded-circle bg-primary">
-                        <i class="bx bxs-wallet-alt text-white font-size-20"></i>
+                  <li className="checkout-item">
+                    <div className="avatar checkout-icon p-1">
+                      <div className="avatar-title rounded-circle bg-primary">
+                        <i className="bx bxs-wallet-alt text-white font-size-20"></i>
                       </div>
                     </div>
-                    <div class="feed-item-list">
+                    <div className="feed-item-list">
                       <div>
-                        <h5 class="font-size-16 mb-1">Payment Info</h5>
-                        <p class="text-muted text-truncate mb-4">
+                        <h5 className="font-size-16 mb-1">Payment Info</h5>
+                        <p className="text-muted text-truncate mb-4">
                           Choose a payment method
                         </p>
                       </div>
                       <div>
-                        <h5 class="font-size-14 mb-3">Payment method :</h5>
-                        <div class="row">
-                          <div class="col-lg-3 col-sm-6">
+                        <h5 className="font-size-14 mb-3">Payment method :</h5>
+                        <div className="row">
+                          <div className="col-lg-3 col-sm-6">
                             <div data-bs-toggle="collapse">
-                              <label class="card-radio-label">
+                              <label className="card-radio-label">
                                 <input
                                   type="radio"
                                   name="pay-method"
@@ -319,40 +410,40 @@ console.log("newOrder: " , newOrder);
                                   className="card-radio-input"
                                   onChange={() => setShowCreditCardInput(true)}
                                 />
-                                <span class="card-radio py-3 text-center text-truncate">
-                                  <i class="bx bx-credit-card d-block h2 mb-3"></i>
+                                <span className="card-radio py-3 text-center text-truncate">
+                                  <i className="bx bx-credit-card d-block h2 mb-3"></i>
                                   Credit Card
                                 </span>
                               </label>
                             </div>
                           </div>
 
-                          <div class="col-lg-3 col-sm-6">
+                          <div className="col-lg-3 col-sm-6">
                             <div>
-                              <label class="card-radio-label">
+                              <label className="card-radio-label">
                                 <input
                                   type="radio"
                                   name="pay-method"
                                   id="pay-methodoption2"
-                                  class="card-radio-input"
+                                  className="card-radio-input"
                                   onChange={() => setShowCreditCardInput(false)}
                                 />
-                                <span class="card-radio py-3 text-center text-truncate">
-                                  <i class="bx bx-money d-block h2 mb-3"></i>
+                                <span className="card-radio py-3 text-center text-truncate">
+                                  <i className="bx bx-money d-block h2 mb-3"></i>
                                   Cash
                                 </span>
                               </label>
                             </div>
                           </div>
 
-                          <div class="col-lg-3 col-sm-6">
+                          <div className="col-lg-3 col-sm-6">
                             <div>
-                              <label class="card-radio-label">
+                              <label className="card-radio-label">
                                 <input
                                   type="radio"
                                   name="pay-method"
                                   id="pay-methodoption3"
-                                  class="card-radio-input"
+                                  className="card-radio-input"
                                   checked=""
                                 />
                               </label>
@@ -366,55 +457,113 @@ console.log("newOrder: " , newOrder);
                             data-bs-parent="#accordionPayment"
                           >
                             <div className="accordion-body">
-                              <div class="row">
-                                <div class="col-lg-4">
-                                  <div class="mb-4 mb-lg-0">
-                                    <label class="form-label">
+                              <div className="row">
+                                <div className="col-lg-4">
+                                  <div className="mb-4 mb-lg-0">
+                                    <label className="form-label">
                                       Card number
                                     </label>
                                     <input
                                       type="text"
-                                      class="form-control"
+                                      className="form-control"
                                       placeholder="Enter card number"
+                                      name="cardNumber"
+                                      value={deliveryInfo.cardNumber}
+                                      onChange={handleDeliveryInfoChange}
+                                      id="cardNumber"
                                     />
+                                    {errors.cardNumber && (
+                                      <div
+                                        style={{
+                                          color: "red",
+                                          marginTop: "3px",
+                                        }}
+                                      >
+                                        {errors.cardNumber}
+                                      </div>
+                                    )}
                                   </div>
                                 </div>
 
-                                <div class="col-lg-4">
-                                  <div class="mb-4 mb-lg-0">
-                                    <label class="form-label">
+                                <div className="col-lg-4">
+                                  <div className="mb-4 mb-lg-0">
+                                    <label className="form-label">
                                       Name on card
                                     </label>
                                     <input
                                       type="text"
-                                      class="form-control"
+                                      name="cardFullName"
+                                      value={deliveryInfo.cardFullName}
+                                      onChange={handleDeliveryInfoChange}
+                                      className="form-control"
+                                      id="billing-name"
                                       placeholder="Enter name"
                                     />
+                                    {errors.cardFullName && (
+                                      <div
+                                        style={{
+                                          color: "red",
+                                          marginTop: "3px",
+                                        }}
+                                      >
+                                        {errors.cardFullName}
+                                      </div>
+                                    )}
                                   </div>
                                 </div>
                               </div>
 
-                              <div class="row">
-                                <div class="col-lg-4">
-                                  <div class="mb-0">
-                                    <label class="form-label">
+                              <div className="row">
+                                <div className="col-lg-4">
+                                  <div className="mb-0">
+                                    <label className="form-label">
                                       Expiry date
                                     </label>
                                     <input
                                       type="text"
-                                      class="form-control"
+                                      className="form-control"
                                       placeholder="Enter expiry date"
+                                      name="expDate"
+                                      value={deliveryInfo.expDate}
+                                      onChange={handleDeliveryInfoChange}
+                                      id="exp-Date"
                                     />
+                                    {errors.expDate && (
+                                      <div
+                                        style={{
+                                          color: "red",
+                                          marginTop: "3px",
+                                        }}
+                                      >
+                                        {errors.expDate}
+                                      </div>
+                                    )}
                                   </div>
                                 </div>
-                                <div class="col-lg-4">
-                                  <div class="mb-0">
-                                    <label class="form-label">CVV Code</label>
+                                <div className="col-lg-4">
+                                  <div className="mb-0">
+                                    <label className="form-label">
+                                      CVV Code
+                                    </label>
                                     <input
                                       type="text"
-                                      class="form-control"
+                                      className="form-control"
                                       placeholder="Enter CVV code"
+                                      name="cvv"
+                                      value={deliveryInfo.cvv}
+                                      onChange={handleDeliveryInfoChange}
+                                      id="cvv"
                                     />
+                                    {errors.cvv && (
+                                      <div
+                                        style={{
+                                          color: "red",
+                                          marginTop: "3px",
+                                        }}
+                                      >
+                                        {errors.cvv}
+                                      </div>
+                                    )}
                                   </div>
                                 </div>
                               </div>
@@ -425,32 +574,6 @@ console.log("newOrder: " , newOrder);
                     </div>
                   </li>
                 </ol>
-              </div>
-            </div>
-            <div class="row my-4">
-              <div class="col">
-                <a href="products.html" class="btn btn-link text-muted">
-                  <i class="mdi mdi-arrow-left me-1"></i> Continue Shopping{" "}
-                </a>
-              </div>
-              <div class="col">
-                <div className="text-end mt-2 mt-sm-0">
-                  <form id="payment-form" onSubmit={handleSubmit}>
-                    <button
-                      id="submit"
-                      style={{
-                        backgroundColor: "green",
-                        color: "white",
-                        border: "none",
-                        padding: "10px 20px",
-                        borderRadius: "5px",
-                        cursor: "pointer",
-                      }}
-                    >
-                      Pay
-                    </button>
-                  </form>
-                </div>
               </div>
             </div>
           </div>
@@ -490,14 +613,14 @@ console.log("newOrder: " , newOrder);
                             </p>
                           </td>
                           <td>{item.amount}</td>
-                          <td>${item.price * item.amount}</td>
+                          <td>₪{item.price * item.amount}</td>
                         </tr>
                       ))}
                       <tr>
                         <td colSpan="2">
                           <h5 className="font-size-14 m-0">Sub Total :</h5>
                         </td>
-                        <td>${subtotal}</td>
+                        <td>₪{subtotal}</td>
                       </tr>
                       <tr>
                         <td colSpan="2">
@@ -505,17 +628,43 @@ console.log("newOrder: " , newOrder);
                             Shipping Charge :
                           </h5>
                         </td>
-                        <td>${shipping_fee}</td>
+                        <td>₪{shipping_fee}</td>
                       </tr>
                       <tr className="bg-light">
                         <td colSpan="2">
                           <h5 className="font-size-14 m-0">Total:</h5>
                         </td>
-                        <td>${total_amount + shipping_fee}</td>
+                        <td>₪{total_amount + shipping_fee}</td>
                       </tr>
                     </tbody>
                   </table>
                 </div>
+              </div>
+            </div>
+          </div>
+          <div className="row my-4">
+            <div className="col">
+              <a href="products.html" className="btn btn-link text-muted">
+                <i className="mdi mdi-arrow-left me-1"></i> Continue Shopping{" "}
+              </a>
+            </div>
+            <div className="col">
+              <div className="text-end mt-2 mt-sm-0">
+                <form id="payment-form" onSubmit={handleSubmit}>
+                  <button
+                    id="submit"
+                    style={{
+                      backgroundColor: "green",
+                      color: "white",
+                      border: "none",
+                      padding: "10px 20px",
+                      borderRadius: "5px",
+                      cursor: "pointer",
+                    }}
+                  >
+                    Pay
+                  </button>
+                </form>
               </div>
             </div>
           </div>

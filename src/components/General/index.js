@@ -16,7 +16,7 @@ import Sort from "../Product/Sort";
 import Stars from "../Stars";
 import CartContent from "../Cart/CartContent";
 import PageHero from "../Product/PageHero";
-import StripeCheckout from "../StripeCheckout";
+import StripeCheckout from "../CheckOut/StripeCheckout";
 export {
   FeaturedProducts,
   Navbar,
