@@ -65,8 +65,8 @@ export const pattern = new RegExp(
 );
 
 export const signupSchema = Joi.object({
-  firstName: Joi.string().min(3).max(50).required(),
-  lastName: Joi.string().min(3).max(200).required(),
+  firstName: Joi.string().min(2).max(50).required(),
+  lastName: Joi.string().min(2).max(200).required(),
   phone: Joi.number()
     .integer()
     .custom((value, helpers) => {
@@ -77,7 +77,7 @@ export const signupSchema = Joi.object({
       }
     })
     .required(),
-    password: Joi.string()
+  password: Joi.string()
     .custom((value, helpers) => {
       if (!/[a-z]/.test(value)) {
         return helpers.error("string.pattern.lowercase");
@@ -104,10 +104,11 @@ export const signupSchema = Joi.object({
       "string.pattern.uppercase": "Password should contain an uppercase letter",
       "string.pattern.digit": "Password should contain a digit",
       "string.pattern.specialCharacter":
-        "Password should contain a special character ($, @, $, !, #)"}),
+        "Password should contain a special character ($, @, $, !, #)",
+    }),
   email: Joi.string().email({ tlds: { allow: false } }),
-  city: Joi.string().min(3).required(),
-  street: Joi.string().min(3).required(),
+  city: Joi.string().min(2).required(),
+  street: Joi.string().min(2).required(),
   houseNumber: Joi.number().required(),
   zip: Joi.number().required(),
 });

@@ -56,13 +56,15 @@ const CartButton = () => {
 
   return (
     <Wrapper className="cart-btn-wrapper">
-      <Link to="/cart" className="cart-btn1" onClick={closeSidebar}>
-        Cart
-        <span className="cart-container">
-          <FaShoppingCart />
-          <span className="cart-value">{total_items}</span>
-        </span>
-      </Link>{" "}
+      <div>
+        <Link to="/cart" className="cart-btn1" onClick={closeSidebar}>
+          Cart
+          <span className="cart-container">
+            <FaShoppingCart />
+            <span className="cart-value">{total_items}</span>
+          </span>
+        </Link>{" "}
+      </div>
       {user ? (
         <div className="user_buttons">
           <Link className="cart-btn2" onClick={toggleDropdown}>
@@ -105,9 +107,11 @@ const CartButton = () => {
               </Link>
             </div>
           )}
-          <Link to="/favoriteproducts" className="cart-btn3">
-            💚
-          </Link>
+          <div>
+            <Link to="/favoriteproducts" className="cart-btn3">
+              💚
+            </Link>
+          </div>
         </div>
       ) : (
         <button
@@ -223,9 +227,11 @@ const Wrapper = styled.div`
     }
   }
   .user_buttons {
-    position: relative;
     display: flex;
+    position: relative;
     align-items: start;
+    justify-content: space-between;
+    width: 100%; // Ensure full width for alignment
   }
 `;
 export default CartButton;
