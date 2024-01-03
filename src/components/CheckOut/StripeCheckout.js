@@ -1,7 +1,7 @@
 import React, { useState, useContext, useEffect } from "react";
 import styled from "styled-components";
-import { loadStripe } from "@stripe/stripe-js";
-import { CardElement, Elements } from "@stripe/react-stripe-js";
+// import { loadStripe } from "@stripe/stripe-js";
+// import { CardElement, Elements } from "@stripe/react-stripe-js";
 import axios from "axios";
 import { useCartContext } from "../../context/cart_context";
 import { formatPrice } from "../../utils/helpers";
@@ -21,7 +21,7 @@ import {
   validations,
 } from "./formValidation";
 
-const promise = loadStripe(process.env.REACT_APP_STRIPE_PUBLIC_KEY);
+// const promise = loadStripe(process.env.REACT_APP_STRIPE_PUBLIC_KEY);
 
 const CheckoutForm = () => {
   const [showCreditCardInput, setShowCreditCardInput] = useState(false);
@@ -52,21 +52,21 @@ const CheckoutForm = () => {
 
   const [errors, setErrors] = useState({});
 
-  const createPaymentIntent = async () => {
-    try {
-      const { data } = await axios.post(
-        "/.netlify/functions/create-payment-intent",
+  // const createPaymentIntent = async () => {
+  //   try {
+  //     const { data } = await axios.post(
+  //       "/.netlify/functions/create-payment-intent",
 
-        JSON.stringify({ cart, shipping_fee, total_amount })
-      );
-      setClientSecret(data.clientSecret);
-    } catch (error) {
-      // console.log(error.response)
-    }
-  };
+  //       JSON.stringify({ cart, shipping_fee, total_amount })
+  //     );
+  //     setClientSecret(data.clientSecret);
+  //   } catch (error) {
+  //     // console.log(error.response)
+  //   }
+  // };
 
   useEffect(() => {
-    createPaymentIntent();
+    // createPaymentIntent();
     const bootstrapStyle = document.createElement("link");
     bootstrapStyle.href =
       "https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css";
@@ -642,30 +642,28 @@ const CheckoutForm = () => {
               </div>
             </div>
           </div>
-          <div className="row my-4">
-            <div className="col">
+          <div className="row my-4 justify-content-center">
+            <div className="col-auto continue_shopping_button ">
               <a href="products.html" className="btn btn-link text-muted">
                 <i className="mdi mdi-arrow-left me-1"></i> Continue Shopping{" "}
               </a>
             </div>
-            <div className="col">
-              <div className="text-end mt-2 mt-sm-0">
-                <form id="payment-form" onSubmit={handleSubmit}>
-                  <button
-                    id="submit"
-                    style={{
-                      backgroundColor: "green",
-                      color: "white",
-                      border: "none",
-                      padding: "10px 20px",
-                      borderRadius: "5px",
-                      cursor: "pointer",
-                    }}
-                  >
-                    Pay
-                  </button>
-                </form>
-              </div>
+            <div className="col-auto pay_button">
+              <form id="payment-form" onSubmit={handleSubmit}>
+                <button
+                  id="submit"
+                  style={{
+                    backgroundColor: "green",
+                    color: "white",
+                    border: "none",
+                    padding: "10px 20px",
+                    borderRadius: "5px",
+                    cursor: "pointer",
+                  }}
+                >
+                  Pay
+                </button>
+              </form>
             </div>
           </div>
         </div>

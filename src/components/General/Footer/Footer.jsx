@@ -7,7 +7,7 @@ function Footer() {
       <div className="footer_section">
         <BottomNav />
         <div className="line"></div>
-        <h2>Created by - MT Web Solutions 2023 ©️</h2>
+        <h2>Created by - MT Web Solutions {new Date().getFullYear()} ©️</h2>
       </div>
     </div>
   );

@@ -8,6 +8,8 @@ const OrderStatusBar = ({ order }) => {
     Processing: { name: "Processing", symbol: "🔄" },
     Shipped: { name: "Shipped", symbol: "🚚" },
     Delivered: { name: "Delivered", symbol: "📦" },
+    Canceled: { name: "Canceled", symbol: "❌" },
+    Refunded: { name: "Refunded", symbol: "🔙" },
   };
 
   // Find the symbol for the current status

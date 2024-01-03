@@ -9,7 +9,7 @@ import { useFavoriteContext } from "../../context/favorite_context";
 import ConfirmationModal from "./ConfirmationModal";
 import { useNavigate } from "react-router-dom";
 
-const Product = ({ image, name, category, price, id }) => {
+const Product = ({ image, name, author, price, id }) => {
   const { addToCart } = useCartContext();
   const { isFavorite } = useFavoriteContext();
   const { setUser, user } = useContext(GeneralContext);
@@ -18,7 +18,7 @@ const Product = ({ image, name, category, price, id }) => {
   const navigate = useNavigate();
 
   const handleCartClick = () => {
-    setSelectedItem({ id, image, name, category, price });
+    setSelectedItem({ id, image, name, author, price });
     setIsModalOpen(true);
   };
 
@@ -66,9 +66,9 @@ const Product = ({ image, name, category, price, id }) => {
         </div>
         <div className="column">
           <h5>{name}</h5>
-          <h5>{category}</h5>
+          <h5>{author}</h5>
+          <p>{formatPrice(price)}</p>
         </div>
-        <p>{formatPrice(price)}</p>
       </div>
       <ConfirmationModal
         isOpen={isModalOpen}
@@ -92,26 +92,6 @@ const Wrapper = styled.article`
     border-radius: var(--radius);
     transition: var(--transition);
   }
-  // .link {
-  //   position: absolute;
-  //   top: 50%;
-  //   left: 50%;
-  //   transform: translate(-50%, -50%);
-  //   background: var(--clr-primary-5);
-  //   display: flex;
-  //   align-items: center;
-  //   justify-content: center;
-  //   width: 2.5rem;
-  //   height: 2.5rem;
-  //   border-radius: 50%;
-  //   transition: var(--transition);
-  //   opacity: 0;
-  //   cursor: pointer;
-  //   svg {
-  //     font-size: 1.25rem;
-  //     color: var(--clr-white);
-  //   }
-  // }
 
   .links {
     position: absolute;
@@ -178,6 +158,7 @@ const Wrapper = styled.article`
     display: flex;
     justify-content: space-between;
     align-items: center;
+    background-color: none !important;
   }
   footer h5 {
     margin-bottom: 0;

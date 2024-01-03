@@ -5,14 +5,14 @@ import { getUniqueValues, formatPrice } from "../../utils/helpers";
 
 const Filters = () => {
   const {
-    filters: { text, category, company, min_price, price, max_price, shipping },
+    filters: { text, category, author, min_price, price, max_price, shipping },
     updateFilters,
     all_products,
     clearFilters,
   } = useFilterContext();
 
   const categories = getUniqueValues(all_products, "category");
-  const companies = getUniqueValues(all_products, "company");
+  const companies = getUniqueValues(all_products, "author");
   return (
     <Wrapper>
       <div className="content">
@@ -51,14 +51,14 @@ const Filters = () => {
             </div>
           </div>
           {/* end of category */}
-          {/* company */}
+          {/* author */}
           <div className="form-control">
-            <h5>company</h5>
+            <h5>Author</h5>
             <select
-              name="company"
-              value={company}
+              name="author"
+              value={author}
               onChange={updateFilters}
-              className="company"
+              className="author"
             >
               {companies.map((c, index) => {
                 return (
@@ -69,7 +69,7 @@ const Filters = () => {
               })}
             </select>
           </div>
-          {/* end of company */}
+          {/* end of author */}
           {/* price */}
           <div className="form-control">
             <h5>price</h5>
@@ -81,6 +81,7 @@ const Filters = () => {
               min={min_price}
               max={max_price}
               value={price}
+              className="range-input"
             />
           </div>
           {/* end of price */}
@@ -118,6 +119,7 @@ const Wrapper = styled.section`
     border-radius: var(--radius);
     border-color: transparent;
     letter-spacing: var(--spacing);
+    width: 100%;
   }
   .search-input::placeholder {
     text-transform: capitalize;
@@ -138,11 +140,15 @@ const Wrapper = styled.section`
   .active {
     border-color: var(--clr-grey-5);
   }
-  .company {
+
+  .author {
     background: var(--clr-grey-10);
     border-radius: var(--radius);
     border-color: transparent;
     padding: 0.25rem;
+    width: 100%;
+  }
+
   .all-btn {
     display: flex;
     align-items: center;
@@ -150,12 +156,15 @@ const Wrapper = styled.section`
     margin-right: 0.5rem;
     opacity: 0.5;
   }
+
   .active {
     opacity: 1;
   }
+
   .all-btn .active {
     text-decoration: underline;
   }
+
   .price {
     margin-bottom: 0.25rem;
   }
@@ -167,6 +176,11 @@ const Wrapper = styled.section`
     column-gap: 0.5rem;
     font-size: 1rem;
   }
+
+  .range-input {
+    width: 100%;
+  }
+
   .clear-btn {
     background: var(--clr-red-dark);
     color: var(--clr-white);

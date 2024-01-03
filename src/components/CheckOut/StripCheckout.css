@@ -7,6 +7,14 @@
   display: flex;
 }
 
+.continue_shopping_button {
+  margin-left: 1rem;
+}
+
+.pay_button {
+  margin-left: 4rem;
+}
+
 body {
   margin-top: 20px;
   background-color: #f1f3f7;

@@ -72,6 +72,7 @@ li {
   margin: auto;
   padding: 20px;
   border: 1px solid #888;
+  border-radius: 10px;
   width: 80%;
   max-width: 500px;
 }
@@ -81,11 +82,20 @@ li {
   float: right;
   font-size: 28px;
   font-weight: bold;
+  margin-left: 3%;
+  margin-top: -3%;
 }
 
 .close:hover,
-.close:focus {
-  color: #000;
+.close:focus,
+.view-details:hover {
+  color: blue;
   text-decoration: none;
   cursor: pointer;
+  scale: 1.03;
+}
+
+.order-status-bar {
+  margin: 0 !important;
+  padding: 0 !important;
 }

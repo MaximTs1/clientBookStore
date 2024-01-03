@@ -50,6 +50,7 @@ const OrderHistoryPage = () => {
           <thead>
             <tr>
               <th>Date</th>
+              <th>OrderStatus</th>
               <th>Details</th>
             </tr>
           </thead>
@@ -57,7 +58,10 @@ const OrderHistoryPage = () => {
             {orderHistory.map((order, index) => (
               <tr key={index} onClick={() => toggleOrderDetails(order)}>
                 <td>{new Date(order.date).toLocaleDateString()}</td>
-                <td>View Details</td>
+                <td>
+                  <OrderStatusBar order={order} className="order-status-bar" />
+                </td>
+                <td className="view-details">View Details</td>
               </tr>
             ))}
           </tbody>
@@ -72,9 +76,17 @@ const OrderHistoryPage = () => {
                 <div className="card checkout-order-summary">
                   <div className="card-body">
                     <div className="p-3 bg-light mb-3">
-                      <h5 className="font-size-16 mb-0">Order Summary</h5>
+                      <h5
+                        className="font-size-16 mb-0"
+                        style={{ marginLeft: "5%", marginTop: "3%" }}
+                      >
+                        Order Summary
+                      </h5>
                     </div>
-                    <div className="table-responsive">
+                    <div
+                      className="table-responsive"
+                      style={{ width: "200%", marginLeft: "5%" }}
+                    >
                       <table className="table table-centered mb-0 table-nowrap">
                         <thead>
                           <tr>
@@ -103,14 +115,14 @@ const OrderHistoryPage = () => {
                                 </p>
                               </td>
                               <td>{item.amount}</td>
-                              <td>${item.price * item.amount}</td>
+                              <td>₪{item.price * item.amount}</td>
                             </tr>
                           ))}
                           <tr>
                             <td colSpan="2">
                               <h5 className="font-size-14 m-0">Sub Total :</h5>
                             </td>
-                            <td>${subtotal}</td>
+                            <td>₪{subtotal}</td>
                           </tr>
                           <tr>
                             <td colSpan="2">
@@ -118,13 +130,13 @@ const OrderHistoryPage = () => {
                                 Shipping Charge :
                               </h5>
                             </td>
-                            <td>${10}</td>
+                            <td>₪{30}</td>
                           </tr>
                           <tr className="bg-light">
                             <td colSpan="2">
                               <h5 className="font-size-14 m-0">Total:</h5>
                             </td>
-                            <td>${subtotal + 10}</td>
+                            <td>₪{subtotal + 30}</td>
                           </tr>
                           <tr>
                             <td colSpan="2">
