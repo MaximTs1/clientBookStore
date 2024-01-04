@@ -6,11 +6,15 @@ import { useUserContext } from "../../context/user_context";
 import { formatPrice } from "../../utils/helpers";
 import { Link } from "react-router-dom";
 import { GeneralContext } from "../../App";
+import { useNavigate } from 'react-router-dom';
+
 
 const CartTotals = () => {
   const { total_amount, shipping_fee } = useCartContext();
   const { myUser, loginWithRedirect } = useUserContext();
   const { setLoading, snackbar, setUser, user } = useContext(GeneralContext);
+  const navigate = useNavigate();
+
 
   return (
     <Wrapper>
@@ -32,9 +36,10 @@ const CartTotals = () => {
             proceed to checkout
           </Link>
         ) : (
-          <button onClick={loginWithRedirect} className="btn">
-            login
-          </button>
+          <button onClick={() => navigate('/login')} className="btn">
+  Login
+</button>
+
         )}
       </div>
     </Wrapper>

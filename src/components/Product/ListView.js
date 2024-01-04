@@ -8,7 +8,6 @@ const ListView = ({ products }) => {
     <Wrapper>
       {products.map((product) => {
         const { id, image, name, author, price, description } = product;
-        console.log("ListView products: ", products);
 
         return (
           <article key={id}>

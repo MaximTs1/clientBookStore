@@ -66,7 +66,6 @@ const ChangePassword = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log("userData", userData);
     try {
       const response = await fetch(
         `http://185.229.226.27:3001/user/update-password`,

@@ -156,11 +156,9 @@ const CheckoutForm = () => {
       }
 
       const updatedUser = await response.json();
-      console.log("Updated User:", updatedUser);
 
       setUser((user) => ({ ...user, likedBooks: updatedUser.likedBooks }));
     } catch (error) {
-      console.error("Error:", error);
     }
   };
 
