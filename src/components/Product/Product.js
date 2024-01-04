@@ -24,11 +24,15 @@ const Product = ({ image, name, author, price, id, stock }) => {
 
   const continueShopping = (id) => {
     setIsModalOpen(false);
+    let product = selectedItem;
+    product.customId = selectedItem.id;
     addToCart(id, 1, selectedItem);
   };
 
   const addToCartAndGoToCart = (id) => {
     setIsModalOpen(false);
+    let product = selectedItem;
+    product.customId = selectedItem.id;
     addToCart(id, 1, selectedItem);
     navigate("/cart");
   };
