@@ -100,6 +100,7 @@ const CartButton = () => {
                   clearCart();
                   handleDropdownItemClick();
                   localStorage.clear("token");
+                  navigate("/")
                   window.location.reload();
                 }}
               >

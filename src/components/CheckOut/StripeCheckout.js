@@ -9,15 +9,6 @@ import { useNavigate } from "react-router-dom";
 import { GeneralContext } from "../../App";
 import "./StripCheckout.css";
 import {
-  isValidName,
-  isValidEmail,
-  isValidPhoneNumber,
-  isValidAddress,
-  isValidCity,
-  isValidPostalCode,
-  isValidCardNumber,
-  isValidExpiryDate,
-  isValidCVV,
   validations,
 } from "./formValidation";
 
@@ -85,10 +76,13 @@ const CheckoutForm = () => {
     const newErrors = {};
 
     validations.forEach(({ field, validate, errorMessage }) => {
+      // Skip credit card related fields if credit card is not selected
+    if (showCreditCardInput || (!showCreditCardInput && !['cardNumber', 'cardFullName', 'expDate', 'cvv'].includes(field))) {
       if (!validate(deliveryInfo[field])) {
         newErrors[field] = errorMessage;
       }
-    });
+    }
+  });
 
     setErrors(newErrors);
 
