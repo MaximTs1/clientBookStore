@@ -13,10 +13,12 @@ const ProductList = () => {
     );
   }
 
+  let productsInStock = products.filter((product) => product.stock !== 0);
+
   if (grid_view === false) {
-    return <ListView products={products} />;
+    return <ListView products={productsInStock} />;
   }
-  return <GridView products={products} />;
+  return <GridView products={productsInStock} />;
 };
 
 export default ProductList;

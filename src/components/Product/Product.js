@@ -9,7 +9,7 @@ import { useFavoriteContext } from "../../context/favorite_context";
 import ConfirmationModal from "./ConfirmationModal";
 import { useNavigate } from "react-router-dom";
 
-const Product = ({ image, name, author, price, id }) => {
+const Product = ({ image, name, author, price, id, stock }) => {
   const { addToCart } = useCartContext();
   const { isFavorite } = useFavoriteContext();
   const { setUser, user } = useContext(GeneralContext);
@@ -18,18 +18,22 @@ const Product = ({ image, name, author, price, id }) => {
   const navigate = useNavigate();
 
   const handleCartClick = () => {
-    setSelectedItem({ id, image, name, author, price });
+    setSelectedItem({ id, image, name, author, price, stock });
     setIsModalOpen(true);
   };
 
-  const continueShopping = (id, quantity, product) => {
+  const continueShopping = (id) => {
     setIsModalOpen(false);
-    addToCart(id, quantity, product);
+    let product = selectedItem;
+    product.customId = selectedItem.id;
+    addToCart(id, 1, selectedItem);
   };
 
-  const addToCartAndGoToCart = (id, quantity, product) => {
+  const addToCartAndGoToCart = (id) => {
     setIsModalOpen(false);
-    addToCart(id, quantity, product);
+    let product = selectedItem;
+    product.customId = selectedItem.id;
+    addToCart(id, 1, selectedItem);
     navigate("/cart");
   };
 
