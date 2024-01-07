@@ -17,7 +17,7 @@ export const structure = [
   },
   {
     name: "phone",
-    type: "number",
+    type: "string",
     label: "Phone Number",
     required: true,
     block: false,
@@ -67,15 +67,8 @@ export const pattern = new RegExp(
 export const signupSchema = Joi.object({
   firstName: Joi.string().min(2).max(50).required(),
   lastName: Joi.string().min(2).max(200).required(),
-  phone: Joi.number()
-    .integer()
-    .custom((value, helpers) => {
-      if (value.toString().length === 10) {
-        return value;
-      } else {
-        return helpers.error("any.invalid");
-      }
-    })
+  phone: Joi.string()
+    .pattern(/^[0-9]{10}$/)
     .required(),
   password: Joi.string()
     .custom((value, helpers) => {

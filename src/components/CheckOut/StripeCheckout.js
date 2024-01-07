@@ -8,9 +8,7 @@ import { formatPrice } from "../../utils/helpers";
 import { useNavigate } from "react-router-dom";
 import { GeneralContext } from "../../App";
 import "./StripCheckout.css";
-import {
-  validations,
-} from "./formValidation";
+import { validations } from "./formValidation";
 
 // const promise = loadStripe(process.env.REACT_APP_STRIPE_PUBLIC_KEY);
 
@@ -77,12 +75,16 @@ const CheckoutForm = () => {
 
     validations.forEach(({ field, validate, errorMessage }) => {
       // Skip credit card related fields if credit card is not selected
-    if (showCreditCardInput || (!showCreditCardInput && !['cardNumber', 'cardFullName', 'expDate', 'cvv'].includes(field))) {
-      if (!validate(deliveryInfo[field])) {
-        newErrors[field] = errorMessage;
+      if (
+        showCreditCardInput ||
+        (!showCreditCardInput &&
+          !["cardNumber", "cardFullName", "expDate", "cvv"].includes(field))
+      ) {
+        if (!validate(deliveryInfo[field])) {
+          newErrors[field] = errorMessage;
+        }
       }
-    }
-  });
+    });
 
     setErrors(newErrors);
 
@@ -152,8 +154,7 @@ const CheckoutForm = () => {
       const updatedUser = await response.json();
 
       setUser((user) => ({ ...user, likedBooks: updatedUser.likedBooks }));
-    } catch (error) {
-    }
+    } catch (error) {}
   };
 
   const subtotal = cart.reduce(
@@ -199,7 +200,7 @@ const CheckoutForm = () => {
                                   <div className="mb-3">
                                     <label
                                       className="form-label"
-                                      for="billing-name"
+                                      htmlFor="billing-name"
                                     >
                                       Full Name
                                     </label>
@@ -228,7 +229,7 @@ const CheckoutForm = () => {
                                   <div className="mb-3">
                                     <label
                                       className="form-label"
-                                      for="billing-email-address"
+                                      htmlFor="billing-email-address"
                                     >
                                       Email Address
                                     </label>
@@ -237,7 +238,7 @@ const CheckoutForm = () => {
                                       name="email"
                                       value={deliveryInfo.email}
                                       onChange={handleDeliveryInfoChange}
-                                      class="form-control"
+                                      className="form-control"
                                       id="billing-email-address"
                                       placeholder="Enter email"
                                     />
@@ -257,7 +258,7 @@ const CheckoutForm = () => {
                                   <div className="mb-3">
                                     <label
                                       className="form-label"
-                                      for="billing-phone"
+                                      htmlFor="billing-phone"
                                     >
                                       Phone
                                     </label>
@@ -266,7 +267,7 @@ const CheckoutForm = () => {
                                       name="phone"
                                       value={deliveryInfo.phone}
                                       onChange={handleDeliveryInfoChange}
-                                      class="form-control"
+                                      className="form-control"
                                       id="billing-phone"
                                       placeholder="Enter Phone no."
                                     />
@@ -287,7 +288,7 @@ const CheckoutForm = () => {
                               <div className="mb-3">
                                 <label
                                   className="form-label"
-                                  for="billing-address"
+                                  htmlFor="billing-address"
                                 >
                                   Address
                                 </label>
@@ -314,7 +315,7 @@ const CheckoutForm = () => {
                                   <div className="mb-4 mb-lg-0">
                                     <label
                                       className="form-label"
-                                      for="billing-city"
+                                      htmlFor="billing-city"
                                     >
                                       City
                                     </label>
@@ -323,7 +324,7 @@ const CheckoutForm = () => {
                                       name="city"
                                       value={deliveryInfo.city}
                                       onChange={handleDeliveryInfoChange}
-                                      class="form-control"
+                                      className="form-control"
                                       id="billing-city"
                                       placeholder="Enter City"
                                     />
@@ -344,7 +345,7 @@ const CheckoutForm = () => {
                                   <div className="mb-0">
                                     <label
                                       className="form-label"
-                                      for="zip-code"
+                                      htmlFor="zip-code"
                                     >
                                       Zip / Postal code
                                     </label>
@@ -353,7 +354,7 @@ const CheckoutForm = () => {
                                       name="postalCode"
                                       value={deliveryInfo.postalCode}
                                       onChange={handleDeliveryInfoChange}
-                                      class="form-control"
+                                      className="form-control"
                                       id="postalCode"
                                       placeholder="Enter Postal code"
                                     />
@@ -436,7 +437,7 @@ const CheckoutForm = () => {
                                   name="pay-method"
                                   id="pay-methodoption3"
                                   className="card-radio-input"
-                                  checked=""
+                                  // checked=""
                                 />
                               </label>
                             </div>

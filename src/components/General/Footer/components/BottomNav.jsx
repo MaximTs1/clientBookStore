@@ -71,9 +71,8 @@ const BottomNav = () => {
             <div className="bot_nav">
               {my_navbar_data.map((data, index) => {
                 return (
-                  <>
+                  <React.Fragment key={index}>
                     <HashLink
-                      key={index}
                       to={data.nav_link}
                       scroll={(el) => el.scrollIntoView({ behavior: "smooth" })}
                     >
@@ -89,7 +88,7 @@ const BottomNav = () => {
                         {data.navbar_name}
                       </p>
                     </HashLink>
-                  </>
+                  </React.Fragment>
                 );
               })}
             </div>
@@ -104,7 +103,7 @@ const BottomNav = () => {
                   <div className="bot_cdiv" key={index}>
                     {data.section_two.map((e, i) => {
                       return (
-                        <div className="contact_me_here" key={i}>
+                        <div className="contact_me_here" key={`${index}-${i}`}>
                           <FontAwesomeIcon
                             icon={e.icon}
                             style={{ color: e.ic_color }}
