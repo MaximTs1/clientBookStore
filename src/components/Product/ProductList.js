@@ -13,7 +13,7 @@ const ProductList = () => {
     );
   }
 
-  let productsInStock = products.filter((product) => product.stock !== 0);
+  let productsInStock = products.filter((product) => product.stock > 0);
 
   if (grid_view === false) {
     return <ListView products={productsInStock} />;

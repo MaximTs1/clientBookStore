@@ -4,13 +4,8 @@ import SocialMediaLinks from "./SocialMediaLinks";
 import my_navbar_data from "../assets/NavData";
 import { HashLink } from "react-router-hash-link";
 import personal_info_data from "../assets/AboutIn";
-import Githubcomp from "./Githubcomp";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import {
-  faPhoneFlip,
-  faLocationDot,
-  faEnvelope,
-} from "@fortawesome/free-solid-svg-icons";
+import logo from "../../../../assets/logo.jpeg";
 
 const BottomNav = () => {
   return (
@@ -22,13 +17,16 @@ const BottomNav = () => {
               <HashLink
                 to="/admin/login"
                 style={{ textDecoration: "none", color: "#fff" }}
-              >
-                <h3>Ariella`s Books Store</h3>
-              </HashLink>
+              ></HashLink>
             </div>
             <div className="bot_middle_info">
+              <img
+                src={logo}
+                alt="Ariella Books"
+                style={{ width: "300px", height: "auto" }}
+              />
               <p className="basic_info">
-                Thank you for visiting and checking out my books collection 😊{" "}
+                Thank you for visiting and checking out my books collection 😊
                 <br></br>
                 For any question, don`t hesitate and contact me for anything!
               </p>

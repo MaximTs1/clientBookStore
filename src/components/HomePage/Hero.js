@@ -7,10 +7,12 @@ const Hero = () => {
   return (
     <Wrapper className="section-center">
       <article className="content">
-        <h1>
-          Ariella's <br />
-          Book Store
-        </h1>
+        <header>
+          <h1>
+            Ariella's <br />
+            Book Store
+          </h1>
+        </header>
         <p>
           Hey ! My name is Ariela and this is my bookstore 😊 <br /> Over the
           years I have read thousands of books, and now they are looking for new

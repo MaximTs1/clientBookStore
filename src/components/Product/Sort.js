@@ -27,7 +27,9 @@ const Sort = () => {
           <BsList />
         </button>
       </div>
-      <p>{products.length} products found</p>
+      <p>
+        {products.filter((product) => product.stock > 0).length} products found
+      </p>
       <hr />
       <form>
         <label htmlFor="sort">sort by</label>

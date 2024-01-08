@@ -12,25 +12,56 @@ const LegalInfo = () => {
             <div className="underline"></div>
           </div>
           <p>
-            Hello, <br />
-            My name is Ariella and this is my online book inventory. <br />
-            I am a huge fan of reading and almost all my life you can find me in
-            the evening catching up with my favorite authors and the latest
-            books they have published.
-            <br /> In recent years, I tried to reduce a little the stock of
-            books accumulated in my house (over 3000 books 🫠), but on Facebook
-            and Yad2 I found myself a little stuck and unable to find new owners
-            for all the books that I love so much. <br />
-            That's why I decided to create an attractive and modern website for
-            my entire collection, so that anyone who is interested in one or
-            several of the books, can easily add the books they like to the
-            shopping cart and make a purchase, and make a convenient and simple
-            transfer via Paybox/Bit.
-            <br /> After quick confirmation of the order by SMS that everything
-            has been completed successfully - the order will be sent by a
-            courier company straight to you! <br /> <br /> I hope for better and
-            calmer times and that you can enjoy all the wealth of the content
-            that I love so much. <br />
+            1. General Information <br />
+            Welcome to Ariella's Book Shop, an e-commerce platform dedicated to
+            providing [describe products/services]. Our website is operated by
+            [Company Name] and is subject to the following terms and conditions.
+            By using our website, you agree to these terms.
+            <br /> <br /> 2.Intellectual Property Rights <br />
+            The content published on [Your Website Name], including texts,
+            graphics, logos, images, as well as the compilation thereof, and any
+            software used on the site, is the property of [Company Name] or its
+            suppliers and protected by copyright and intellectual property laws.
+            <br /> <br /> 3. User Obligations <br /> Users of [Your Website
+            Name] are expected to use the website lawfully, not to violate any
+            applicable laws and regulations, and not to infringe on the rights
+            of others or restrict or inhibit their use and enjoyment of the
+            website.
+            <br /> <br />
+            4. Product Information <br /> [Your Website Name] makes every effort
+            to ensure that product descriptions and prices are accurate.
+            However, errors may occur. If an error in the pricing of products is
+            found, [Your Website Name] will inform you as soon as possible and
+            offer the option of reconfirming your order at the correct price or
+            cancelling it. <br />
+            <br /> 5. Order Cancellation, Return, and Refund Policy
+            <br />
+            Please refer to our detailed [Return and Refund Policy] for
+            information about cancelling orders, returning products, and
+            receiving refunds. <br />
+            <br /> 6. Privacy Policy <br /> Your privacy is important to us. Our
+            [Privacy Policy] explains how we collect, use, protect, and when
+            necessary, disclose your personal information. By using our website,
+            you agree to the collection and use of information in accordance
+            with this policy. <br />
+            <br /> 7. Limitation of Liability <br />
+            [Company Name] will not be liable for any indirect, incidental,
+            special, consequential or punitive damages, or any loss of profits
+            or revenues, whether incurred directly or indirectly, or any loss of
+            data, use, goodwill, or other intangible losses, resulting from your
+            access to, use of, or inability to access or use the services.
+            <br />
+            <br /> 8. Changes to Terms and Conditions
+            <br /> [Your Website Name] reserves the right to modify these terms
+            at any time. Your continued use of the site will constitute your
+            acceptance of the changes to these terms. <br />
+            <br />
+            9. Governing Law <br /> These terms shall be governed by and
+            construed in accordance with the laws of [Your Country/State].{" "}
+            <br />
+            <br /> 10. Contact Information <br /> For any questions regarding
+            these terms or the services we provide, please contact us at [Your
+            Contact Information].
           </p>
         </article>
       </Wrapper>

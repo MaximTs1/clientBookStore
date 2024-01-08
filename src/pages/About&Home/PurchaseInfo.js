@@ -12,25 +12,39 @@ const PurchaseInfo = () => {
             <div className="underline"></div>
           </div>
           <p>
-            Hello, <br />
-            My name is Ariella and this is my online book inventory. <br />
-            I am a huge fan of reading and almost all my life you can find me in
-            the evening catching up with my favorite authors and the latest
-            books they have published.
-            <br /> In recent years, I tried to reduce a little the stock of
-            books accumulated in my house (over 3000 books 🫠), but on Facebook
-            and Yad2 I found myself a little stuck and unable to find new owners
-            for all the books that I love so much. <br />
-            That's why I decided to create an attractive and modern website for
-            my entire collection, so that anyone who is interested in one or
-            several of the books, can easily add the books they like to the
-            shopping cart and make a purchase, and make a convenient and simple
-            transfer via Paybox/Bit.
-            <br /> After quick confirmation of the order by SMS that everything
-            has been completed successfully - the order will be sent by a
-            courier company straight to you! <br /> <br /> I hope for better and
-            calmer times and that you can enjoy all the wealth of the content
-            that I love so much. <br />
+            Order Process <br /> Purchasing on [Your Website Name] is designed
+            to be quick and user-friendly. After selecting your desired
+            products, you can proceed to checkout. You'll be asked to provide
+            shipping information and choose a payment method. Once you confirm
+            your order, an acknowledgment email will be sent to you, detailing
+            the products ordered, payment method, cost, and shipping
+            information. <br />
+            <br /> Payment Methods <br /> We accept a variety of payment
+            methods, including credit/debit cards, PayPal, and other digital
+            wallets. All transactions are secured and encrypted to ensure your
+            financial data is protected. Please note that the availability of
+            certain payment methods may vary based on your region.
+            <br />
+            <br /> Pricing and Taxes <br /> All prices displayed on [Your
+            Website Name] are inclusive of applicable sales tax. However, please
+            be aware that international shipments may incur additional customs
+            duties and taxes, which are the responsibility of the customer.{" "}
+            <br />
+            <br />
+            Shipping and Delivery <br /> We strive to dispatch orders promptly
+            and efficiently. Shipping costs and delivery times vary depending on
+            the destination and shipping method selected. You can track your
+            order through the tracking information provided in the shipping
+            confirmation email.
+            <br />
+            <br /> Order Modification and Cancellation <br />
+            To modify or cancel your order, please contact our customer service
+            team immediately. Orders that have already been dispatched cannot be
+            modified or cancelled. <br />
+            <br /> Customer Support <br /> Our dedicated customer support team
+            is here to assist you with any inquiries or issues related to your
+            purchase. Please contact us at [Your Contact Information] for
+            assistance.
           </p>
         </article>
       </Wrapper>
