@@ -107,7 +107,7 @@ const CheckoutForm = () => {
     }));
 
     await axios.post(
-      "http://185.229.226.27:3001/api/update-stock",
+      "http://185.229.226.27:3001/book/update-stock",
       itemsToUpdate
     );
   };

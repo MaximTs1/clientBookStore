@@ -92,11 +92,10 @@ const Signup = () => {
       alert("New user was signed up successfully");
       navigate("/login");
     } catch (error) {
-      console.error("There was an error registering the user:", error);
-      alert(
+      const errorMessage =
         error.response?.data?.message ||
-          "There was an error registering the user."
-      );
+        "There was an error registering the user.";
+      alert(errorMessage);
     }
   };
 
