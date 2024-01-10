@@ -22,7 +22,7 @@ import { PageHero } from "../../components/General";
 const defaultTheme = createTheme();
 
 const UserInfo = () => {
-  const { user, setUser } = useContext(GeneralContext);
+  const { user, setUser, snackbar } = useContext(GeneralContext);
   const navigate = useNavigate();
 
   // Function to initialize userData
@@ -124,6 +124,7 @@ const UserInfo = () => {
       const updatedUser = await response.json();
       setUser(updatedUser);
       setUserData(initializeUserData(""));
+      snackbar("User updated successfully !");
       navigate("/");
     } catch (error) {
       console.error("Error:", error);

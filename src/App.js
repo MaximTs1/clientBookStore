@@ -4,6 +4,7 @@ import { Navbar, Sidebar } from "./components/General";
 import Footer from "./components/General/Footer/Footer";
 import AppRoutes from "./AppRoutes";
 import Loader from "./components/FromOtherProjects/Loader";
+import Snackbar from "./components/FromOtherProjects/Snackbar";
 import "./App.css";
 
 export const GeneralContext = createContext();
@@ -11,6 +12,12 @@ export const GeneralContext = createContext();
 function App() {
   const [user, setUser] = useState();
   const [loading, setLoading] = useState(false);
+  const [snackbarText, setSnackbarText] = useState("");
+
+  const snackbar = (text) => {
+    setSnackbarText(text);
+    setTimeout(() => setSnackbarText(""), 3 * 1000);
+  };
 
   useEffect(() => {
     if (localStorage.token) {
@@ -33,6 +40,7 @@ function App() {
         })
         .then((data) => {
           setUser(data);
+          snackbar("Logged in!");
         })
         .catch((err) => {})
         .finally(() => {
@@ -43,7 +51,7 @@ function App() {
   }, []);
 
   return (
-    <GeneralContext.Provider value={{ setLoading, setUser, user }}>
+    <GeneralContext.Provider value={{ setLoading, setUser, user, snackbar }}>
       {
         <Router>
           <Navbar />
@@ -53,6 +61,7 @@ function App() {
         </Router>
       }
       {loading && <Loader />}
+      {snackbarText && <Snackbar text={snackbarText} />}
     </GeneralContext.Provider>
   );
 }

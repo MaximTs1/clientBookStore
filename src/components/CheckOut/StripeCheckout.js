@@ -19,7 +19,7 @@ const CheckoutForm = () => {
   const [succeeded, setSucceeded] = useState(false);
   const [error, setError] = useState(null);
   const [setClientSecret] = useState("");
-  const { setUser, user } = useContext(GeneralContext);
+  const { setUser, user, snackbar } = useContext(GeneralContext);
   const [deliveryInfo, setDeliveryInfo] = useState({
     fullName: "",
     email: "",
@@ -154,6 +154,7 @@ const CheckoutForm = () => {
       const updatedUser = await response.json();
 
       setUser((user) => ({ ...user, likedBooks: updatedUser.likedBooks }));
+      snackbar("Logged in!");
     } catch (error) {}
   };
 
