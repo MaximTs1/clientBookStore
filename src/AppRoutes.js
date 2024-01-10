@@ -15,8 +15,9 @@ import UserInfo from "./pages/Auth/UserInfo";
 import ChangePassword from "./pages/Auth/ChangePassword/ChangePassword";
 import OrderHistoryPage from "./pages/OrderHistory/OrderHistoryPage ";
 import LegalInfo from "./pages/About&Home/LegalInfo.js";
-import   PurchaseInfo from "./pages/About&Home/PurchaseInfo.js";
-
+import PurchaseInfo from "./pages/About&Home/PurchaseInfo.js";
+import UserEmailInputPage from "./pages/Auth/ForgotMyPassword/UserEmailInputPage.js";
+import ChangePasswordLandingPage from "./pages/Auth/ForgotMyPassword/ChangePasswordLandingPage.js";
 export default function AppRoutes() {
   return (
     <Routes>
@@ -33,13 +34,13 @@ export default function AppRoutes() {
       <Route path="favoriteproducts" element={<FavoriteProducts />} />
       <Route path="orderhistorypage" element={<OrderHistoryPage />} />
       <Route path="changepassword" element={<ChangePassword />} />
-
+      <Route path="forgotmypasswordpage" element={<UserEmailInputPage />} />
       <Route
-        path="checkout"
-        element={
-          <Checkout />
-        }
+        path="changepasswordlandingpage"
+        element={<ChangePasswordLandingPage />}
       />
+
+      <Route path="checkout" element={<Checkout />} />
       <Route path="*" element={<Error />} />
     </Routes>
   );

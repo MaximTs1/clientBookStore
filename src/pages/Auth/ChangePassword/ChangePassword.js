@@ -128,6 +128,9 @@ const ChangePassword = () => {
               <Avatar sx={{ mt: 0, mb: 2, bgcolor: "secondary.main" }}>
                 <LockOutlinedIcon />
               </Avatar>
+              <Typography component="h1" variant="h5">
+                Change Password
+              </Typography>
               {user && (
                 <Box
                   component="form"

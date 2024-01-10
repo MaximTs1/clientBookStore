@@ -23,6 +23,24 @@ export const structure = [
     block: true,
   },
 ];
+
+export const resetPasswordStructure = [
+  {
+    name: "resetPassword",
+    type: "password",
+    label: "Reset Password",
+    required: true,
+    block: true,
+  },
+  {
+    name: "confirmResetPassword",
+    type: "password",
+    label: "Confirm Reset Password",
+    required: true,
+    block: true,
+  },
+];
+
 // check why "-" is not allowed
 export const ChangePasswordSchema = Joi.object({
   password: Joi.string()
@@ -125,3 +143,94 @@ export const ChangePasswordSchema = Joi.object({
       "any.required": "Confirm New Password cannot be empty",
     }),
 });
+
+//ForgotPasswordEmailSchema
+
+export const ForgotPasswordEmailSchema = Joi.object({
+  email: Joi.string()
+    .email({ tlds: { allow: false } })
+    .required()
+    .messages({
+      "string.email": "Please enter a valid email address",
+      "any.required": "Email is required",
+    }),
+});
+
+//ResetPasswordSchema
+
+export const ResetPasswordSchema = Joi.object({
+  resetPassword: Joi.string()
+    .required()
+    .custom((value, helpers) => {
+      if (!/[a-z]/.test(value)) {
+        return helpers.error("string.pattern.lowercase");
+      }
+      if (!/[A-Z]/.test(value)) {
+        return helpers.error("string.pattern.uppercase");
+      }
+      if (!/\d/.test(value)) {
+        return helpers.error("string.pattern.digit");
+      }
+      if (!/[!@%$#^&*_()*]/.test(value)) {
+        return helpers.error("string.pattern.specialCharacter");
+      }
+      return value;
+    })
+    .min(8)
+    .max(20)
+
+    .messages({
+      "any.only": "Passwords do not match",
+      "string.min":
+        "Confirm New Password should have a minimum length of {#limit} characters",
+      "string.max":
+        "Confirm New Password should have a maximum length of {#limit} characters",
+      "string.pattern.lowercase":
+        "New Password should contain a lowercase letter",
+      "string.pattern.uppercase":
+        "New Password should contain an uppercase letter",
+      "string.pattern.digit": "New Password should contain a digit",
+      "string.pattern.specialCharacter":
+        "New Password should contain a special character ($, @, $, !, #)",
+      "any.required": "Rest Password cannot be empty",
+    }),
+
+  confirmResetPassword: Joi.string()
+    .required()
+    .custom((value, helpers) => {
+      if (!/[a-z]/.test(value)) {
+        return helpers.error("string.pattern.lowercase");
+      }
+      if (!/[A-Z]/.test(value)) {
+        return helpers.error("string.pattern.uppercase");
+      }
+      if (!/\d/.test(value)) {
+        return helpers.error("string.pattern.digit");
+      }
+      if (!/[!@%$#^&*_()*]/.test(value)) {
+        return helpers.error("string.pattern.specialCharacter");
+      }
+      return value;
+    })
+    .valid(Joi.ref("resetPassword"))
+    .min(8)
+    .max(20)
+
+    .messages({
+      "any.only": "Passwords do not match",
+      "string.min":
+        "Confirm New Password should have a minimum length of {#limit} characters",
+      "string.max":
+        "Confirm New Password should have a maximum length of {#limit} characters",
+      "string.pattern.lowercase":
+        "New Password should contain a lowercase letter",
+      "string.pattern.uppercase":
+        "New Password should contain an uppercase letter",
+      "string.pattern.digit": "New Password should contain a digit",
+      "string.pattern.specialCharacter":
+        "New Password should contain a special character ($, @, $, !, #)",
+      "any.required": "Confirm Reset Password cannot be empty",
+    }),
+});
+
+export default ResetPasswordSchema;
