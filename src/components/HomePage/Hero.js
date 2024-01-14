@@ -15,13 +15,15 @@ const Hero = () => {
         </header>
         <p>
           Hey ! My name is Ariela and this is my bookstore 😊 <br /> Over the
-          years I have read thousands of books, and now they are looking for new
+          years I have read thousands of books,  <br />and now they are looking for new
           owners who will enjoy them as much as I did. <br /> Come visit and
           shop at my new store 🤩
         </p>
-        <Link to="/products" className="btn hero-btn">
-          shop now
-        </Link>
+        <div className="btn-container">
+    <Link to="/products" className="btn hero-btn">
+      shop now
+    </Link>
+  </div>
       </article>
       <article className="img-container">
         <img src={heroBcg} alt="book and plant" className="main-img" />
@@ -34,28 +36,45 @@ const Hero = () => {
 const Wrapper = styled.section`
   min-height: 40vh;
   max-height: 55vh;
+  margin-bottom: 3vh;
   display: grid;
   place-items: center;
   .img-container {
     display: none;
   }
-
+h1{
+  text-align:center;
+  font-size: 2.25rem;}
   p {
     line-height: 2;
     max-width: 45em;
     margin-bottom: 2rem;
     color: var(--clr-grey-5);
     font-size: 1rem;
+    text-align:center;
   }
+  .btn-container {
+    display: flex;
+    justify-content: center; /* Center horizontally */
+    /* Add any additional styling as necessary */
+}
+
   @media (min-width: 992px) {
-    height: calc(100vh - 5rem);
+    max-height: 60vh;
     grid-template-columns: 1fr 1fr;
+    margin-bottom: 3vh;
     gap: 8rem;
     h1 {
       margin-bottom: 2rem;
+      font-size: 2.25rem;
+      text-align: left;      
+
     }
     p {
-      font-size: 1.25rem;
+      font-size: 1rem;
+      text-align: left;      
+
+      
     }
     .hero-btn {
       padding: 0.75rem 1.5rem;
@@ -67,7 +86,7 @@ const Wrapper = styled.section`
     }
     .main-img {
       width: 100%;
-      height: 350px;
+      height: 45vh;
       position: relative;
       border-radius: var(--radius);
       display: block;
@@ -92,6 +111,8 @@ const Wrapper = styled.section`
       border-radius: var(--radius);
     }
   }
+
+  @media (max-width: 992px) {
 `;
 
 export default Hero;

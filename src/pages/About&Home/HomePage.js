@@ -8,6 +8,7 @@ import {
 const HomePage = () => {
   return (
     <main>
+      
       <Hero />
       <FeaturedProducts />
       <Services />

@@ -39,12 +39,19 @@ const FeaturedProducts = () => {
 
 const Wrapper = styled.section`
   background: var(--clr-grey-10);
+
+  .section-center{
+    min-width:55%;
+    max-width: 60%;
+  }
   .featured {
     margin: 2rem auto;
     display: grid;
+    width: 65vw;
     gap: 2.5rem;
     img {
-      height: 225px;
+      height: 100%;
+      width:100%;
     }
   }
   .btn {
