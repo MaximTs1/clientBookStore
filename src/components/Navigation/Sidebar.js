@@ -1,7 +1,7 @@
 import React from "react";
-import { useContext, useState } from "react";
+import { useContext, useState, useRef, useEffect } from "react";
 import logo from "../../assets/logo.jpeg";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useProductsContext } from "../../context/products_context";
 import { FaTimes } from "react-icons/fa";
 import { links } from "../../utils/constants";
@@ -9,11 +9,45 @@ import styled from "styled-components";
 import CartButtons from "../Cart/CartButtons";
 import { useUserContext } from "../../context/user_context";
 import { GeneralContext } from "../../App";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import {
+  faShoppingCart,
+  faUser,
+  faHeart,
+} from "@fortawesome/free-solid-svg-icons";
+import { useCartContext } from "../../context/cart_context.js";
 
 const Sidebar = () => {
   const { isSidebarOpen, closeSidebar } = useProductsContext();
   const { myUser } = useUserContext();
   const { setLoading, snackbar, setUser, user } = useContext(GeneralContext);
+  const [isAccountDropdownOpen, setIsAccountDropdownOpen] = useState(false);
+  const accountDropdownRef = useRef(null);
+  const { total_items, clearCart } = useCartContext();
+  const navigate = useNavigate();
+
+  const toggleAccountDropdown = () => {
+    setIsAccountDropdownOpen(!isAccountDropdownOpen);
+  };
+
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (
+        accountDropdownRef.current &&
+        !accountDropdownRef.current.contains(event.target)
+      ) {
+        setIsAccountDropdownOpen(false);
+      }
+    };
+
+    if (isAccountDropdownOpen) {
+      document.addEventListener("mousedown", handleClickOutside);
+    }
+
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, [isAccountDropdownOpen]);
 
   return (
     <SidebarContainer>
@@ -36,17 +70,57 @@ const Sidebar = () => {
               </li>
             );
           })}
+          <li>
+            <Link to="/cart" onClick={closeSidebar}>
+              <span style={{ marginRight: "10px" }}>Cart</span>
+              <FontAwesomeIcon icon={faShoppingCart} />
+            </Link>
+            <Link to="/Login" onClick={closeSidebar}>
+              <span style={{ marginRight: "10px" }}>Login</span>
+              <FontAwesomeIcon icon={faUser} />
+            </Link>
+          </li>
           {user && (
             <li>
-              <Link to="/checkout" onClick={closeSidebar}>
-                checkout
+              <Link to="/favoriteproducts" onClick={closeSidebar}>
+                <span style={{ marginRight: "10px" }}>Favorite Products</span>
+                <FontAwesomeIcon icon={faHeart} />
               </Link>
+              <div className="account-dropdown" ref={accountDropdownRef}>
+                <Link to="#" onClick={toggleAccountDropdown}>
+                  <span style={{ marginRight: "10px" }}>My Account</span>
+                  <FontAwesomeIcon icon={faUser} />
+                </Link>
+                {isAccountDropdownOpen && (
+                  <div className="dropdown-menu">
+                    {/* Add your dropdown links here */}
+                    <Link to="/userInfo" onClick={closeSidebar}>
+                      User Info
+                    </Link>
+                    <Link to="/changepassword" onClick={closeSidebar}>
+                      My Password
+                    </Link>
+                    <Link to="/orderhistorypage" onClick={closeSidebar}>
+                      My Orders
+                    </Link>
+                    <Link
+                      to="/"
+                      onClick={() => {
+                        clearCart();
+                        closeSidebar();
+                        localStorage.clear("token");
+                        navigate("/");
+                        window.location.reload();
+                      }}
+                    >
+                      Log Out
+                    </Link>
+                  </div>
+                )}
+              </div>
             </li>
           )}
         </ul>
-        <div className="cart_buttons">
-          <CartButtons />
-        </div>
       </aside>
     </SidebarContainer>
   );

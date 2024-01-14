@@ -203,12 +203,16 @@ export default function Login() {
                 </Button>
                 <Grid container justifyContent="center">
                   <Grid item sx={{ mt: 1, mb: 2 }}>
-                    <Link to="/signup">להרשמה לחץ כאן</Link>
+                    <Button variant="outlined" component={Link} to="/signup">
+                      להרשמה לחץ כאן
+                    </Button>
                   </Grid>
                 </Grid>
                 <Grid container justifyContent="center">
                   <Grid item sx={{ mt: 1, mb: 2 }}>
-                    <Link to="/forgotmypasswordpage">שכחתי סיסמא</Link>
+                    <Button component={Link} to="/forgotmypasswordpage">
+                      שכחתי סיסמא
+                    </Button>
                   </Grid>
                 </Grid>
               </Box>
