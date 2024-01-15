@@ -20,7 +20,7 @@ about project assignments and documentation:
 Client side technology requirements
 
 1. Design and Responsiveness:
-   It is recommended to use the Bootstrap or Design Material library.
+   It is recommended to use the Bootstrap or Design Material library. <br/>
    **i used bootstarp and MUI in this project**
 
 2. The design file
