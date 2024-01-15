@@ -8,44 +8,65 @@ My name is Maxim Tsvetkov and welcome to my ecommerce shop and my final HackerU 
   Common platforms like Facebook Market and Yad2 created difficulties with the purchase proccess because of the great variety, therefore a website was needed to make the purchase much more simple.
 
 - About this project:
-  I created 2 different websites - one for the clients and one for the admin.
-  The admin will be able to know //"everything"// and easily upload new items and control the orders.
+  I created 2 different websites - one for the clients and one for the admin. <br/>
+  The admin will be able to controll the inventory and easily upload new items and control the orders. <br/>
   Both the admin and the client web sites are synchronized and live information between the seller and the client will be available.
 
 I opened a sever with Kamatera Cloud Solutions to learn how to create a server and upload it, so Ill could learn more and beyond the local host.
-The server will be olways on and if there will be any problem and the server will off for some reason .. please contact me right away and ill fix that !
+The server will be olways on and if there will be any problem and the server will off for some reason .. please contact me right away and ill fix that ! <br/>
 **052-774-1590**
 
-about project assignments and documentation:
-Client side technology requirements
+about project assignments and documentation: <br/>
+
+Client side technology requirements:
 
 1. Design and Responsiveness:
    It is recommended to use the Bootstrap or Design Material library. <br/>
-   **i used bootstarp and MUI in this project**
+   **I used bootstarp and MUI in this project**
 
-2. The design file
+2. The design file:
    If the design file (css) is over 100 lines, it must be divided into files
-   separate according to the subjects. For this purpose it is recommended to use the scss library.
-   **i used separated css files and also included the design inside the files using wrappers**
+   separate according to the subjects. For this purpose it is recommended to use the scss library. <br/>
+   **I used separated css files and also included the design inside the files using wrappers**
 
-3. Icons It is recommended to use sample icons from the fontawesome material bootstrap library
-   and the like
+3. Icons:
+   It is recommended to use sample icons from the fontawesome material bootstrap library
+   and the like.. <br/>
+   **I used MUI icons and fontawesome icons**
+
 4. An entry page should include a main title, a secondary title, an image text that will match the nature of the site/
    the app. If it is a website of any online store, a search field must be displayed on the opening page
    with at least three card codes. The landing page should be clear for what type of website/app
    We have arrived and should be designed in such a way that invites the surfer to register.
-5. Navigation menu on the website/application to contain a dynamic navigation menu that is common to all website pages
+   **I have completed all the necessary in this part**
+
+5. Navigation menu on the website/application to contain a dynamic navigation menu that is common to all website pages.
+   **This project has a navbar and a side bar for this project**
+
 6. A footer on the website / application to contain a footer with a logo, copyright and means of contacting
    the site. If necessary, also add links to social media or anything else in the navigation menu
-   to match this area in the application/site
-7. Accessibility Put the name of the application in the title tag in the forms index file, as well as an image/
-   Logo in favicon: link. Each image must include the alt attribute with a caption that describes the image.
-8. About page You must create an about page in which you provide an in-depth explanation of the site and how to deal with it.
-9. Forms Uniformity must be maintained in the design of all forms on the site. Validations must be made on all fields
-   The forms can. A visual indication must be given below the field being entered if the user is standing
-   or does not meet the field validation requirements. Sending of the forms should be allowed only after reason
-   Mandatory fields are complete. The surfer must be updated on the success or failure of sending from the form
-   And in case of success, it should be moved to the relevant page.
+   to match this area in the application/site.
+   **This project has a footer with all the necessary instructions**
+
+7. Accessibility:
+   Put the name of the application in the title tag in the forms index file, as well as an image/
+   Logo in favicon: link.
+   Each image must include the alt attribute with a caption that describes the image.
+   **This project has a all the necessary as described in this part**
+
+8. About page:
+   You must create an about page in which you provide an in-depth explanation of the site and how to deal with it.
+   **This project has a all the necessary as described in this part**
+
+9. Forms Uniformity must be maintained in the design of all forms on the site. <br/>
+   Validations must be made on all fields. <br/>
+   A visual indication must be given below the field being entered if the user is standing
+   or does not meet the field validation requirements.
+
+   Sending of the forms should be allowed only after reason mandatory fields are complete.
+   
+   The surfer must be updated on the success or failure of sending from the form and in case of success, it should be moved to the relevant page.
+   
 10. Registration and membership on the client side interface to display the login page and the title membership registration page
     eligibility and a form for registration/login. Regex must be used for password fields in forms,
     which requires entering a password with at least one uppercase and one lowercase letter in English, at least four
