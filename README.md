@@ -22,42 +22,42 @@ Client side technology requirements:
 
 1. Design and Responsiveness:
    It is recommended to use the Bootstrap or Design Material library. <br/>
-   **I used bootstarp and MUI in this project**
+   **I used bootstarp and MUI in this project.**
 
 2. The design file:
    If the design file (css) is over 100 lines, it must be divided into files
    separate according to the subjects. For this purpose it is recommended to use the scss library. <br/>
-   **I used separated css files and also included the design inside the files using wrappers**
+   **I used separated css files and also included the design inside the files using wrappers.**
 
 3. Icons:
    It is recommended to use sample icons from the fontawesome material bootstrap library
    and the like.. <br/>
-   **I used MUI icons and fontawesome icons**
+   **I used MUI icons and fontawesome icons.**
 
 4. An entry page:
    Should include a main title, a secondary title, an image text that will match the nature of the site/the app.
    If it is a website of any online store, a search field must be displayed on the opening page with at least three card codes.
    The landing page should be clear for what type of website/app we have arrived to and should be designed in such a way that invites the users to register. <br/>
-   **I have completed all the necessary in this part**
+   **I have completed all the necessary in this part.**
 
 5. Navigation menu:
    On the website/application to contain a dynamic navigation menu that is common to all website pages. <br/>
-   **This project has a navbar and a side bar for this project**
+   **This project has a navbar and a side bar for this project.**
 
-6. A footer:
+6. Footer:
    On the website / application to contain a footer with a logo, copyright and means of contacting the site.
    If necessary, also add links to social media or anything else in the navigation menu to match this area in the application/site. <br/>
-   **This project has a footer with all the necessary instructions**
+   **This project has a footer with all the necessary instructions.**
 
 7. Accessibility:
    Put the name of the application in the title tag in the forms index file, as well as an image/
    Logo in favicon: link.
    Each image must include the alt attribute with a caption that describes the image. <br/>
-   **This project has a all the necessary as described in this part**
+   **This project has a all the necessary as described in this part.**
 
 8. About page:
    You must create an about page in which you provide an in-depth explanation of the site and how to deal with it. <br/>
-   **This project has a all the necessary as described in this part**
+   **This project has a all the necessary as described in this part.**
 
 9. Forms:
    Uniformity must be maintained in the design of all forms on the site. <br/>
@@ -65,13 +65,13 @@ Client side technology requirements:
    A visual indication must be given below the field being entered if the user is standing or does not meet the field validation requirements.
    Sending of the forms should be allowed only after reason mandatory fields are complete.  
     The user must be updated on the success or failure of sending from the form and in case of success, it should be moved to the relevant page. <br/>
-   **This project has a all the necessary as described in this part**
+   **This project has a all the necessary as described in this part.**
 
 10. Registration and membership:
     On the client side interface to display the login page and the title membership registration page eligibility and a form for registration/login.<br/>
     Regex must be used for password fields in forms, which requires entering a password with at least one uppercase and one lowercase letter in English, at least four
     numbers and a special sign from among the following signs (!@%$#^&\_-\_\_) In addition, all passwords must include at least 8 characters. <br/>
-    **This project has a all the necessary as described in this part**
+    **This project has a all the necessary as described in this part.**
 
 11. Token:
     After a successful login, you must receive a token from the server with an encrypted value using the library
@@ -79,13 +79,16 @@ Client side technology requirements:
     The user's permissions.
     A visual indication must be given according to the user's login status.
     Do not save sensitive user information such as email and password inside the token even if it is encrypted. <br/>
-    **This project has a all the necessary as described in this part**
+    **This project has a all the necessary as described in this part.**
+    **The client side has the token login, and the admin side for now has only regular login because i want to continue my reseach and later add maybe stronger login option.**
 
 12. Crud:
     After logging in, the user must allow the crud operations, i.e.: read, create, update and deletion of content.
     The content you create should be available in different parts of the site.
     For example if it is in an online store, after you add a product it should appear on the forms page or the products page.
     There is to give a visual indication to the user about the success/failure of performing the crud operations.
+    **In this project, the user can create, read, and update data, but doesnt have an option to delete.**
+    **The admin web side has the option to delete "cards" and for now I dont want to able the admin to delete users.**
 
 13. Favorites/Input to shopping basket:
     The user must be given the option to save content (card/code/user) etc. in favorites.
@@ -93,43 +96,53 @@ Client side technology requirements:
     The preferences must be saved in a database so that it doesn't matter from which device a user accesses the site/content application he preferred will continue to be preferred.
     A page of favorite content must be created, where the user can see everything.
     The details he has marked as favorites and if he wants he can get favorite items from the page.
+    **This project has a all the necessary as described in the client site.**
 
 14. Content details page:
     By clicking on a card/user/content, the user will go to a dynamic page where details will be given to the content item the user clicked on.
+    **This project has a all the necessary as described in "edit info" part.**
 
 15. Search field:
     A search field must be created for the content (card/code/user, etc.)
+    **This project has a all the necessary as described in "products" part and also in the admin site in "cards" and "users".**
 
 16. Privileges:
-    The creation of at least two types of users must be allowed, the first when it is a regular user
-    And the other is admin.
+    The creation of at least two types of users must be allowed, the first when it is a regular user and the other is admin.
     Only a user defined as an admin will be able to create, edit and delete content, while that a normal user can only see or mark content as their favorite.
+    **It is possible to create regular users, that can read the data and edit their info,**
+    **and the admin site allows to delete and update all the products and add new items.**
 
 17. HTTP calls:
     HTTP calls must be made on the server side from the client side and through them send information from the server.
     For this purpose the Axios library must be used.
     The catch and try mechanism must be used in readings server-side asynchronicity in case you use asynchronous functions, or substitutes in the mechanism
     ()catch.()then. And this is so that the code does not break by chance and a critical error is returned from the server.
+    **This project has a all the necessary as described in this part.**
 
 18. Architecture:
     A logical and industry-accepted order of files must be maintained.
     The code must be clean and readable, With correct division into folders and components.
+    **This project has a all the necessary as described in this part.**
 
 19. Console:
     Be sure to work correctly with the console.
     The consul must be free of warning notes, errors and content, so critical errors can be easily seen from the server.
+    **This project has a all the necessary as described in this part.**
 
 20. Content filtering:
-    The client has the option to filter the content displayed on a certain page according to different parameters
+    The client has the option to filter the content displayed on a certain page according to different parameters.
+    **This project has a all the necessary as described in the client -> products part.**
 
 21. Display modes:
-    It must be possible to switch between different information displays of the content displayed to the client. ( the content display
-    in the table or tabs )
+    It must be possible to switch between different information displays of the content displayed to the client.
+    (the content display in the table or tabs)
+    **This project has a all the necessary as described in the client -> products part and also in the admin -> order table.**
 
-**Bonus on the client side**
+**Bonus on the client side:**
 
 1. Logout:
    The application/site must be allowed to disconnect the user and not use the site/another app from 4 hours.
+   **This project has a all the necessary as described and logs out after 1 hour.**
 
 2. Limiting requests:
    The number of calls to the server that a user can make in 24 hours must be limited
