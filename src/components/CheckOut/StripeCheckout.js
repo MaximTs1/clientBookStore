@@ -154,7 +154,7 @@ const CheckoutForm = () => {
       const updatedUser = await response.json();
 
       setUser((user) => ({ ...user, likedBooks: updatedUser.likedBooks }));
-      snackbar("Logged in!");
+      snackbar("Purchase was successfully updated!");
     } catch (error) {}
   };
 

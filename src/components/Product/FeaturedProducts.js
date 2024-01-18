@@ -25,10 +25,13 @@ const FeaturedProducts = () => {
         <div className="underline"></div>
       </div>
       <div className="section-center featured">
-  {featured.slice(-6).reverse().map((product) => {
-    return <Product key={product.id} {...product} />;
-  })}
-</div>
+        {featured
+          .slice(-6)
+          .reverse()
+          .map((product) => {
+            return <Product key={product.id} {...product} />;
+          })}
+      </div>
 
       <Link to="/products" className="btn">
         all products
@@ -40,18 +43,21 @@ const FeaturedProducts = () => {
 const Wrapper = styled.section`
   background: var(--clr-grey-10);
 
-  .section-center{
-    min-width:55%;
-    max-width: 60%;
+  .section-center {
+    min-width: 250px;
+    max-width: 1800px;
   }
   .featured {
     margin: 2rem auto;
     display: grid;
     width: 65vw;
     gap: 2.5rem;
+
     img {
-      height: 100%;
-      width:100%;
+      height: 20rem;
+      // width: 100%;
+      object-fit: cover !important;
+      object-position: center;
     }
   }
   .btn {

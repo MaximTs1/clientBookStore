@@ -120,7 +120,7 @@ const Wrapper = styled.article`
     text-align: center;
     padding: 2.5rem 0rem 3.5rem;
     transition: var(--transition);
-    border-radius: 50%;
+    border-radius: 7%;
     width: 0rem;
     height: 1.5rem;
     svg {

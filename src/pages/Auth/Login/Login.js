@@ -93,6 +93,7 @@ export default function Login() {
         localStorage.token = data.token;
         setUser(data);
         navigate("/");
+        window.location.reload();
       })
       .catch((err) => {
         alert(err);

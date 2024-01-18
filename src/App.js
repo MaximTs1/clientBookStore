@@ -21,8 +21,6 @@ function App() {
 
   useEffect(() => {
     if (localStorage.token) {
-      setLoading(true);
-
       fetch("http://185.229.226.27:3001/user/login", {
         credentials: "include",
         headers: {
@@ -40,12 +38,10 @@ function App() {
         })
         .then((data) => {
           setUser(data);
-          snackbar("Logged in!");
+          snackbar(`Logged in ! Welcome !`);
         })
         .catch((err) => {})
-        .finally(() => {
-          setLoading(false);
-        });
+        .finally(() => {});
     } else {
     }
   }, []);

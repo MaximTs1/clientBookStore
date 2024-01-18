@@ -12,36 +12,36 @@ const PurchaseInfo = () => {
             <div className="underline"></div>
           </div>
           <p>
-            Order Process <br /> Purchasing on [Your Website Name] is designed
+            Order Process: <br /> Purchasing on [Your Website Name] is designed
             to be quick and user-friendly. After selecting your desired
             products, you can proceed to checkout. You'll be asked to provide
             shipping information and choose a payment method. Once you confirm
             your order, an acknowledgment email will be sent to you, detailing
             the products ordered, payment method, cost, and shipping
             information. <br />
-            <br /> Payment Methods <br /> We accept a variety of payment
+            <br /> Payment Methods: <br /> We accept a variety of payment
             methods, including credit/debit cards, PayPal, and other digital
             wallets. All transactions are secured and encrypted to ensure your
             financial data is protected. Please note that the availability of
             certain payment methods may vary based on your region.
             <br />
-            <br /> Pricing and Taxes <br /> All prices displayed on [Your
+            <br /> Pricing and Taxes: <br /> All prices displayed on [Your
             Website Name] are inclusive of applicable sales tax. However, please
             be aware that international shipments may incur additional customs
             duties and taxes, which are the responsibility of the customer.{" "}
             <br />
             <br />
-            Shipping and Delivery <br /> We strive to dispatch orders promptly
+            Shipping and Delivery: <br /> We strive to dispatch orders promptly
             and efficiently. Shipping costs and delivery times vary depending on
             the destination and shipping method selected. You can track your
             order through the tracking information provided in the shipping
             confirmation email.
             <br />
-            <br /> Order Modification and Cancellation <br />
+            <br /> Order Modification and Cancellation: <br />
             To modify or cancel your order, please contact our customer service
             team immediately. Orders that have already been dispatched cannot be
             modified or cancelled. <br />
-            <br /> Customer Support <br /> Our dedicated customer support team
+            <br /> Customer Support: <br /> Our dedicated customer support team
             is here to assist you with any inquiries or issues related to your
             purchase. Please contact us at [Your Contact Information] for
             assistance.

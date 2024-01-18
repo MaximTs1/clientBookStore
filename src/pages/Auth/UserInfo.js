@@ -82,25 +82,6 @@ const UserInfo = () => {
     setIsValid(Object.keys(newErrors).length === 0);
   }, [userData]);
 
-  // useEffect(() => {
-  //   const validationResults = signupSchema.validate(userData, {
-  //     abortEarly: false,
-  //     allowUnknown: true,
-  //   });
-
-  //   const newErrors = {};
-  //   if (validationResults.error) {
-  //     validationResults.error.details.forEach((error) => {
-  //       if (error.path && error.path.length > 0) {
-  //         newErrors[error.path[0]] = error.message;
-  //       }
-  //     });
-  //   }
-
-  //   setErrors(newErrors);
-  //   setIsValid(Object.keys(newErrors).length === 0);
-  // }, [userData]);
-
   const handleSubmit = async (e) => {
     e.preventDefault();
 
