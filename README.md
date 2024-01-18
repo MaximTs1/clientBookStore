@@ -3,9 +3,9 @@ Hi !
 My name is Maxim Tsvetkov and welcome to my ecommerce shop and my final HackerU Full-Stack project !
 
 - Interduction:
-  This project is designed for a neighbor of mine - Ariella, that long time ago asked me to create a new project that will help her sell her many books that she read and collected among the years.
-  Ariella is huge reading fan that within the years read thousands of books and it was time to make room in the house and also a new place for all new books that should be purchased.
-  Common platforms like Facebook Market and Yad2 created difficulties with the purchase proccess because of the great variety, therefore a website was needed to make the purchase much more simple.
+  This project is designed for a neighbor of mine - Ariella, that long time ago asked me to create a new project that will help her sell her many books that she read and collected among the years.<br/>
+  Ariella is huge reading fan that within the years read thousands of books and it was time to make room in the house and also a new place for all new books that should be purchased.<br/>
+  Common platforms like Facebook Market and Yad2 created difficulties with the purchase proccess because of the great variety, therefore a website was needed to make the purchase much more simple.<br/>
 
 - About this project:
   I created 2 different websites - one for the clients and one for the admin. <br/>
@@ -14,16 +14,17 @@ My name is Maxim Tsvetkov and welcome to my ecommerce shop and my final HackerU 
   The admin will be able to controll the inventory and easily upload new items and control the orders. <br/>
   Both the admin and the client web sites are synchronized and live information between the seller and the client will be available.
 
------------------------- How to log in to admin site --------------------------------
-admin site:
-username: a@a.com
+------------------------ How to log in to admin site --------------------------------<br/>
+admin site:<br/>
+username: a@a.com<br/>
 password: lala123
 
------------------------- How to log in to PuTTy: --------------------------------
-I used PuTTy for the server and its details to log in wil be: 185.229.226.27, port:22, login as:root, password: MaximMor251199<br/>
+------------------------ How to log in to PuTTy: --------------------------------<br/>
+I used PuTTy for the server and its details to log in wil be:<br/>
+185.229.226.27, port:22, login as:root, password: MaximMor251199<br/>
 Then you write: cd .. -> cd var/www/book-store-server/ -> node sever.js
 
------------------------- How to log in to mongo compass: --------------------------------
+------------------------ How to log in to mongo compass: --------------------------------<br/>
 mongodb://admin:MorMafhidaBesharatim23%23%23@185.229.226.27:27017/BookStore?authSource=admin
 
 I opened a sever with Kamatera Cloud Solutions to learn how to create a server and upload it, so I'll could learn more and beyond the local host.<br/>
@@ -42,6 +43,7 @@ Admin wesite:
 - has a fourth view of all the book - can edit and delete the book.
 - fifth and last is the orders page, where the admin gets all his orders, can sort them and change their status (that will be updated for him and for the client), and also can press "..." and view the order.
 
+-------------------------------------------------------------------------------------------------------------------- <br/>
 about project assignments and documentation: <br/>
 
 Client side technology requirements:
@@ -164,6 +166,8 @@ Client side technology requirements:
     (the content display in the table or tabs).<br/>
     **This project has a all the necessary as described in the client -> products part and also in the admin -> order table.**
 
+-------------------------------------------------------------------------------------------------------------------- <br/>
+
 **Bonus on the client side:**
 
 1. Logout:
@@ -201,6 +205,8 @@ Client side technology requirements:
    For that matter it is recommended to send an email to the user with a link to the password change page.<br/>
    **I've created this page using node mailer, and a password will be sent to his email with a one time token, and after clicking the link - the user will be routed to change password page.**
    **Now the email service is commented in the userRoutes because all my one time emails we're blocked after 24h and the failure of the login to the admin/sending mail does problems to the server, and this way its off right now. By undo the comment and inserting "admin" mail, the system will send a mail to the email the user wrote (if exists in the data base).**
+
+-------------------------------------------------------------------------------------------------------------------- <br/>
 
 **Server-side technology requirements**
 
