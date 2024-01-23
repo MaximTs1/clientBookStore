@@ -100,8 +100,9 @@ const CartButton = () => {
                   clearCart();
                   handleDropdownItemClick();
                   localStorage.clear("token");
-                  navigate("/")
+                  navigate("/");
                   window.location.reload();
+                  snackbar("logged out successfully");
                 }}
               >
                 LogOut

@@ -96,7 +96,8 @@ export default function Login() {
         window.location.reload();
       })
       .catch((err) => {
-        alert(err);
+        snackbar("Email or password are incorrect, please try again");
+        // alert(err);
       })
       .finally(() => {});
   };

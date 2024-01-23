@@ -6,7 +6,7 @@ import { PageHero } from "../../components/General";
 import OrderStatusBar from "./OrderStatus.js";
 
 const OrderHistoryPage = () => {
-  const { user } = useContext(GeneralContext);
+  const { user, snackbar } = useContext(GeneralContext);
   const [orderHistory, setOrderHistory] = useState([]);
   const [selectedOrder, setSelectedOrder] = useState(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -23,7 +23,8 @@ const OrderHistoryPage = () => {
         const data = await response.json();
         setOrderHistory(data);
       } catch (error) {
-        console.error("Fetch error:", error);
+        snackbar("there was an error, please try again");
+        // console.error("Fetch error:", error);
       }
     };
 

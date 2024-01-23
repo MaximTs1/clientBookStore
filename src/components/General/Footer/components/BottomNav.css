@@ -43,7 +43,7 @@
 
 .bot_nav a:hover {
   color: white !important;
-  transform: scale(1.2);
+  transform: scale(1.1);
 }
 .bot_nav a p {
   padding-bottom: 3px;

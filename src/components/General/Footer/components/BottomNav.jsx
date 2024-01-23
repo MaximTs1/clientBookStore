@@ -33,7 +33,7 @@ const BottomNav = () => {
             </div>
             {/* <div>
               <Githubcomp
-                href="https://github.com/ganraj21"
+                href="https://github.com/"
                 shadow="#482e87 0px 0px 13px"
               />
             </div> */}
