@@ -3,6 +3,7 @@ import { BrowserRouter as Router } from "react-router-dom";
 import { Navbar, Sidebar } from "./components/General";
 import Footer from "./components/General/Footer/Footer";
 import AppRoutes from "./AppRoutes";
+import AuthRoutes from "./AuthRoutes";
 import Loader from "./components/FromOtherProjects/Loader";
 import Snackbar from "./components/FromOtherProjects/Snackbar";
 import "./App.css";
@@ -52,7 +53,7 @@ function App() {
         <Router>
           <Navbar />
           <Sidebar />
-          <AppRoutes />
+          {user ? <AuthRoutes /> : <AppRoutes />}
           <Footer />
         </Router>
       }
