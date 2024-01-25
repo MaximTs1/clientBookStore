@@ -68,7 +68,7 @@ const ChangePassword = () => {
     e.preventDefault();
     try {
       const response = await fetch(
-        `https://185.229.226.27:3001/user/update-password`,
+        `http://185.229.226.27:3001/user/update-password`,
         {
           method: "PUT",
           headers: {

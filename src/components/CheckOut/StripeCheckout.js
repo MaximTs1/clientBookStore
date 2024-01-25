@@ -107,7 +107,7 @@ const CheckoutForm = () => {
     }));
 
     await axios.post(
-      "https://185.229.226.27:3001/book/update-stock",
+      "http://185.229.226.27:3001/book/update-stock",
       itemsToUpdate
     );
   };
@@ -136,7 +136,7 @@ const CheckoutForm = () => {
 
     try {
       const response = await fetch(
-        `https://185.229.226.27:3001/user/update-order-history/${user.customId}`,
+        `http://185.229.226.27:3001/user/update-order-history/${user.customId}`,
         {
           method: "PUT",
           headers: {

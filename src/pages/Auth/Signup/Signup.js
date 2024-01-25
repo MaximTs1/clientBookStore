@@ -86,7 +86,7 @@ const Signup = () => {
 
     try {
       const response = await axios.post(
-        "https://185.229.226.27:3001/user/signup",
+        "http://185.229.226.27:3001/user/signup",
         signupData
       );
       alert("New user was signed up successfully");
