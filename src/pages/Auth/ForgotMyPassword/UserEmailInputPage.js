@@ -83,17 +83,9 @@ const UserEmailInputPage = () => {
       } else {
         const errorMessage = await response.text(); // or response.json() if your server sends JSON
         snackbar("there was an error, please try again");
-        // console.error("Server error:", errorMessage);
-        alert(
-          "An error occurred while processing your request. Please try again."
-        ); // Generic error message for the user
       }
     } catch (error) {
       snackbar("there was an error, please try again");
-      // console.error("Network or other error:", error);
-      alert(
-        "Unable to connect. Please check your internet connection and try again."
-      ); // Network error message for the user
     }
   };
 
