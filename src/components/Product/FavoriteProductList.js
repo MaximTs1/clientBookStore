@@ -20,7 +20,7 @@ const FavoriteProductList = () => {
     const fetchProducts = async () => {
       try {
         const response = await axios.get(
-          `http://185.229.226.27:3001/user/get-favorite-books/${
+          `https://185.229.226.27:3001/user/get-favorite-books/${
             user && user.customId
           }`,
           {

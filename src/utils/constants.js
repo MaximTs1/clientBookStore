@@ -45,6 +45,6 @@ export const services = [
   },
 ];
 
-export const products_url = "http://185.229.226.27:3001/book/get-books";
+export const products_url = "https://185.229.226.27:3001/book/get-books";
 
 export const single_product_url = `https://185.229.226.27:3001/book/book/?id=`;
