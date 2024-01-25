@@ -76,7 +76,7 @@ const ChangePasswordLandingPage = () => {
 
     try {
       const response = await fetch(
-        "http://185.229.226.27:3001/user/reset-password",
+        "https://185.229.226.27:3001/user/reset-password",
         {
           credentials: "include",
           method: "POST",

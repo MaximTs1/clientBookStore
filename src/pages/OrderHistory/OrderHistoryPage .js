@@ -15,7 +15,7 @@ const OrderHistoryPage = () => {
     const fetchOrderHistory = async () => {
       try {
         const response = await fetch(
-          `http://185.229.226.27:3001/user/order-history/${user.customId}`
+          `https://185.229.226.27:3001/user/order-history/${user.customId}`
         );
         if (!response.ok) {
           throw new Error("Network response was not ok");

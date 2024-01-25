@@ -14,7 +14,7 @@ export const FavoriteProvider = ({ children }) => {
     };
     try {
       const response = await fetch(
-        `http://185.229.226.27:3001/user/update-likedBooks/${user.customId}`,
+        `https://185.229.226.27:3001/user/update-likedBooks/${user.customId}`,
         {
           method: "PUT",
           headers: {
