@@ -87,7 +87,7 @@ const UserInfo = () => {
 
     try {
       const response = await fetch(
-        `https://185.229.226.27:3001/user/get-user-info/${userData.customId}`,
+        `http://185.229.226.27:3001/user/get-user-info/${userData.customId}`,
         {
           method: "PUT",
           headers: {
