@@ -53,7 +53,7 @@ export const ProductsProvider = ({ children }) => {
     dispatch({ type: GET_SINGLE_PRODUCT_BEGIN });
     try {
       const response = await axios.get(
-        `http://185.229.226.27:3001/book/book-by-custom-id/${id}`
+        `https://ariellasv-api.onrender.com/book/book-by-custom-id/${id}`
       );
       const singleProduct = response.data;
       dispatch({ type: GET_SINGLE_PRODUCT_SUCCESS, payload: singleProduct });
