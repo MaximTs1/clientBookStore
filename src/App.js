@@ -22,7 +22,7 @@ function App() {
 
   useEffect(() => {
     if (localStorage.token) {
-      fetch("http://185.229.226.27:3001/user/login", {
+      fetch("https://ariellasv-api.onrender.com/user/login", {
         credentials: "include",
         headers: {
           Authorization: localStorage.token,
