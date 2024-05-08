@@ -64,7 +64,7 @@ const UserEmailInputPage = () => {
     e.preventDefault();
     try {
       const response = await fetch(
-        `http://185.229.226.27:3001/user/forgot-password`, // Update the URL to your forgot password endpoint
+        `https://ariellasv-api.onrender.com/user/forgot-password`, // Update the URL to your forgot password endpoint
         {
           method: "POST",
           headers: {
