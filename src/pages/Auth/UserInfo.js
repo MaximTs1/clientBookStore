@@ -87,7 +87,7 @@ const UserInfo = () => {
 
     try {
       const response = await fetch(
-        `http://185.229.226.27:3001/user/get-user-info/${userData.customId}`,
+        `https://ariellasv-api.onrender.com/user/get-user-info/${userData.customId}`,
         {
           method: "PUT",
           headers: {
