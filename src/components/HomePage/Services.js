@@ -37,11 +37,11 @@ const Services = () => {
 const Wrapper = styled.section`
   h3,
   h4 {
-    color: var(--clr-primary-1);
+    color: #f3f8d2;
   }
   padding: 5rem 0;
 
-  background: var(--clr-primary-10);
+  background: #060e1fe3;
 
   .header h3,p {
     margin-bottom: 2rem;
@@ -50,7 +50,7 @@ const Wrapper = styled.section`
   p {
     margin-bottom: 0;
     line-height: 1.8;
-    color: var(--clr-primary-3);
+    color: #f5f5f5;
   }
   .services-center {
     margin-top: 4rem;
@@ -59,12 +59,12 @@ const Wrapper = styled.section`
   }
   .service {
     margin: 10%;
-    background: var(--clr-primary-7);
+    background: #255a77;
     text-align: center;
     padding: 2.5rem 2rem;
     border-radius: var(--radius);
     p {
-      color: var(--clr-primary-2);
+      color: #f5f5f5;
       text-align: center;
     }
   }
