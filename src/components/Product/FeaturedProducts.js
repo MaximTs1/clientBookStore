@@ -41,7 +41,7 @@ const FeaturedProducts = () => {
 };
 
 const Wrapper = styled.section`
-  background: var(--clr-grey-10);
+  background: #ffffffdb;
 
   .section-center {
     min-width: 250px;

@@ -5,7 +5,7 @@ import heroBcg from "../../assets/books-picture-2.jpg";
 import heroBcg2 from "../../assets/book-river.jpg";
 const Hero = () => {
   return (
-    <Wrapper className="section-center" style={{ backgroundColor: "#060e1fe3", padding: "10px" }}>
+    <Wrapper className="section-center" style={{ backgroundColor: "#101724e3", padding: "10px" }}>
       <article className="content">
         <header>
           <h1>
@@ -20,7 +20,7 @@ const Hero = () => {
           shop at my new store 🤩
         </p>
         <div className="btn-container">
-          <Link style={{backgroundColor:"blue"}} to="/products" className="btn hero-btn">
+          <Link style={{ backgroundColor: "blue" }} to="/products" className="btn hero-btn">
             shop now
           </Link>
         </div>
@@ -38,7 +38,7 @@ const Wrapper = styled.section`
   max-height: 55vh;
   min-width: 100%;
   max-width: 100%;
-  margin-bottom: 3vh;
+  margin-top: 10px;
   display: grid;
   place-items: center;
   .img-container {
@@ -65,7 +65,6 @@ h1{
   @media (min-width: 992px) {
     max-height: 60vh;
     grid-template-columns: 1fr 1fr;
-    margin-bottom: 3vh;
     gap: 8rem;
     h1 {
       margin-bottom: 2rem;

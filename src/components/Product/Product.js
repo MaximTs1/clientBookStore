@@ -88,13 +88,14 @@ const Wrapper = styled.article`
     position: relative;
     border-radius: var(--radius);
     border: 0.5px solid #ddd;
+    background: #B9D9EB;
   }
   img {
     width: 100%;
     display: block;
     object-fit: cover;
-    border-radius: var(--radius);
     transition: var(--transition);
+    border-radius: 4px 4px 0px 0px;
   }
 
   .links {
@@ -131,7 +132,7 @@ const Wrapper = styled.article`
   }
 
   .link:hover {
-    background: var(--clr-primary-5);
+    background: #6495ED;
   }
 
   .container:hover img {
@@ -144,8 +145,11 @@ const Wrapper = styled.article`
   .column {
     display: flex;
     flex-direction: column;
+    border-radius: 0px 0px 4px 4px;
     align-items: center;
-    background: white;
+    background: #0b111f;
+    color:#f3f8d6;
+    padding: 8px;
   }
   .column h5 {
     margin-bottom: 0.5rem;

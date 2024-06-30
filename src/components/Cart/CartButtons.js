@@ -142,17 +142,16 @@ const Wrapper = styled.div`
     border-color: transparent;
     font-size: 1.5rem;
     cursor: pointer;
-    color: var(--clr-grey-1);
+    color: #f3f8d2;
     letter-spacing: var(--spacing);
     svg {
       margin-left: 5px;
     }
   }
   .cart-btn1 {
-    color: var(--clr-grey-1);
+    color: #f3f8d2;
     font-size: 1.5rem;
     letter-spacing: var(--spacing);
-    color: var(--clr-grey-1);
     display: flex;
     align-items: center;
     width: 5.5vw;
