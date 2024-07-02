@@ -108,21 +108,30 @@ const Filters = () => {
 const Wrapper = styled.section`
    margin-top:28px;
   .form-control {
+    border: none;
+    box-shadow: -1.5px 0px 4px 1px #00000080;
+    color: #f9f6dd;
+    background: #222933;
     margin-bottom: 1.25rem;
     h5 {
       margin-bottom: 0.5rem;
     }
+    button {
+      color: white;
+    }
   }
   .search-input {
     padding: 0.5rem;
-    background: var(--clr-grey-10);
+    background: #222933;
     border-radius: var(--radius);
     border-color: transparent;
+    color: white;
     letter-spacing: var(--spacing);
     width: 100%;
   }
   .search-input::placeholder {
     text-transform: capitalize;
+    color: white;
   }
 
   button {
@@ -142,7 +151,8 @@ const Wrapper = styled.section`
   }
 
   .author {
-    background: var(--clr-grey-10);
+    background: #222933;
+    color: white;
     border-radius: var(--radius);
     border-color: transparent;
     padding: 0.25rem;
@@ -167,6 +177,7 @@ const Wrapper = styled.section`
 
   .price {
     margin-bottom: 0.25rem;
+    color:hsl(125, 71%, 66%);
   }
   .shipping {
     display: grid;
@@ -184,7 +195,7 @@ const Wrapper = styled.section`
   .clear-btn {
     background: var(--clr-red-dark);
     color: var(--clr-white);
-    padding: 0.25rem 0.5rem;
+    padding: 0.8rem;
     border-radius: var(--radius);
   }
   @media (min-width: 768px) {
