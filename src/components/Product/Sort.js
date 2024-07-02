@@ -51,6 +51,7 @@ const Sort = () => {
 };
 
 const Wrapper = styled.section`
+  margin-top:30px;
   display: grid;
   grid-template-columns: auto auto 1fr auto;
   align-items: center;

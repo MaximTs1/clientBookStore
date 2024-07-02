@@ -40,9 +40,8 @@ const Filters = () => {
                     onClick={updateFilters}
                     type="button"
                     name="category"
-                    className={`${
-                      category === c.toLowerCase() ? "active" : null
-                    }`}
+                    className={`${category === c.toLowerCase() ? "active" : null
+                      }`}
                   >
                     {c}
                   </button>
@@ -107,6 +106,7 @@ const Filters = () => {
 };
 
 const Wrapper = styled.section`
+   margin-top:28px;
   .form-control {
     margin-bottom: 1.25rem;
     h5 {

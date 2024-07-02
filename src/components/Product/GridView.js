@@ -21,6 +21,7 @@ const Wrapper = styled.section`
 
   .products-container {
     display: grid;
+    margin-top:60px;
     gap: 2rem 1.5rem;
   }
 
