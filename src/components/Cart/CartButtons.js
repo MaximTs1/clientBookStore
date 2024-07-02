@@ -158,10 +158,9 @@ const Wrapper = styled.div`
     margin-right: 35px;
   }
   .cart-btn2 {
-    color: var(--clr-grey-1);
+    color: #f3f8d2;
     font-size: 1.5rem;
     letter-spacing: var(--spacing);
-    color: var(--clr-grey-1);
     display: flex;
     align-items: center;
     width: 7.5vw;

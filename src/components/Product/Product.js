@@ -69,7 +69,7 @@ const Product = ({ image, name, author, price, id, stock }) => {
           )}
         </div>
         <div className="column">
-          <h5>{name}</h5>
+          <h1>{name}</h1>
           <h5>{author}</h5>
           <p>{formatPrice(price)}</p>
         </div>
@@ -87,11 +87,12 @@ const Wrapper = styled.article`
   .container {
     position: relative;
     border-radius: var(--radius);
-    border: 0.5px solid #ddd;
-    background: #B9D9EB;
+    background: #B999EB;
+    box-shadow: 2px 4px 10px 2px #00000080;
   }
   img {
     width: 100%;
+    border-bottom: 1px solid grey;
     display: block;
     object-fit: cover;
     transition: var(--transition);
@@ -147,18 +148,25 @@ const Wrapper = styled.article`
     flex-direction: column;
     border-radius: 0px 0px 4px 4px;
     align-items: center;
-    background: #0b111f;
-    color:#f3f8d6;
+    background: #222933;
+    color : #f4eebf;
     padding: 8px;
   }
   .column h5 {
     margin-bottom: 0.5rem;
     font-weight: 400;
   }
+  .column h1 {
+    margin-top: 4px;
+    color:#f3f8d6;
+    font-weight: 400;
+    font-size: 26px;
+  }
   p {
     display: flex;
     flex-direction: column;
     align-items: center;
+    color:hsl(125, 71%, 66%);
   }
 
   footer {

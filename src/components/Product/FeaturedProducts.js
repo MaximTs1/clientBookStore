@@ -33,7 +33,7 @@ const FeaturedProducts = () => {
           })}
       </div>
 
-      <Link to="/products" className="btn">
+      <Link style={{ backgroundColor: "blue" }} to="/products" className="btn">
         all products
       </Link>
     </Wrapper>
@@ -41,7 +41,15 @@ const FeaturedProducts = () => {
 };
 
 const Wrapper = styled.section`
-  background: #ffffffdb;
+  background: #fffff9db;
+
+  h2 {
+    color:#49597c;
+  }
+
+  .underline {
+    color : purple !important;
+  }
 
   .section-center {
     min-width: 250px;

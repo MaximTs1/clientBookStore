@@ -19,10 +19,11 @@ const ProductsPage = () => {
 };
 
 const Wrapper = styled.div`
+
   .products {
     display: grid;
     gap: 3rem 1.5rem;
-    margin: 4rem auto;
+    margin:auto;
   }
   @media (min-width: 768px) {
     .products {
