@@ -3,6 +3,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
+  background-color: #161b22 !important;
 }
 
 .bottom_nav_section {
@@ -25,6 +26,7 @@
   flex-wrap: wrap;
   width: 387px;
   padding: 10px 10px 10px 0;
+  color: white;
 }
 
 .bot_nav {
@@ -47,6 +49,7 @@
 }
 .bot_nav a p {
   padding-bottom: 3px;
+  color: rgb(115, 146, 172);
 }
 
 .bot_right_header,
@@ -70,7 +73,7 @@
 
 .bot_contact_info p {
   margin-bottom: 3px;
-  color: rgb(46, 47, 49);
+  color: rgb(201, 202, 204);
 }
 
 .contact_me_here {

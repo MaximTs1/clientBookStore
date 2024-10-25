@@ -4,11 +4,12 @@ import { PageHero } from "../../components/General";
 import aboutImg from "../../assets/books-picture-4.jpg";
 const AboutPage = () => {
   return (
-    <main>
-      <PageHero title="about" />
-      <Wrapper className="page section section-center">
+    <main style={{paddingBottom:'60px'}}>
+      <PageHero title="about"/>
+      <div style={{height:'60px'}}></div>
+      <Wrapper className="page section section-center" >
         <img src={aboutImg} alt="books and coffee" />
-        <article>
+        <article >
           <div className="title">
             <h2>my story</h2>
             <div className="underline"></div>
@@ -49,6 +50,11 @@ const Wrapper = styled.section`
     height: 750px;
     object-fit: cover;
   }
+
+  h2 {
+   color:#b4b4ff;
+  }
+
   p {
     line-height: 2;
     max-width: 45em;
@@ -56,6 +62,7 @@ const Wrapper = styled.section`
     margin-top: 2rem;
     color: var(--clr-grey-5);
   }
+
   .title {
     text-align: left;
   }

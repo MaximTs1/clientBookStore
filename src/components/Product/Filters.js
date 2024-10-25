@@ -145,6 +145,7 @@ const Wrapper = styled.section`
     letter-spacing: var(--spacing);
     color: var(--clr-grey-5);
     cursor: pointer;
+    box-shadow: -1.5px 0px 6px 1px #00000080;
   }
   .active {
     border-color: var(--clr-grey-5);

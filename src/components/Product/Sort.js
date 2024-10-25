@@ -112,8 +112,10 @@ const Wrapper = styled.section`
     border-radius: 10px;
   }
   label {
-    font-size: 1rem;
+    font-size: 1.1rem;
     text-transform: capitalize;
+    color: black;
+    padding: 5px;
   }
 `;
 

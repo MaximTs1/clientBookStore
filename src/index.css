@@ -15,7 +15,7 @@ Variables
   --clr-primary-3: hsl(22, 28%, 37%);
   --clr-primary-4: hsl(22, 28%, 45%); */
   /* primary/main color */
-  --clr-primary-5: hsl(104, 31%, 52%);
+  --clr-primary-5: hsl(104, 31%, 45%);
   /* --clr-primary-5: hsl(22, 31%, 52%); */
   /* lighter shades of primary color */
   --clr-primary-6: hsl(22, 31%, 60%);
@@ -122,7 +122,7 @@ h5 {
 
 p {
   margin-bottom: 1.25rem;
-  color: var(--clr-grey-3);
+  color: rgb(17, 17, 15);
 }
 
 @media screen and (min-width: 800px) {
@@ -174,8 +174,9 @@ p {
 }
 
 .page {
-  background-color: #fffff9db !important;
-  height: 2200px;
+  background-color: #f1f1f1 !important;
+  height: auto;
+  padding: 10px;
 }
 
 @media screen and (min-width: 992px) {
@@ -206,9 +207,11 @@ p {
 }
 
 .btn {
+  background-color: #576489e8 !important;
+  color: #feeffe;
+  font-family: 'Arial Narrow Bold';
   text-transform: uppercase;
   background: var(--clr-primary-5);
-  color: white;
   padding: 0.375rem 0.75rem;
   letter-spacing: var(--spacing);
   display: inline-block;
@@ -219,6 +222,17 @@ p {
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
   border-radius: var(--radius);
   border-color: transparent;
+}
+
+.jsncLF .btn {
+  background-color: #1c2c59e8 !important;
+  color: #feeffe;
+  font-family: 'Arial Narrow Bold';
+}
+
+.jsncLF .btn:hover {
+  background-color: #1c2c59 !important;
+  color: #feeffe;
 }
 
 .btn:hover {
