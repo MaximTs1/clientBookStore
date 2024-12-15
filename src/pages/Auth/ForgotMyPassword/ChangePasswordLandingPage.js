@@ -76,7 +76,7 @@ const ChangePasswordLandingPage = () => {
 
     try {
       const response = await fetch(
-        "https://ariellasv-api.onrender.com/user/reset-password",
+        "http://localhost:3001/user/reset-password",
         {
           credentials: "include",
           method: "POST",

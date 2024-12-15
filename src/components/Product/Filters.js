@@ -111,7 +111,7 @@ const Wrapper = styled.section`
     border: none;
     box-shadow: -1.5px 0px 4px 1px #00000080;
     color: #f9f6dd;
-    background: #222933;
+    background: #173317;
     margin-bottom: 1.25rem;
     h5 {
       margin-bottom: 0.5rem;
@@ -122,7 +122,7 @@ const Wrapper = styled.section`
   }
   .search-input {
     padding: 0.5rem;
-    background: #222933;
+    background: #173317;
     border-radius: var(--radius);
     border-color: transparent;
     color: white;
@@ -152,7 +152,7 @@ const Wrapper = styled.section`
   }
 
   .author {
-    background: #222933;
+    background: #173317;
     color: white;
     border-radius: var(--radius);
     border-color: transparent;

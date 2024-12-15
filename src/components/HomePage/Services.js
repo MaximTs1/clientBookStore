@@ -23,7 +23,7 @@ const Services = () => {
             return (
               <article className="service" key={id}>
                 <span className="icon">{icon}</span>
-                <h4>{title}</h4>
+                <h5 className="title">{title}</h5>
                 <p>{text}</p>
               </article>
             );
@@ -37,11 +37,12 @@ const Services = () => {
 const Wrapper = styled.section`
   h3,
   h4 {
-    color: #f3f8d2;
+    color: #222;
+  }
+  h5 {
+      color: #f5f5f5;
   }
   padding: 5rem 0;
-
-  background: #060e1fe3;
 
   .header h3,p {
     margin-bottom: 2rem;
@@ -50,7 +51,7 @@ const Wrapper = styled.section`
   p {
     margin-bottom: 0;
     line-height: 1.8;
-    color: #f5f5f5;
+    color: #222;
   }
   .services-center {
     margin-top: 4rem;
@@ -59,7 +60,7 @@ const Wrapper = styled.section`
   }
   .service {
     margin: 10%;
-    background: #255a77;
+    background: #173317 ;
     text-align: center;
     padding: 2.5rem 2rem;
     border-radius: var(--radius);

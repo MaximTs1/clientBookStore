@@ -15,7 +15,7 @@ const OrderHistoryPage = () => {
     const fetchOrderHistory = async () => {
       try {
         const response = await fetch(
-          `https://ariellasv-api.onrender.com/user/order-history/${user.customId}`
+          `http://localhost:3001/user/order-history/${user.customId}`
         );
         if (!response.ok) {
           throw new Error("Network response was not ok");

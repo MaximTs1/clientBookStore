@@ -5,7 +5,7 @@
   align-content: center;
   width: 100%;
   flex-direction: column;
-  background-color: #161b22 !important;
+  background-color: #173317 !important;
 }
 .footer_section h2 {
   font-size: 21px !important;
@@ -19,6 +19,6 @@
 }
 .line {
   width: 90%;
-  color: #4d4d4d;
+  color: black;
   border-bottom: 1px solid;
 }

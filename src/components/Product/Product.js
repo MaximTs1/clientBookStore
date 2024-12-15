@@ -87,7 +87,6 @@ const Wrapper = styled.article`
   .container {
     position: relative;
     border-radius: var(--radius);
-    background: #B999EB;
     box-shadow: 2px 4px 10px 2px #00000080;
   }
   img {
@@ -133,8 +132,7 @@ const Wrapper = styled.article`
   }
 
   .link:hover {
-    background: #6495ED;
-  }
+    background: var(--clr-primary-5);  }
 
   .container:hover img {
     opacity: 0.5;
@@ -146,10 +144,9 @@ const Wrapper = styled.article`
   .column {
     display: flex;
     flex-direction: column;
-    border-radius: 0px 0px 4px 4px;
     align-items: center;
-    background: #222933;
-    color : #f4eebf;
+    background: white;
+     color : black;
     padding: 8px;
   }
   .column h5 {
@@ -158,7 +155,7 @@ const Wrapper = styled.article`
   }
   .column h1 {
     margin-top: 4px;
-    color:#f3f8d6;
+    color:black;
     font-weight: 400;
     font-size: 26px;
   }

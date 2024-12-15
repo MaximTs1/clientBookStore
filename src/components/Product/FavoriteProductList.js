@@ -20,7 +20,7 @@ const FavoriteProductList = () => {
     const fetchProducts = async () => {
       try {
         const response = await axios.get(
-          `https://ariellasv-api.onrender.com/user/get-favorite-books/${
+          `http://localhost:3001/user/get-favorite-books/${
             user && user.customId
           }`,
           {

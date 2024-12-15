@@ -15,19 +15,19 @@ const PageHero = ({ title, product }) => {
 };
 
 const Wrapper = styled.section`
-  background: var(--clr-primary-10);
+  background: var(--clr-primary-5);
   width: 100%;
   min-height: 30vh;
   margin-top:50px;
   display: flex;
   align-items: center;
   a {
-    color: #b4b4ff;
+    color:  var(--clr-primary-3);;
     padding: 0.5rem;
     transition: var(--transition);
   }
   a:hover {
-    color: #0f9964;
+    color: # var(--clr-primary-3);;
   }
 `;
 

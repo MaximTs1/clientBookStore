@@ -4,6 +4,11 @@
   cursor: pointer;
 }
 
+
+body {
+  background-color: var(--background) !important;
+}
+
 .Frame {
   position: fixed;
   top: 10%;

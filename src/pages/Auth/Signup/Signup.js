@@ -86,7 +86,7 @@ const Signup = () => {
 
     try {
       const response = await axios.post(
-        "https://ariellasv-api.onrender.com/user/signup",
+        "http://localhost:3001/user/signup",
         signupData
       );
       alert("New user was signed up successfully");

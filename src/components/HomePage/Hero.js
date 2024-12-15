@@ -5,8 +5,8 @@ import heroBcg from "../../assets/books-picture-2.jpg";
 import heroBcg2 from "../../assets/book-river.jpg";
 const Hero = () => {
   return (
-    <Wrapper className="section-center" style={{ backgroundColor: "#101724e3", padding: "10px" }}>
-      <article className="content">
+<Wrapper className="section-center" style={{ backgroundColor: "#a8dfa3", padding: "10px" }}>      
+  <article className="content">
         <header>
           <h1>
             Ariella's <br />
@@ -20,7 +20,7 @@ const Hero = () => {
           shop at my new store 🤩
         </p>
         <div className="btn-container">
-          <Link style={{ backgroundColor: "blue" }} to="/products" className="btn hero-btn">
+          <Link to="/products" className="btn hero-btn">
             shop now
           </Link>
         </div>
@@ -52,7 +52,7 @@ h1{
     line-height: 2;
     max-width: 45em;
     margin-bottom: 2rem;
-    color:#f5f5f5;
+    color:#222;
     font-size: 1rem;
     text-align:center;
   }

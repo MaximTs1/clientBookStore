@@ -88,7 +88,7 @@ const Sidebar = () => {
               </Link>
               <div className="account-dropdown" ref={accountDropdownRef}>
                 <Link to="#" onClick={toggleAccountDropdown}>
-                  <span style={{ marginRight: "10px" }}>My Account</span>
+                  <span style={{ marginRight: "10px", color: 'black' }}>My Account</span>
                   <FontAwesomeIcon icon={faUser} />
                 </Link>
                 {isAccountDropdownOpen && (
@@ -160,7 +160,7 @@ const SidebarContainer = styled.div`
     font-size: 1rem;
     text-transform: capitalize;
     padding: 1rem 1.5rem;
-    color: var(--clr-grey-3);
+    color: black;
     transition: var(--transition);
     letter-spacing: var(--spacing);
   }
@@ -169,7 +169,7 @@ const SidebarContainer = styled.div`
     padding: 1rem 1.5rem;
     padding-left: 2rem;
     background: var(--clr-grey-10);
-    color: var(--clr-grey-2);
+    color: black;
   }
 
   .sidebar {

@@ -107,7 +107,7 @@ const CheckoutForm = () => {
     }));
 
     await axios.post(
-      "https://ariellasv-api.onrender.com/book/update-stock",
+      "http://localhost:3001/book/update-stock",
       itemsToUpdate
     );
   };
@@ -136,7 +136,7 @@ const CheckoutForm = () => {
 
     try {
       const response = await fetch(
-        `https://ariellasv-api.onrender.com/user/update-order-history/${user.customId}`,
+        `http://localhost:3001/user/update-order-history/${user.customId}`,
         {
           method: "PUT",
           headers: {

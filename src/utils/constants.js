@@ -45,6 +45,6 @@ export const services = [
   },
 ];
 
-export const products_url = "https://ariellasv-api.onrender.com/book/get-books";
+export const products_url = "http://localhost:3001/book/get-books";
 
-export const single_product_url = `https://ariellasv-api.onrender.com/book/book/?id=`;
+export const single_product_url = `http://localhost:3001/book/book/?id=`;

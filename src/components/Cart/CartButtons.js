@@ -142,14 +142,14 @@ const Wrapper = styled.div`
     border-color: transparent;
     font-size: 1.5rem;
     cursor: pointer;
-    color: #f3f8d2;
+    color: var(--clr-grey-1);
     letter-spacing: var(--spacing);
     svg {
       margin-left: 5px;
     }
   }
   .cart-btn1 {
-    color: #f3f8d2;
+    color: var(--clr-grey-1);;
     font-size: 1.5rem;
     letter-spacing: var(--spacing);
     display: flex;
@@ -158,7 +158,7 @@ const Wrapper = styled.div`
     margin-right: 35px;
   }
   .cart-btn2 {
-    color: #f3f8d2;
+    color: balck;
     font-size: 1.5rem;
     letter-spacing: var(--spacing);
     display: flex;

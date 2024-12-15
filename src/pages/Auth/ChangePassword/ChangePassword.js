@@ -68,7 +68,7 @@ const ChangePassword = () => {
     e.preventDefault();
     try {
       const response = await fetch(
-        `https://ariellasv-api.onrender.com/user/update-password`,
+        `http://localhost:3001/user/update-password`,
         {
           method: "PUT",
           headers: {

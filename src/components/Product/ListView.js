@@ -14,7 +14,7 @@ const ListView = ({ products }) => {
             <article key={id} >
               <img src={`data:image/jpeg;base64,${image}`} alt={name} />
               <div>
-                <h4>{name}</h4>
+                <h4 >{name}</h4>
                 <h5>{author}</h5>
                 <h5 className="price">{formatPrice(price)}</h5>
                 <p className="des">{description.substring(0, 150)}...</p>
@@ -35,7 +35,7 @@ const Wrapper = styled.section`
   row-gap: 3rem;
   
   article {
-    background: #22262d !important;
+    background: white';
     box-shadow: 2px 4px 10px 2px #00000080;
     border-radius: 8px;
     width: 80%;
@@ -45,6 +45,7 @@ const Wrapper = styled.section`
  
   .list-container {
     padding: 0px 0px 30px 0px;
+    
   } 
 
   img {
@@ -57,6 +58,7 @@ const Wrapper = styled.section`
   }
   h4 {
     margin-bottom: 0.5rem;
+    color: black;
   }
   .price {
     color: #79fb82;

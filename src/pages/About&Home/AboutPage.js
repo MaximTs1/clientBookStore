@@ -51,10 +51,6 @@ const Wrapper = styled.section`
     object-fit: cover;
   }
 
-  h2 {
-   color:#b4b4ff;
-  }
-
   p {
     line-height: 2;
     max-width: 45em;

@@ -97,7 +97,7 @@ const NavContainer = styled.nav`
         margin: 0 0.5rem;
       }
       a {
-        color: #f5f5f5;
+        color: var(--clr-grey-3);
         font-size: 1rem;
         text-transform: capitalize;
         letter-spacing: var(--spacing);
